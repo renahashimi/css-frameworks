@@ -1,5 +1,30 @@
-$primary: red;
-$secondary: orange;
+$primary: #2E4374;
+$secondary: #FFD475;
+$white: #fff;
+
+.font-righteous {
+  font-family: "Righteous", sans-serif;
+}
+
+.fs-7 {
+  font-size: 0.8em;
+}
+
+.me-n6 {
+   margin-left: -50px !important;
+}
+
+.borderswing {
+  border-radius: 60% 60% / 60px 60px !important;
+  padding-left: 50px;
+}
+
+.bordertopbuttom {
+  border: 0.5rem solid $primary;
+  border-left: none;
+  border-right: none;
+}
+
 
 
 // Variables
@@ -384,7 +409,7 @@ $enable-cssgrid:              false !default;
 $enable-button-pointers:      true !default;
 $enable-rfs:                  true !default;
 $enable-validation-icons:     true !default;
-$enable-negative-margins:     false !default;
+$enable-negative-margins:     true !default;
 $enable-deprecation-messages: true !default;
 $enable-important-utilities:  true !default;
 
