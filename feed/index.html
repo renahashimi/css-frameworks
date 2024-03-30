@@ -13,34 +13,87 @@
     <title>MOONLIGHT - Feed</title>
 </head>
 <body>
-
     <header>
         <!--NAV FOR TOP PAGE-->
-        <nav class="border-bottom position-relative border-1 d-flex fixed-top justify-content-between m-2 pb-1">
-            <h1 class="position-relative font-righteous text-primary fs-7 m-2 ms-4 ">MOONLIGHT</h1>
-            <img src="/images/blue-moon.png" style="width: 40px; height: 40px;" class="d-flex  position-absolute" alt="Moon">
-
-            <form class="form-inline d-flex w-50 justify-content-center md-form form-sm search-box m-2">
+        <nav class="border-bottom position-relative border-1 d-flex fixed-top justify-content-between m-0 p-2">
+            <h1 class="position-relative font-righteous text-primary fs-7 fs-md-6 m-2 ms-4 ">MOONLIGHT</h1>
+            <img src="/images/pinkmoon.png" style="width: 40px; height: 40px;" class="d-flex  position-absolute" alt="Moon">
+            <form id="searchsection" class="form-inline d-flex w-50 justify-content-center md-form form-sm search-box m-2">
                 <div class="input-group border border-0 search-box">
                     <i class="bi bi-search-heart pt-1" aria-hidden="true"></i>
                     <input class="form-control form-control-sm border border-0" type="text" placeholder="Search" aria-label="Search">            
                 </div>
             </form>
         </nav>
-
         <!--NAV FOR BOTTOM PAGE  / FIXED-->
-        <nav class="navbar justify-content-center d-flex fixed-bottom navbar-light bg-secondary p-0">
+        <nav class="navbar justify-content-center d-flex m-auto fixed-bottom navbar-light bg-white p-0 pb-2 px-4" style="max-width: 1100px;">
             <div class="container text-primary h-25 p-0 m-0 border-top border-1 border-primary">
-                <a class="navbar-brand m-auto text-primary" href="/profile"><i class="bi bi-person-hearts boot-icon p-0" style="font-size: 30px;"></i></a>
-
-                <div><a class="navbar-brand m-auto text-primary rounded-circle border-top border-5 border-primary bg-secondary m-0 pt-5" href="#"><i class="bi bi-plus-circle-fill icon-300 mx-4" style="font-size: 2.8em;"></i></a></div>
-        
-                <a class="navbar-brand m-auto text-primary rounded-circle" href="/feed"><i class="bi bi-chat-heart-fill" style="font-size: 30px;"></i></a>
+            <i class="bi bi-house-fill" style="font-size: 30px;"></i>
+               <a class="navbar-brand m-auto text-primary" href="/profile"><i class="bi bi-person-hearts boot-icon p-0" style="font-size: 30px;"></i></a>
+               <div class="bg-white mt-n5 border border-3 border-primary rounded-circle"><a class="navbar-brand m-auto text-primary px-1" href="#"><i class="bi bi-plus-circle-fill m-2" style="font-size: 2.5em;"></i></a></div>
+               <a class="navbar-brand m-auto text-primary rounded-circle" href="/feed"><i class="bi bi-chat-heart-fill" style="font-size: 30px;"></i></a>
+               <i class="bi bi-heart-fill" style="font-size: 30px;"></i>
             </div>
         </nav> 
     </header>
-    <main>
+    <main class="boxshadowinset pt-3">
+        <!--UPLOAD POST-->
+        <form id="sharepost">
+            <div class="container-sm p-3 border border-4 border-primary text-primary m-auto justify-content-center" aria-labelledby="dropdownMenuButton1" style="width: 90%; max-width: 800px;">
+                <div class="row d-block d-md-flex m-auto justify-content-center">
+                    <h1 class="text-center fs-4">ADD NEW POST</h1>
+                    <div class="col col-md-6 mb-6 pt-2">
+                        <label for="textarea" class="fs-6 pb-2 ps-1">Add your text</label>
+                        <textarea rows="3" class="form-control" placeholder="Tell your friends what's on your mind..." id="textarea"></textarea>
+                    </div>
+                    <div class="col col-md-6 justify-content-center m-auto">
+                        <label for="form-post" class="form-label fs-6 text-primary mt-4 mt-md-2 ps-1">Choose image</label>
+                        <input class="form-control form-control-sm" id="form-post" type="file">        
+                        <div class="col-4 mt-4 mb-3 pt-1 m-auto">
+                            <button type="submit" class="btn btn-white p-0 px-1 border border-2 border-primary rounded lt-sp fw-bold" style="width: 120px;">SHARE <i class="bi bi-share-fill"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 
+        <!--POSTS-->
+        <section class="d-block d-sm-flex flex-wrap-column m-auto" style="width: 95%; max-width: 850px;">
+            <div class="container-fluid d-block justify-content-center my-3 m-0 m-sm-3">
+                <div class="row feedpost justify-content-left m-auto m-2 border border-1 border-primary" style="max-width: 600px;">
+                    <div class="col-2 col-md-2 p-2">
+                        <img class="profileimg" src="/images/profileimages/" alt="My profile image">
+                    </div>
+                    <div class="col-8 pt-1">
+                        <h2 class="fs-6 mt-1">renahashimi</h2>
+                        <p class="fs-8 mt-n2">01.04.2024</p>
+                    </div>
+                    <div id="feedtxt" class="row">
+                        <p>&#8220; hello &#8220;</p>
+                    </div>
+                    <div class="row ">
+                        <img class="feedimg p-2" src="/images/pinkmoon.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid d-block justify-content-center my-3 m-0 m-sm-3">
+                <div class="row feedpost justify-content-left m-auto m-2 border border-1 border-primary" style="max-width: 600px;">
+                    <div class="col-2 col-md-2 p-2">
+                        <img class="profileimg" src="/images/profileimages/profileimg.jpeg" alt="My profile image">
+                    </div>
+                    <div class="col-8 pt-1">
+                        <h2 class="fs-6 mt-1">renahashimi</h2>
+                        <p class="fs-8 mt-n2">01.04.2024</p>
+                    </div>
+                    <div id="feedtxt" class="row">
+                        <p>&#8220; hello &#8220;</p>
+                    </div>
+                    <div class="row ">
+                        <img class="feedimg p-2" src="/images/pinkmoon.png" alt="">
+                    </div>
+                </div>
+            </div>
+       </section>
     </main>
     <footer>
 

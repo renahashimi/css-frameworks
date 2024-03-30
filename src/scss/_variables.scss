@@ -1,22 +1,99 @@
-$primary: #2E4374;
-$secondary: #FFD475;
+$primary: #C35874;
+$secondary: #EF8B6E;
 $white: #fff;
+$black: #000;
+$pinklight: #dd9faf;
 
 .font-righteous {
   font-family: "Righteous", sans-serif;
 }
 
-.fs-7 {
-  font-size: 0.8em;
+
+/*---------------------------------*/
+
+body, main, html, footer {
+  justify-content: center;
+  align-items: center;
+  font-family: "Dosis", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: $black;
+  margin: auto;
+  padding: 0;
+  max-width: 1100px;
+}
+
+main {
+  padding-bottom: 120px; 
+}
+
+html {
+  background-color: $white;
+  background-image: url(/images/pinkback.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.fs-7, h4 {
+  font-size: 0.8em !important;
+}
+
+.fs-8 {
+  font-size: 0.6em !important;
+}
+
+.lt-sp {
+  letter-spacing: 0.1em;
+} 
+
+img {
+  object-fit: cover;
 }
 
 .me-n6 {
   margin-left: -50px !important;
 }
 
+.postimages, .feedimg {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  max-width: 500px;
+  max-height: 300px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+#postbackground {
+  background: linear-gradient(0.5turn, $white 55%, $pinklight, $primary);
+}
+
+#back {
+  display: none;
+}
+
+.boxshadow {
+  box-shadow: 0px 2px 15px $primary;
+}
+
+.boxshadowinset {
+  box-shadow: inset 0px -2px 10px $primary;
+}
+
 .borderswing {
-  border-radius: 60% 60% / 60px 60px !important;
-  padding-left: 50px;
+      border-radius: 60% 60% / 60px 60px !important;
+}
+
+#formsection.boxshadow {
+  box-shadow: none !important;
+}
+
+section div {
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .bordertopbuttom {
@@ -25,20 +102,97 @@ $white: #fff;
   border-right: none;
 }
 
-.search-box {
-  border-bottom: 1px solid $primary;
+#searchsection {
+  &.search-box {
+    border-bottom: 1px solid $primary;
+  }
+  
+  &input .form-control:focus{
+    outline: 0;
+    box-shadow: none!important;
+}
 }
 
-.form-control:focus{
-  outline: 0;
-  box-shadow: none!important;
+.navbar-brand, i {
+
+  &:hover {
+    color: $secondary;
+  }
 }
 
-.bi::before, .bi i {
-  scale: 3;
-  width: 300px;
-  font-size: 3em;
+.profilebackground {
+  display: block;
+  position: static;
+  background-image: url(/images/roses.JPG);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 130px;
+  padding-bottom: 30px;
+  width: 100%;
 }
+
+.profileimg {
+  width: 40px;
+  height: 40px;
+  border: 1px solid $primary;
+  border-radius: 50% 50%;
+}
+
+.historyimg {
+  width: 50px;
+  height: 50px;
+  border: 1px solid $primary;
+  border-radius: 50% 50%;
+}
+
+
+/*--MEDIA--*/
+
+@media (min-width: 576px) {
+
+.profilebackground {
+  height: 200px;
+}
+
+.profileimage img {
+  min-width: 150px;
+  min-height: 150px;
+} 
+
+#postbackground {
+  background: linear-gradient(0.25turn, $white 60%, $pinklight, $primary);
+}
+
+}
+
+@media (min-width: 768px) {
+
+#medianame {
+
+}
+
+.fs-7 {
+  font-size: 1em !important;
+}
+
+#formsection {
+  box-shadow: 0 0 20px $primary !important;
+  border-radius: 0% !important;
+}
+
+.profilename h1 {
+  text-transform: uppercase;
+  max-width: 170px;
+  font-size: 2.2em;
+  margin-top: 45px;
+}
+}
+ 
+
+  
+
+/*------------------------------*/
 
 // Variables
 //
