@@ -5,23 +5,22 @@
 }
 
 /*---------------------------------*/
-body, main, html, footer {
-  justify-content: center;
-  align-items: center;
+/*  ALL PAGES */
+body {
   font-family: "Dosis", sans-serif;
   font-weight: 600;
   letter-spacing: 0.1em;
   color: #000;
-  margin: auto;
-  padding: 0;
+  justify-content: center;
   max-width: 1100px;
-}
-
-main {
-  padding-bottom: 120px;
+  width: 100%;
 }
 
 html {
+  display: flex;
+  margin: auto;
+  padding: 0;
+  justify-content: center;
   background-color: #fff;
   background-image: url(/images/pinkback.jpeg);
   background-size: cover;
@@ -29,12 +28,21 @@ html {
   background-repeat: no-repeat;
 }
 
+footer {
+  margin-bottom: 120px;
+}
+
+/* SMALL CHANGES */
 .fs-7, h4, .h4 {
   font-size: 0.8em !important;
 }
 
 .fs-8 {
   font-size: 0.6em !important;
+}
+
+.fs-9 {
+  font-size: 0.8em !important;
 }
 
 .lt-sp {
@@ -62,7 +70,7 @@ img {
 }
 
 #postbackground {
-  background: linear-gradient(0.5turn, #fff 55%, #dd9faf, #C35874);
+  background: linear-gradient(0.5turn, #fff 60%, #dd9faf, #C35874);
 }
 
 #back {
@@ -71,18 +79,25 @@ img {
 
 .boxshadow {
   box-shadow: 0px 2px 15px #C35874;
+  max-width: 1100px;
 }
-
+.boxshadowup {
+  box-shadow: 0px -5px 15px #C35874;
+}
 .boxshadowinset {
   box-shadow: inset 0px -2px 10px #C35874;
 }
-
-.borderswing {
-  border-radius: 60% 60%/60px 60px !important;
+.boxshadow-none {
+  outline: 0;
+  box-shadow: none !important;
 }
 
 #formsection.boxshadow {
   box-shadow: none !important;
+}
+
+.borderswing {
+  border-radius: 60% 60%/60px 60px !important;
 }
 
 section div {
@@ -99,13 +114,9 @@ section div {
 #searchsection.search-box {
   border-bottom: 1px solid #C35874;
 }
-#searchsectioninput .form-control:focus {
-  outline: 0;
-  box-shadow: none !important;
-}
 
-.navbar-brand:hover, i:hover {
-  color: #EF8B6E;
+.navbar-brand:hover, i:hover, button:hover, .btn:hover {
+  color: #EF8B6E !important;
 }
 
 .profilebackground {
@@ -157,7 +168,6 @@ section div {
   }
   .profilename h1, .profilename .h1 {
     text-transform: uppercase;
-    max-width: 170px;
     font-size: 2.2em;
     margin-top: 45px;
   }

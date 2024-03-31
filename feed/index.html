@@ -26,31 +26,31 @@
             </form>
         </nav>
         <!--NAV FOR BOTTOM PAGE  / FIXED-->
-        <nav class="navbar justify-content-center d-flex m-auto fixed-bottom navbar-light bg-white p-0 pb-2 px-4" style="max-width: 1100px;">
-            <div class="container text-primary h-25 p-0 m-0 border-top border-1 border-primary">
-            <i class="bi bi-house-fill" style="font-size: 30px;"></i>
+        <nav class="navbar justify-content-center d-flex m-auto border-top border-1 border-primary fixed-bottom navbar-light bg-white p-0 pb-2 px-4 boxshadowup" style="max-width: 1100px;">
+            <div class="container text-primary h-25 p-0 m-0" style="max-width: 600px;">
+               <a href="/feed"><i class="bi bi-house-fill" style="font-size: 30px;"></i></a>
+               <a class="navbar-brand m-auto text-primary rounded-circle" href="#"><i class="bi bi-chat-heart-fill" style="font-size: 30px;"></i></a>
+               <div class="bg-white mt-n5 border border-3 border-primary rounded-circle"><a class="navbar-brand m-auto text-primary px-1" href="#sharepost"><i class="bi bi-plus-circle-fill m-2" style="font-size: 2.5em;"></i></a></div>
                <a class="navbar-brand m-auto text-primary" href="/profile"><i class="bi bi-person-hearts boot-icon p-0" style="font-size: 30px;"></i></a>
-               <div class="bg-white mt-n5 border border-3 border-primary rounded-circle"><a class="navbar-brand m-auto text-primary px-1" href="#"><i class="bi bi-plus-circle-fill m-2" style="font-size: 2.5em;"></i></a></div>
-               <a class="navbar-brand m-auto text-primary rounded-circle" href="/feed"><i class="bi bi-chat-heart-fill" style="font-size: 30px;"></i></a>
                <i class="bi bi-heart-fill" style="font-size: 30px;"></i>
             </div>
         </nav> 
     </header>
-    <main class="boxshadowinset pt-3">
+    <main class="pt-3">
         <!--UPLOAD POST-->
         <form id="sharepost">
-            <div class="container-sm p-3 border border-4 border-primary text-primary m-auto justify-content-center" aria-labelledby="dropdownMenuButton1" style="width: 90%; max-width: 800px;">
+            <div class="container-sm p-3 border border-4 border-primary text-primary m-auto justify-content-center" style="width: 90%; max-width: 800px;">
                 <div class="row d-block d-md-flex m-auto justify-content-center">
                     <h1 class="text-center fs-4">ADD NEW POST</h1>
                     <div class="col col-md-6 mb-6 pt-2">
                         <label for="textarea" class="fs-6 pb-2 ps-1">Add your text</label>
                         <textarea rows="3" class="form-control" placeholder="Tell your friends what's on your mind..." id="textarea"></textarea>
                     </div>
-                    <div class="col col-md-6 justify-content-center m-auto">
+                    <div class="col col-md-6 justify-content-center m-auto mt-5">
                         <label for="form-post" class="form-label fs-6 text-primary mt-4 mt-md-2 ps-1">Choose image</label>
                         <input class="form-control form-control-sm" id="form-post" type="file">        
-                        <div class="col-4 mt-4 mb-3 pt-1 m-auto">
-                            <button type="submit" class="btn btn-white p-0 px-1 border border-2 border-primary rounded lt-sp fw-bold" style="width: 120px;">SHARE <i class="bi bi-share-fill"></i></button>
+                        <div class="col-12 mt-4 mb-3 pt-1 m-auto justify-content-center">
+                            <button type="submit" class="btn btn-white p-0 w-75 border border-2 border-primary rounded lt-sp fw-bold" style="width: 120px;">SHARE <i class="bi bi-share-fill"></i></button>
                         </div>
                     </div>
                 </div>
@@ -96,9 +96,19 @@
        </section>
     </main>
     <footer>
-
+        <div class="container-fluid mt-5 pt-3 d-block border-top border-4 border-primary">
+            <div class="row d-flex text-center pb-4 m-auto justify-content-center">
+                <div class="col-7" style="max-width: 180px;">
+                    <h1 class="font-righteous text-primary fs-7 ms-n1 mb-1">MOONLIGHT</h1>
+                    <img src="/images/pinkmoon.png" style="width: 40px; height: 40px;" class="d-flex mt-n4 ms-2" alt="Moon">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <p class="fs-7 font-righteous text-center">Copyright &copy; 2024 - Moonlight</p>
+                </div>
+            </div>
+        </div>
     </footer>
-
-
 </body>
 </html>
