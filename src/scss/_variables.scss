@@ -1,5 +1,5 @@
-$primary: #C35874;
-$secondary: #EF8B6E;
+$primary: #9e3753;
+$secondary: #be6d83;
 $white: #fff;
 $black: #000;
 $pinklight: #dd9faf;
@@ -7,6 +7,7 @@ $pinklight: #dd9faf;
 .font-righteous {
   font-family: "Righteous", sans-serif;
 }
+//$primary: #c35874;
 
 
 /*---------------------------------*/
@@ -32,6 +33,13 @@ html {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+p {
+  font-family: "Dosis", sans-serif;
+  color: $black;
+  opacity: 1;
+  font-weight: 500;
 }
 
 footer {
@@ -77,7 +85,11 @@ img {
 }
 
 #postbackground {
-  background: linear-gradient(0.5turn, $white 60%, $pinklight, $primary);
+  box-shadow: 0 0 10px $black;  
+
+  &black {
+    box-shadow: 0 0 10px $primary;  
+  }
 }
 
 #back {
@@ -172,10 +184,6 @@ section div {
   min-width: 150px;
   min-height: 150px;
 } 
-
-#postbackground {
-  background: linear-gradient(0.25turn, $white 60%, $pinklight, $primary);
-}
 
 }
 
