@@ -6,26 +6,15 @@
 
 /*---------------------------------*/
 /*  ALL PAGES */
-body {
-  font-family: "Dosis", sans-serif;
+body, html {
   font-weight: 600;
   letter-spacing: 0.1em;
   color: #000;
   justify-content: center;
   max-width: 1100px;
   width: 100%;
-}
-
-html {
-  display: flex;
   margin: auto;
   padding: 0;
-  justify-content: center;
-  background-color: #fff;
-  background-image: url(/images/pinkback.jpeg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 p {
@@ -33,10 +22,6 @@ p {
   color: #000;
   opacity: 1;
   font-weight: 500;
-}
-
-footer {
-  margin-bottom: 120px;
 }
 
 /* SMALL CHANGES */
@@ -52,10 +37,6 @@ footer {
   font-size: 0.8em !important;
 }
 
-.lt-sp {
-  letter-spacing: 0.1em;
-}
-
 img {
   object-fit: cover;
 }
@@ -64,42 +45,8 @@ img {
   margin-left: -50px !important;
 }
 
-.postimages, .feedimg {
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  max-width: 500px;
-  max-height: 300px;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-#postbackground {
-  box-shadow: 0 0 10px #000;
-}
-#postbackgroundblack {
-  box-shadow: 0 0 10px #9e3753;
-}
-
 #back {
   display: none;
-}
-
-.boxshadow {
-  box-shadow: 0px 2px 15px #9e3753;
-  max-width: 1100px;
-}
-.boxshadowup {
-  box-shadow: 0px -5px 15px #9e3753;
-}
-.boxshadowinset {
-  box-shadow: inset 0px -2px 10px #9e3753;
-}
-.boxshadow-none {
-  outline: 0;
-  box-shadow: none !important;
 }
 
 #formsection.boxshadow {
