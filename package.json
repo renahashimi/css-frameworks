@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"My CA for css-frameworks\" && exit 1",
     "build": "sass src/scss:dist/css",
-    "watch": "sass --watch src/scss:dist/css"
+    "watch": "sass --watch src/scss:dist/css",
+    "start-server": "live-server"
   },
   "repository": {
     "type": "git",

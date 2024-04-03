@@ -49,25 +49,6 @@ img {
   display: none;
 }
 
-#formsection.boxshadow {
-  box-shadow: none !important;
-}
-
-section div {
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-.bordertopbuttom {
-  border: 0.5rem solid #9e3753;
-  border-left: none;
-  border-right: none;
-}
-
-#searchsection.search-box {
-  border-bottom: 1px solid #9e3753;
-}
-
 .navbar-brand:hover, i:hover, button:hover, .btn:hover {
   color: #be6d83 !important;
 }
@@ -111,10 +92,6 @@ section div {
 @media (min-width: 768px) {
   .fs-7 {
     font-size: 1em !important;
-  }
-  #formsection {
-    box-shadow: 0 0 20px #9e3753 !important;
-    border-radius: 0% !important;
   }
   .profilename h1, .profilename .h1 {
     text-transform: uppercase;

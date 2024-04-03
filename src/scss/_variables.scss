@@ -58,27 +58,6 @@ img {
   display: none;
 }
 
-#formsection.boxshadow {
-  box-shadow: none !important;
-}
-
-section div {
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-.bordertopbuttom {
-  border: 0.5rem solid $primary;
-  border-left: none;
-  border-right: none;
-}
-
-#searchsection {
-  &.search-box {
-    border-bottom: 1px solid $primary;
-  }
-}
-
 .navbar-brand, i, button, .btn  {
 
   &:hover {
@@ -132,11 +111,6 @@ section div {
 
 .fs-7 {
   font-size: 1em !important;
-}
-
-#formsection {
-  box-shadow: 0 0 20px $primary !important;
-  border-radius: 0% !important;
 }
 
 .profilename h1 {
