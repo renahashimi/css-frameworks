@@ -10,7 +10,7 @@ const action = "/auth/login";
 
 
 export async function loginUser(profile){
-    const loginUrl = API_URL + action;
+    const loginUrl = API_URL + API_AUTH + API_LOGIN;
     const body = JSON.stringify(profile);
 
     console.log(loginUrl);
@@ -28,7 +28,6 @@ export async function loginUser(profile){
     storage.save("token", accessToken);
     storage.save("profile", user);
 
-    alert("You are logged in")
-    window.location.href = "/";
+    window.location.href = "/profile/posts/";
 
 }
