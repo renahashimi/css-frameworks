@@ -1,123 +1,175 @@
-$primary: #9e3753;
-$secondary: #be6d83;
+$primary: #2d3134;
+$secondary: #c6a226;
 $white: #fff;
 $black: #000;
-$pinklight: #dd9faf;
+$black2: #0F0F0F;
+$backshade: #51515164;
 $font-righteous: "Righteous", sans-serif;
 $font-dosis: "Dosis", sans-serif;
 
-//$primary: #c35874;
 
+.fs- {
+  &7, h4 {
+   font-size: 0.8em !important;
+  }
+  
+  &8 {
+   font-size: 0.6em !important;
+  }
 
-/*---------------------------------*/
+  &9 { 
+   font-size: 2.5em !important;
+  }
 
-/*  ALL PAGES */
-body, html {
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: $black;  
-  justify-content: center;
-  max-width: 1100px;
-  width: 100%;
-  margin: auto;
-  padding: 0;
+  &10 { 
+    font-size: 1.8em !important;
+  }
+  
 }
 
-p {
-  font-family: $font-dosis;
-  color: $black;
-  opacity: 1;
-  font-weight: 500;
-}
+  
+.backImage {
+  display: block;
+  background-image: url(../../images/layers1.jpg);
+  background-repeat: no-repeat;
+  background-size: fill;
+  height: 100vh;
 
 
-/* SMALL CHANGES */
+  &2 {
+    display: block;
+    background-image: url(../../images/abstract2.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 40%;
+    height: fit-content;
+  }
 
-.fs-7, h4 {
-  font-size: 0.8em !important;
-}
+  &3 {
+    background-color: $black2;
+  }
 
-.fs-8 {
-  font-size: 0.6em !important;
-}
-
-.fs-9 { 
-  font-size: 0.8em !important;
-}
-
-img {
-  object-fit: cover;
-}
-
-.me-n6 {
-  margin-left: -50px !important;
-}
-
-#back {
-  display: none;
-}
-
-.navbar-brand, i, button, .btn  {
-
-  &:hover {
-    color: $secondary !important;
+  &Body {
+    display: block;
+    background-image: url(../../images/particle.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
 
-.profilebackground {
-  display: block;
-  position: static;
-  background-image: url(/images/roses.JPG);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 130px;
-  padding-bottom: 30px;
-  width: 100%;
-}
-
-.profileimg {
-  width: 40px;
-  height: 40px;
-  border: 1px solid $primary;
-  border-radius: 50% 50%;
-}
-
-.historyimg {
-  width: 50px;
-  height: 50px;
-  border: 1px solid $primary;
-  border-radius: 50% 50%;
-}
-
-
-/*--MEDIA--*/
-
-@media (min-width: 576px) {
-
-.profilebackground {
-  height: 200px;
-}
-
-.profileimage img {
-  min-width: 150px;
-  min-height: 150px;
-} 
+.back {
+  
+  &Shade {
+  background-color: $backshade;
+  }
+  &Shadow {
+    box-shadow: 0px 0px 20px $black;
+  }
+  &ShadowWhite {
+    box-shadow: 0px 0px 10px $white;
+  }
 
 }
 
-@media (min-width: 768px) {
+/*---------------------------------*/
 
-.fs-7 {
-  font-size: 1em !important;
-}
+// /*  ALL PAGES */
+// body, html {
+//   font-weight: 600;
+//   letter-spacing: 0.1em;
+//   color: $black;  
+//   justify-content: center;
+//   max-width: 1100px;
+//   width: 100%;
+//   margin: auto;
+//   padding: 0;
+// }
 
-.profilename h1 {
-  text-transform: uppercase;
-  font-size: 2.2em;
-  margin-top: 45px;
-}
-}
+// p {
+//   font-family: $font-dosis;
+//   color: $black;
+//   opacity: 1;
+//   font-weight: 500;
+// }
+
+
+// /* SMALL CHANGES */
+
+
+
+// img {
+//   object-fit: cover;
+// }
+
+// .me-n6 {
+//   margin-left: -50px !important;
+// }
+
+// #back {
+//   display: none;
+// }
+
+// .navbar-brand, i, button, .btn  {
+
+//   &:hover {
+//     color: $secondary !important;
+//   }
+// }
+
+// .profilebackground {
+//   display: block;
+//   position: static;
+//   background-image: url(/images/roses.JPG);
+//   background-size: cover;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   height: 130px;
+//   padding-bottom: 30px;
+//   width: 100%;
+// }
+
+// .profileimg {
+//   width: 40px;
+//   height: 40px;
+//   border: 1px solid $primary;
+//   border-radius: 50% 50%;
+// }
+
+// .historyimg {
+//   width: 50px;
+//   height: 50px;
+//   border: 1px solid $primary;
+//   border-radius: 50% 50%;
+// }
+
+
+// /*--MEDIA--*/
+
+// @media (min-width: 576px) {
+
+// .profilebackground {
+//   height: 200px;
+// }
+
+// .profileimage img {
+//   min-width: 150px;
+//   min-height: 150px;
+// } 
+
+// }
+
+// @media (min-width: 768px) {
+
+// .fs-7 {
+//   font-size: 1em !important;
+// }
+
+// .profilename h1 {
+//   text-transform: uppercase;
+//   font-size: 2.2em;
+//   margin-top: 45px;
+// }
+// }
  
 
   
@@ -495,7 +547,7 @@ $escaped-characters: (
 
 $enable-caret:                true !default;
 $enable-rounded:              true !default;
-$enable-shadows:              false !default;
+$enable-shadows:              true !default;
 $enable-gradients:            false !default;
 $enable-transitions:          true !default;
 $enable-reduced-motion:       true !default;

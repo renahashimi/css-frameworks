@@ -1,12 +1,12 @@
 {
-  "name": "css-frameworks-ca",
+  "name": "javascript2-ca",
   "version": "0.0.1",
   "description": "A sosial media app",
   "scripts": {
-    "test": "echo \"My CA for css-frameworks\" && exit 1",
+    "test": "echo \"My CA for JavaScript 2\" && exit 1",
     "build": "sass src/scss:dist/css",
-    "watch": "sass --watch src/scss:dist/css",
-    "start-server": "live-server"
+    "watch": "sass --watch src/scss:dist/css & live-server",
+    "start": "npm run build && live-server"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,8 @@
     "Frameworks",
     "Bootstrap",
     "SCSS",
-    "SASS"
+    "SASS",
+    "JavaScript"
   ],
   "author": "Rena Hashimi <renhas54143@stud.noroff.no>",
   "license": "ISC",
