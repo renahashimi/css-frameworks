@@ -7,7 +7,7 @@ $backshade: #51515164;
 $font-righteous: "Righteous", sans-serif;
 $font-dosis: "Dosis", sans-serif;
 
-
+// FONT
 .fs- {
   &7, h4 {
    font-size: 0.8em !important;
@@ -27,49 +27,114 @@ $font-dosis: "Dosis", sans-serif;
   
 }
 
-  
-.backImage {
-  display: block;
-  background-image: url(../../images/layers1.jpg);
-  background-repeat: no-repeat;
-  background-size: fill;
-  height: 100vh;
+// BACKGROUND COLOR, BOX-SHADOW AND IMAGE
 
+.back {
 
-  &2 {
+  &Image1{
     display: block;
+    background-image: url(../../images/layers1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+  }
+
+  &Image2 {
     background-image: url(../../images/abstract2.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 40%;
+    background-position: center;
     height: fit-content;
   }
 
-  &3 {
+  &Image3 {
+    background-image: url(../../images/abstractw&b.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+
+  &color1 {
     background-color: $black2;
   }
 
-  &Body {
+  &ImageBody {
     display: block;
     background-image: url(../../images/particle.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
   }
-}
 
-.back {
-  
   &Shade {
   background-color: $backshade;
   }
+
   &Shadow {
     box-shadow: 0px 0px 20px $black;
   }
+
   &ShadowWhite {
     box-shadow: 0px 0px 10px $white;
   }
 
 }
+
+@media (min-width: 576px) {
+  .back-sm- {
+    &Image3 {
+      background-image: url(../../images/abstractw&b.jpeg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: left; 
+    }
+  } 
+}
+
+
+//END FOR BACK...
+
+
+
+// MARGIN 
+  .margin {
+    &top50 {
+      margin-top: 50px !important;
+    }
+
+    &top100 {
+      margin-top: 100px !important;
+    }
+
+    &top150 {
+      margin-top: 150px !important;
+    }
+  }
+
+@media (min-width: 576px) {
+  .margin-sm- {
+    &top-none{
+      margin-top: 0px !important;
+    }
+
+    &top100{
+      margin-top: 100px !important;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .margin-md- {
+    &top-none{
+      margin-top: 0px !important;
+    }
+
+    &top100{
+      margin-top: 100px !important;
+    }
+  }
+}
+
+//END FOR MARGIN
 
 /*---------------------------------*/
 
