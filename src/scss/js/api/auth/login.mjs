@@ -20,8 +20,8 @@ export async function loginUser(profile){
             "Content-Type": "application/json",
         },
         method,
-        body
-    })
+        body,
+    });
 
     const { accessToken, ...user } = await response.json();
     
