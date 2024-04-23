@@ -9,5 +9,5 @@ export function renderPostList(postDataList, parent) {
 export async function renderAllPosts() {
     const posts = await postActions.getPosts();
     const container = document.querySelector("#posts");
-    templates.renderPostList(posts, container);
+    renderPostList(posts, container);
 }
