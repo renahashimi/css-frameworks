@@ -1,7 +1,7 @@
 {
   "name": "javascript2-ca",
   "version": "0.0.1",
-  "description": "A sosial media app",
+  "description": "A sosial media app - My JS2 CA",
   "scripts": {
     "test": "echo \"My CA for JavaScript 2\" && exit 1",
     "build": "sass src/scss:dist/css",
@@ -10,10 +10,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NoroffFEU/css-frameworks-ca.git"
+    "url": "git+https://github.com/renahashimi/css-frameworks/tree/js2"
   },
   "keywords": [
-    "CSS",
     "CSS",
     "Frameworks",
     "Bootstrap",
@@ -26,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/NoroffFEU/css-frameworks-ca/issues"
   },
-  "homepage": "https://github.com/NoroffFEU/css-frameworks-ca#readme",
+  "homepage": "https://github.com/renahashimi/css-frameworks/blob/js2/README.md",
   "dependencies": {
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3"
