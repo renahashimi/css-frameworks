@@ -43,13 +43,13 @@ export function postCard(postData) {
        tags.appendChild(tagElement);
        post.appendChild(tags);
     }
-
+    
     post.append(title, userName, time, contentText)
 
     // const button = document.createElement("button");
     // post.append(button);
     // button.addEventListener("click", () => console.log(postData))
-
+    
     return post;
   
     
