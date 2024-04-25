@@ -15,13 +15,11 @@ export function postCard(postData) {
     const userImage = document.createElement("img");
     if (postData.media) {
         userImage.classList.add("postUserImg");        
-        userImage.src = postData.media;
+        userImage.src = postData.media ? postData.media: "../../../../images/abstract1.jpeg";
         userImage.alt = `Image Name ${postData.title}`;
         postLogo.appendChild(userImage);
-    } else {
-        userImage.src = "../../../../images/abstract1.jpeg"
     }
-    
+
     // USERNAME
     const userName = document.createElement("h3");
     userName.innerHTML = `@${postData.id}`;
@@ -55,15 +53,17 @@ export function postCard(postData) {
     } 
 
     // TAGS 
-    if (postData.tags && postData.tags.lenght > 0) {
+    if (Array.isArray(postData.tags) && postData.tags.length > 0) {
         const tags = document.createElement("div")
         tags.classList.add("tags");
         postData.tags.foreach(tag => {
             const tagElement = document.createElement("p");
             tagElement.innerHTML = tag;
-        })
-        tags.appendChild(tagElement);
+            tags.appendChild(tagElement);
+        });
         postContent.appendChild(tags);
+    } else {
+        return null;
     }
     
     postInfo.append(userName, time)
