@@ -1,7 +1,7 @@
 import { API_URL, API_POSTS } from "../constants.mjs"
 import { authFetch } from "../authFetch.mjs";
 
-const method = "put";
+const method = "PUT";
 
 export async function updatePost(postData) {
     if (!postData.id) {
