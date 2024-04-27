@@ -51,13 +51,17 @@ export function postCard(postData) {
 
     // TAGS 
     if (Array.isArray(postData.tags) && postData.tags.length > 0) {
-        const tags = document.createElement("div")
-        tags.classList.add("postTags");
+        const tagsContainer = document.createElement("div");
+        tagsContainer.classList.add("postTags");
         postData.tags.forEach(tag => {
-            const tagElement = document.createElement("p");
-            tagElement.innerHTML = tag;
-            tags.split(",").map.((tag => "#" + tag.trim()));
-            tags.appendChild(tagElement);
+            const individualTags = tag.split(",").map(tag => tag.trim());
+            individualTags.forEach(individualTag => {
+                const formattedTag = "#" + individualTag;
+                const tagElement = document.createElement("p");
+                tagElement.textContent = formattedTag;
+                tagsContainer.appendChild(tagElement);
+            })
+
         });
         postContent.appendChild(tags);
     }
