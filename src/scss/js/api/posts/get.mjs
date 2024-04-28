@@ -10,6 +10,8 @@ export async function getPosts() {
 }
 
 export async function getPost(id) {
+    // const url = new URL(location.href);
+    // const id = url.searchParams.get("id");
     if (!id) {
         throw new Error("You have to have a postID to get posts");
     } 
