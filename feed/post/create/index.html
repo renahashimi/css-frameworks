@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="/dist/css/index.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> -->
     <!-- <script type="module" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script> -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <script type="module" src="../../../src/scss/js/index.mjs"></script>
@@ -22,22 +22,22 @@
                 <div class="col-12">
                     <form id="createPost" method="POST">
                         <div class="form-group my-2">
-                            <label for="title" class="text-uppercase py-1">Title</label>
-                            <input class="form-control" id="title" type="text" required>
+                            <label for="title">Title</label>
+                            <input class="form-control" id="title" type="text" name="title" required>
                         </div>
                         <div class="form-group my-2">
-                            <label for="body" class="text-uppercase py-1">Body</label>
+                            <label for="body">Body</label>
                             <textarea class="form-control" id="body" name="body" required></textarea>
                         </div>
                         <div class="form-group my-2">
-                            <label for="media" class="text-uppercase py-1">Media</label>
+                            <label for="media">Media</label>
                             <input class="form-control" id="media" name="media" type="url">
                         </div>
                         <div class="form-group my-2">
-                            <label for="tags" class="text-uppercase py-1">Tags</label>
+                            <label for="tags">Tags</label>
                             <input class="form-control" id="tags" name="tags" type="text">
                         </div>
-                        <button type="submit" class="btn btn-primary text-uppercase border my-2 px-3 fs-5">Create Post</button>
+                        <button class="btn btn-primary text-uppercase border my-2 px-3 fs-5">Create Post</button>
                     </form>
                 </div>
             </div>

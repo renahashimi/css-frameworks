@@ -18,10 +18,10 @@ export default function router() {
         case "/feed/posts/":
           template.renderAllPosts();
           break;
-        case "/feed/post/edit":
+        case "/feed/post/edit/":
           listeners.setUpdatePostListener();
           break;
-        case "/feed/post/create":
+        case "/feed/post/create/":
           listeners.setCreatePostListener();
           break;
     }

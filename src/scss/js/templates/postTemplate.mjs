@@ -54,16 +54,13 @@ export function postCard(postData) {
         const tagsContainer = document.createElement("div");
         tagsContainer.classList.add("postTags");
         postData.tags.forEach(tag => {
-            const individualTags = tag.split(",").map(tag => tag.trim());
-            individualTags.forEach(individualTag => {
-                const formattedTag = "#" + individualTag;
-                const tagElement = document.createElement("p");
-                tagElement.textContent = formattedTag;
-                tagsContainer.appendChild(tagElement);
-            })
-
+            const individualTags = tag.split(",").map(tag => `#${tag.trim()}`);
+            const tagText = individualTags.join(', ');
+            const tagElement = document.createElement("p");
+            tagElement.textContent = tagText;
+            tagsContainer.appendChild(tagElement);
         });
-        postContent.appendChild(tags);
+        postContent.appendChild(tagsContainer);
     }
     
     postInfo.append(userName, time)

@@ -1,16 +1,13 @@
 import { API_URL, API_POSTS } from "../constants.mjs"
-import { authFetch } from "../authFetch.mjs";
+import { authFetch } from "../";
 
-const method = "POST";
+const method = "post";
 
 export async function createPost(postData) {
-    const createUrl = API_URL + API_POSTS;
+    const createUrl = `${API_URL}${API_POSTS}`;
     const response = await authFetch( createUrl, {
         method,
         body: JSON.stringify(postData)
     });
-    if (!response.ok) {
-        throw new Error("An error acquired!");
-    }
     return await response.json();
 }   

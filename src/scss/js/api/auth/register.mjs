@@ -1,7 +1,7 @@
-import { API_AUTH, API_REGISTER, API_URL } from "../constants.mjs";
+import { API_URL, API_AUTH, API_REGISTER } from "../constants.mjs";
 
 const method = "post";
-const action = "/auth/register";
+// const action = "/auth/register";
 
 /**
  * Make a JSdoc
@@ -9,7 +9,7 @@ const action = "/auth/register";
 
 
 export async function registerUser(profile){
-    const registerUrl = API_URL + action;
+    const registerUrl = `${API_URL}${API_AUTH}${API_REGISTER}`;
     const body = JSON.stringify(profile);
 
     console.log(registerUrl);
@@ -22,5 +22,5 @@ export async function registerUser(profile){
         body,
     });
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
 }

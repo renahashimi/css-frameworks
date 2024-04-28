@@ -1,17 +1,9 @@
-import { postCard } from "./post.mjs";
+import { postCard } from "./postTemplate.mjs";
 
 // Render a post
 export function renderPostCard(postData, parent) {
   parent.append(postCard(postData))
 }
-
-
-
-
-
-
-
-
 
 // import * as postActions from "./api/posts/index.mjs";
 
