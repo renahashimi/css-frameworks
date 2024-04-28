@@ -17,10 +17,10 @@ export async function loginUser(profile){
 
     const response = await fetch(loginUrl, {
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
         },
         method,
-        body,
+        body
     });
 
     const { accessToken, ...user } = await response.json();
@@ -28,6 +28,5 @@ export async function loginUser(profile){
     storage.save("token", accessToken);
     storage.save("profile", user);
 
-    window.location.href = "/pages/posts/";
-
+    window.location.href = "/profile/";
 }

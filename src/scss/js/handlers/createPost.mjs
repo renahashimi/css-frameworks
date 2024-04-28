@@ -1,4 +1,4 @@
-import { createPost } from "../api/posts/create.mjs";
+import { createPost } from "../api/posts/index.mjs";
 
 export function setCreatePostListener() {
     const form = document.querySelector("#createPost");
@@ -9,7 +9,7 @@ export function setCreatePostListener() {
             const form = event.target;
             const formData = new FormData(form);
             const post = Object.fromEntries(formData.entries());
-            // post.tags = post.tags.split(",").map((tag) => tag.trim());
+            //post.tags = post.tags.split(",").map((tag) => tag.trim());
 
             createPost(post);
         });

@@ -9,7 +9,7 @@ export async function removePost(id) {
         throw new Error("You have to have a postID to delete posts");
     } 
     const removePostUrl = `${API_URL}${API_POSTS}/${id}`;
-    const response = await authFetch( removePostUrl, {
+    const response = await authFetch(removePostUrl, {
         method,
     });
     return await response.json();

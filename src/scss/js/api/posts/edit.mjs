@@ -8,9 +8,9 @@ export async function updatePost(postData) {
         throw new Error("You have to have a postID to update posts");
     } 
     const updatePostUrl = `${API_URL}${API_POSTS}/${postData.id}`;
-    const response = await authFetch( updatePostUrl, {
+    const response = await authFetch(updatePostUrl, {
         method,
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
     });
     return await response.json();
 }   

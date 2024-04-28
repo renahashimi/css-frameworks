@@ -8,7 +8,7 @@ export function setUpdatePostListener() {
 
     if (form) {
         form.addEventListener("submit", (event) => {
-            event.preventDefault();
+            event.preventDefault()
             const form = event.target;
             const formData = new FormData(form);
             const post = Object.fromEntries(formData.entries());
