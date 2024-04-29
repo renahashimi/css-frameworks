@@ -45,8 +45,8 @@ export function postCard(postData) {
         const img = document.createElement("img");
         img.classList.add("postImg");
         img.src = postData.media;
-        img.alt = `Image Name ${postData.title}`;
-        postContent.appendChild(img);
+        img.alt = `Image title ${postData.title}`;
+        postContent.append(img);
     } 
 
     // TAGS 
@@ -58,9 +58,9 @@ export function postCard(postData) {
             const tagText = individualTags.join(', ');
             const tagElement = document.createElement("p");
             tagElement.textContent = tagText;
-            tagsContainer.appendChild(tagElement);
+            tagsContainer.append(tagElement);
         });
-        postContent.appendChild(tagsContainer);
+        postContent.append(tagsContainer);
     }
     
     postInfo.append(userName, time)
