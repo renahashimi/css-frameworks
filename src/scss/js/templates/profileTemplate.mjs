@@ -43,7 +43,7 @@ export function profileContent(profileData) {
 
     myProfile.append(myName, myEmail);
     profileContainer.append(pageName, myProfile);
-    console.log(profileContainer);
+    console.log(profileContainer)
 
     //return profileContainer;
 
