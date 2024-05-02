@@ -27,6 +27,7 @@ $font-dosis: "Dosis", sans-serif;
   
 }
 
+
 // BACKGROUND COLOR, BOX-SHADOW AND IMAGE
 
 .back {
@@ -55,7 +56,7 @@ $font-dosis: "Dosis", sans-serif;
   }
 
   &Image4 {
-    background-image: url(../../images/lines.jpeg);
+    background-image: url(../../images/layers1.jpg);
     background-repeat: repeat;
     background-size: contain;
     background-position: center; 
@@ -150,69 +151,69 @@ $font-dosis: "Dosis", sans-serif;
 
 // POSTCARD
 
-.post {
-  &Container {
-    background-color: $white;
-    border: 5px solid $black;
-    border-radius: 15px;
-    margin: 20px;
-    box-shadow: 0px 0px 20px $black;
-  }
+// .post {
+//   &Container {
+//     background-color: $white;
+//     border: 5px solid $black;
+//     border-radius: 15px;
+//     margin: 20px;
+//     box-shadow: 0px 0px 20px $black;
+//   }
 
-  &Head {
-    display: flex;
-    border-bottom: 2px solid $black;
-    padding: 10px;
-  }
+//   &Head {
+//     display: flex;
+//     border-bottom: 2px solid $black;
+//     padding: 10px;
+//   }
 
-  &Info {
-    display: block;
-    margin-left: 15px;
-  }
+//   &Info {
+//     display: block;
+//     margin-left: 15px;
+//   }
 
-  &Content {
-    padding: 10px;
-  }
+//   &Content {
+//     padding: 10px;
+//   }
 
-  &Title {
-    font-weight: bolder;
-    font-size: 1.2em;
-  }
+//   &Title {
+//     font-weight: bolder;
+//     font-size: 1.2em;
+//   }
 
-  &Text {
-    font-size: 1em;
-  }
+//   &Text {
+//     font-size: 1em;
+//   }
 
-  &Img {
-    display: block;
-    margin: auto;   
-    padding: 10px;
-    justify-content: center;
-    max-height: 200px;
-    max-width: 90%;
-  }
+//   &Img {
+//     display: block;
+//     margin: auto;   
+//     padding: 10px;
+//     justify-content: center;
+//     max-height: 200px;
+//     max-width: 90%;
+//   }
 
-  &UserImg {
-    border-radius: 50%;
-    border: 1px solid $black;
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-  }
+//   &UserImg {
+//     border-radius: 50%;
+//     border: 1px solid $black;
+//     width: 60px;
+//     height: 60px;
+//     object-fit: cover;
+//   }
 
-  &Time {
-    font-size: 0.9em !important;
-  }
+//   &Time {
+//     font-size: 0.9em !important;
+//   }
 
-  &Tags {
-    display: flex;
-  }
+//   &Tags {
+//     display: flex;
+//   }
 
-  &Tags p {
-    padding: 0 5px;
-  }
+//   &Tags p {
+//     padding: 0 5px;
+//   }
 
-}
+// }
 @media (min-width: 576px) {
   #posts {
       display: grid;
@@ -227,6 +228,13 @@ $font-dosis: "Dosis", sans-serif;
       grid-template-columns: repeat(3, 33%);
       justify-content: space-evenly;
   } 
+}
+
+//PROFILE 
+
+#profile {
+  margin: 0;
+  padding: 0;
 }
 
 
