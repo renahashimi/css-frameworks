@@ -1,30 +1,30 @@
-import { getPosts } from "../api/posts/get.mjs";
-import { renderPostList } from "./postTemplate.mjs";
+import { postCard } from "./postTemplate.mjs";
+import * as postActions from "../api/posts/index.mjs";
+
 
 //RENDER MY PROFILE-POSTS
 export async function renderProfilePosts(profileName) {
+    const posts = await postActions.getPosts();
+    const postsByProfile = posts.filter(post => post.author === profileName.name);
 
-    const profilePostCntainer = document.querySelector("#profilePosts");
+    const container = document.querySelector("#profilePosts");
+    profilePostContainer.innerHTML = "";
+    renderPostByProfileList(postsByProfile, container)
 
-    //const posts = await postActions.getPost(id);
-    profilePostCntainer.innerHTML = "";
-    
-    try {
-        const postsData = await getPosts();
-        const postsByProfile = postsData.filter(post => post.author === profileName);
-        postsByProfile.foreach(post => {
-            const postElement = document.createElement("div");
-            postElement.classList.add("post");
-            const postContent = document.createElement("p");
-            postContent.textContent = post.condent;
+        // postsByProfile.forEach(post => {
+        //     const postElement = document.createElement("div");
+        //     postElement.classList.add("post");
+        //     const postContent = document.createElement("p");
+        //     postContent.textContent = "post.content";
 
-            profilePostCntainer.appendChild(profileData.name)
-        });
+        // console.log(postElement, postContent, postsData)
 
-    } catch (error) {
-        console.error("Error fetching posts", error)
+        //     postElement.appendChild(postContent);
+        //     profilePostContainer.append(postElement)
+        // });
+}
 
-    }
-    //renderPostList(posts, container);
-    //console.log(posts);
+export function renderPostByProfileList(postDataList, parent) {
+    parent.append(...postDataList.map(postCard));
 };
+
