@@ -8,7 +8,7 @@ export async function renderProfilePosts(profileName) {
     const postsByProfile = posts.filter(post => post.author === profileName.name);
 
     const container = document.querySelector("#profilePosts");
-    profilePostContainer.innerHTML = "";
+    container.innerHTML = "";
     renderPostByProfileList(postsByProfile, container)
 
         // postsByProfile.forEach(post => {
@@ -25,6 +25,15 @@ export async function renderProfilePosts(profileName) {
 }
 
 export function renderPostByProfileList(postDataList, parent) {
-    parent.append(...postDataList.map(postCard));
-};
+    postDataList.forEach(postData => {
+
+    const postElement = postCard(postData);
+    parent.appendChild(postElement);
+    });
+
+}
+
+// export function renderPostByProfileList(postDataList, parent) {
+//     parent.append(...postDataList.map(postCard));
+// };
 
