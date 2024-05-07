@@ -3,20 +3,27 @@ import { getProfile } from "../api/profile/get.mjs";
 import { getPosts } from "../api/posts/index.mjs";
 import * as postActions from "../api/posts/index.mjs";
 import { load } from "../storage/index.mjs";
+import { authFetch } from "../api/authFetch.mjs";
 
-const profileData = JSON.parse(localStorage.getItem("profile"));
-
+//const profileData = JSON.parse(localStorage.getItem("profile"));
+const author = "?_author=";
 //RENDER MY PROFILE-POSTS
 export async function renderProfilePosts() {
-    try{
-        const profile = await getProfile(profileData = load("profile").name);
-        const profileName = profile.name;
-        console.log(profileName)
+   // try{
+        const profileData = await getProfile();
+        const profile = await getProfile();
+        const authorName = profile.name;
+        const getPostsUrl = `${API_SOCIAL_URL}${action}${author}${authorName}`;
+        const response = await authFetch(getPostsUrl);
+        return await response.json();
+}
+        const profileName = profileData.name;
+        console.log(profileName, profileData)
 
 
         const storedPosts = JSON.parse(localStorage.getItem("posts")) || [];
         console.log(storedPosts)
-        const postByProfile = storedPosts.filter(post => post.author === profileName);
+        const postByProfile = storedPosts.filter(post => post.name === profileName);
         console.log(postByProfile)
         const container = document.querySelector("#profilePosts");
         container.innerHTML = "";
