@@ -1,28 +1,35 @@
 import { postCard, renderPostList } from "./postTemplate.mjs";
-import * as postActions from "../api/posts/index.mjs";
 import { getProfile } from "../api/profile/get.mjs";
+import { getPosts } from "../api/posts/index.mjs";
 
-//const profileData = JSON.parse(localStorage.getItem("profile"));
+const profileData = JSON.parse(localStorage.getItem("profile"));
 
+console.log(profileData)
 //RENDER MY PROFILE-POSTS
 export async function renderProfilePosts() {
-    const profileData = await getProfile();
-    const profileName = profileData.name;
-    console.log(profileName, profileData)
+    try{
+        const profileData = await getProfile();
+        const profileName = profileData.name;
+        console.log(profileName)
 
 
-    const response = await postActions.getPosts();
-    const allPosts = await response.json;
-    //const container = document.querySelector("#profilePosts");
+        const response = await getPosts();
+        const allPosts = await response.json();
+        const container = document.querySelector("#profilePosts");
+               console.log(response)
 
+        if (Array.isArray(allPosts)) {
+            const postByProfile = allPosts.filter(post => post.author === profileName);
+            renderPostList(postByProfile, container);
+        } else {
+            console.log("Profile name not found")
+        }
 
-    if (profileName) {
-        return allPosts.filter(post => post.author === profileName);
-    } 
-    console.log(allPosts, profileName)
+        console.log(profileName)
 
-    renderPostList(allPosts, container);
-
+    } catch (error) {
+        console.error("Failed to fetch posts", error)
+    }
 }
         // postsByProfile.forEach(post => {
         //     const postElement = document.createElement("div");
