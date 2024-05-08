@@ -3,7 +3,9 @@ import { authFetch } from "../authFetch.mjs";
 import { API_SOCIAL_URL } from "../constants.mjs";
 
 // const method = "get";
-const action = "/profiles"
+const action = "/profiles";
+//const author = "?_author=true";
+const posts = "?_posts=true";
 
 export async function getProfiles() {
     const getProfilesUrl = `${API_SOCIAL_URL}${action}`;
@@ -11,11 +13,11 @@ export async function getProfiles() {
     return await response.json();
 }
 
-export async function getProfile(name = load("profile").name) {
+export async function getProfile(name = load("profile").name) { 
     if (!name) {
         throw new Error("Requires a name");
     } 
-    const getProfileUrl = `${API_SOCIAL_URL}${action}/${name}`;
+    const getProfileUrl = `${API_SOCIAL_URL}${action}/${name}${posts}`;
     const response = await authFetch(getProfileUrl);
     return await response.json(); 
 }

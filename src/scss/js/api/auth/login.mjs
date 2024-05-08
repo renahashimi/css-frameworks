@@ -1,4 +1,4 @@
-import { API_AUTH, API_LOGIN, API_URL } from "../constants.mjs";
+import { API_SOCIAL_URL } from "../constants.mjs";
 import * as storage from "../../storage/index.mjs";
 
 const method = "post";
@@ -10,7 +10,7 @@ const action = "/auth/login";
 
 
 export async function loginUser(profile){
-    const loginUrl = API_URL + action;
+    const loginUrl = API_SOCIAL_URL + action;
     const body = JSON.stringify(profile);
 
     console.log(loginUrl);

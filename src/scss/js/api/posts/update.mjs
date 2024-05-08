@@ -1,4 +1,4 @@
-import { API_SOCIAL_URL, API_POSTS } from "../constants.mjs"
+import { API_SOCIAL_URL, API_POSTS } from "../constants.mjs";
 import { authFetch } from "../authFetch.mjs";
 
 const method = "put";
