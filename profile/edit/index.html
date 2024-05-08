@@ -11,14 +11,24 @@
     <script type="module" src="../../src/scss/js/index.mjs"></script>
     <title>MOONLIGHT - EDIT PROFILE</title>
 </head>
-<body class="back-sm-Image3">
+<body class="backImage4">
     <header>
-    
+        <!--NAV FOR BOTTOM PAGE  / FIXED-->
+        <nav class="navbar d-flex justify-content-between align-items-center m-auto border-top border-2 border-primary fixed-bottom navbar-light bg-white" style="max-width: 1100px;">
+            <div class="container d-flex justify-content-center align-items-center text-primary h-25 m-auto" style="max-width: 600px;">
+               <a class="navbar-brand m-auto text-primary" href="/feed/posts/"><i class="bi bi-house-fill" style="font-size: 30px;"></i></a>
+               <a class="navbar-brand m-auto text-primary" href="#"><i class="bi bi-chat-heart-fill" style="font-size: 30px;"></i></a>
+               <div class="bg-secondary rounded-circle mt-n5 px-3 py-1 m-auto"><a class="navbar-brand m-auto text-primary" href="/feed/post/create/"><i class="bi bi-plus-circle-fill" style="font-size: 2.6em;"></i></a></div>
+               <a class="navbar-brand m-auto text-primary" href="/profile"><i class="bi bi-person-hearts" style="font-size: 30px;"></i></a>
+               <a class="navbar-brand m-auto text-primary" href="#"><i class="bi bi-heart-fill" style="font-size: 30px;"></i></a>
+            </div>
+        </nav> 
     </header>
     <main>
         <!--FORM TO EDIT PROFILE-->
-        <div class="container-fluid">
-            <form id="editProfile" class="bg-light">
+        <h1 class="font-righteous fs-4 my-2 py-3 text-uppercase text-light text-center">Update your profile</h1>
+        <div class="container-fluid align-items-center m-auto mt-5">
+            <form id="editProfile" class="bg-light p-3">
                 <div class="form-group my-2">
                     <label for="name">Name</label>
                     <input class="form-control" id="name" name="name" type="text" disabled>
@@ -41,13 +51,13 @@
 
     </main>
     <footer class="mb-5 pb-2">
-        <div class="container-fluid mb-5 pb-4 d-block border-top border-4 border-light">
+        <!-- <div class="container-fluid mb-5 pb-4 d-block border-top border-4 border-light">
             <div class="row mt-3 mb-n5">
                 <div class="col">
                     <p class="fs-7 font-righteous text-left ms-4 text-secondary">Copyright &copy; 2024 - Moonlight</p>
                 </div>
             </div>
-        </div>
+        </div> -->
     </footer>
 </body>
 </html>
