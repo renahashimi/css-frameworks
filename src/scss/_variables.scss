@@ -27,6 +27,19 @@ $font-dosis: "Dosis", sans-serif;
   
 }
 
+//HOVER
+.deleteButton, .navbar a, button{
+  transition: transform 0.5s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.deleteButton:hover, .navbar a:hover {
+  transform: scale(1.2);
+}
+
 
 // BACKGROUND COLOR, BOX-SHADOW AND IMAGE
 
@@ -35,7 +48,7 @@ $font-dosis: "Dosis", sans-serif;
   &Image1{
     display: block;
     background-image: url(../../images/layers1.jpg);
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
     height: 100vh;
   }
@@ -56,14 +69,11 @@ $font-dosis: "Dosis", sans-serif;
   }
 
   &Image4 {
-    background-image: url(../../images/layers1.jpg);
-    background-repeat: repeat;
-    background-size: contain;
+    background-image: url(../../images/wavy-folds.jpeg);
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-size: cover;
     background-position: center; 
-  }
-
-  &color1 {
-    background-color: $black2;
   }
 
   &ImageBody {
@@ -71,6 +81,18 @@ $font-dosis: "Dosis", sans-serif;
     background-image: url(../../images/particle.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
+  } 
+
+  &ImageBodyWhite {
+    display: block;
+    background-image: url(../../images/geometrical.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+  } 
+  
+  &color1 {
+    background-color: $black2;
   }
 
   &Shade {
@@ -148,74 +170,9 @@ $font-dosis: "Dosis", sans-serif;
 
 //END FOR MARGIN
 
-
-// POSTCARD
-
-// .post {
-//   &Container {
-//     background-color: $white;
-//     border: 5px solid $black;
-//     border-radius: 15px;
-//     margin: 20px;
-//     box-shadow: 0px 0px 20px $black;
-//   }
-
-//   &Head {
-//     display: flex;
-//     border-bottom: 2px solid $black;
-//     padding: 10px;
-//   }
-
-//   &Info {
-//     display: block;
-//     margin-left: 15px;
-//   }
-
-//   &Content {
-//     padding: 10px;
-//   }
-
-//   &Title {
-//     font-weight: bolder;
-//     font-size: 1.2em;
-//   }
-
-//   &Text {
-//     font-size: 1em;
-//   }
-
-//   &Img {
-//     display: block;
-//     margin: auto;   
-//     padding: 10px;
-//     justify-content: center;
-//     max-height: 200px;
-//     max-width: 90%;
-//   }
-
-//   &UserImg {
-//     border-radius: 50%;
-//     border: 1px solid $black;
-//     width: 60px;
-//     height: 60px;
-//     object-fit: cover;
-//   }
-
-//   &Time {
-//     font-size: 0.9em !important;
-//   }
-
-//   &Tags {
-//     display: flex;
-//   }
-
-//   &Tags p {
-//     padding: 0 5px;
-//   }
-
-// }
+//MEDIA FOR POSTCARD
 @media (min-width: 576px) {
-  #posts {
+  #posts, #profilePosts {
       display: grid;
       grid-template-columns: 50% 50%;
       justify-content: space-evenly;
@@ -223,7 +180,7 @@ $font-dosis: "Dosis", sans-serif;
 }
 
 @media (min-width: 992px) {
-  #posts {
+  #posts, #profilePosts {
       display: grid;
       grid-template-columns: repeat(3, 33%);
       justify-content: space-evenly;
