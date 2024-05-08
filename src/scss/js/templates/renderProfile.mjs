@@ -1,24 +1,32 @@
 import { getProfile } from "../api/profile/get.mjs";
-import { profileContent } from "./profileTemplate.mjs";
+import { postCard } from "./postTemplate.mjs";
+import { profileTemplate } from "./profileTemplate.mjs";
 
 
-export async function renderProfile(profileData) {
+export async function renderProfile() {
     try {
-        // const url = new URL(location.href);
-        // let profile = url.searchParams.get("profile");
-        
         const profileData = await getProfile();
-        console.log(profileData);
+        //console.log(profileData);
 
-        if (profileData) {
+       // if (profileData) {
             const container = document.querySelector("#profile");
-            const profileInfo = profileContent(profileData);
-            container.innerHTML = "";
-            console.log(profileInfo);
-            container.append(profileInfo);
-        } else {
-            console.log("Profile is not found.")
-        }
+            const profileContainer = profileTemplate(profileData);
+            //container.innerHTML = "";
+            //console.log(profileInfo);
+            container.append(profileContainer);
+    
+            //POSTS BY PROFILE
+            const postsContainer = document.querySelector("#profilePosts");
+            const myPosts = profileData.posts;
+            postsContainer.innerHTML = "";
+
+            myPosts.forEach(postData => {
+            const postCardElement = postCard(postData);
+            postsContainer.append(postCardElement);
+            });     
+       // } else {
+       //     console.log("Profile is not found.")
+       // }
     } catch (error) {
         console.error("Failed to load profile:", error)
     }
