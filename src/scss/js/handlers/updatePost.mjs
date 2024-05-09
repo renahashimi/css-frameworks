@@ -17,14 +17,28 @@ export async function setUpdatePostListener() {
         form.media.value = post.media;
         button.disabled = false;
 
-        form.addEventListener("submit", (event) => {
+        form.addEventListener("submit", async (event) => {
             event.preventDefault()
             const form = event.target;
             const formData = new FormData(form);
-            const post = Object.fromEntries(formData.entries());
+            const post = Object.fromEntries(formData.entries())
+            
             post.id = id;
             
-            updatePost(post);
+            if (post.tags) {
+                const arrayTags = post.tags = post.tags.split(",").map((tag) => tag.trim()).filter((tag) => tag !== "");
+                post.tags = arrayTags.length > 0 ? arrayTags : [];
+            } else {
+                post.tags = [];
+            }
+
+        try {
+            const response = await updatePost(post);
+            alert("Your post has been successfully updated");
+            window.location.href = "/profile/";
+        } catch (error) {
+            console.error("Unfortunately, your post was not updated, an error has occurred")
+        }
         })
     }
 }
