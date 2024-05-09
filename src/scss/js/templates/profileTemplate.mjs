@@ -163,13 +163,50 @@ export function profilePostCard(postData) {
     userNameId.classList.add("fs-6", "mt-n1", "text-secondary");
     postInfo.append(userNameId)
 
-    //DELETE and EDIT BUTTON
-    const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("container", "d-flex", "bg-light", "border-2", "justify-content-end");
+    //DELETE and EDIT BUTTON || DROPDOWN MENU
+    const dropdown = document.createElement("div");
+    dropdown.classList.add("dropdown", "container", "d-flex", "bg-light", "m-auto", "justify-content-end", "float-end");
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.classList.add("deleteButton", "fs-6", "rounded-circle", "bg-light", "border-2", "h-50", "mt-3", "me-2");
-    deleteBtn.innerHTML = `<i class="bi bi-archive"></i>`;
+    const dropdownToggle = document.createElement("button");
+    dropdownToggle.classList.add("dropdown-toggle", "btn", "btn-sm", "btn-light", "fs-2", "float-end");
+    dropdownToggle.setAttribute("type", "button");
+    dropdownToggle.setAttribute("id", "dropdownMenuButton");
+    dropdownToggle.setAttribute("data-bs-toggle", "dropdown");
+    dropdownToggle.setAttribute("aria-expended", "false");
+    //dropdownToggle.innerHTML = `<i class="bi bi-three-dots"></i>`;
+    //Icon
+    const icon = document.createElement("i");
+    icon.classList.add("bi", "bi-three-dots-vertical");
+    icon.setAttribute("aria-hidden", "true")
+    dropdownToggle.appendChild(icon);
+
+    const dropdownMenu = document.createElement("li");
+    dropdownMenu.classList.add("dropdown-menu", "p-2");
+    dropdownMenu.setAttribute("aria-labelledby", "dropdownMenubuttun");
+
+    // const buttonContainer = document.createElement("div");
+    // buttonContainer.classList.add("container", "d-flex", "bg-light", "border-2", "justify-content-end");
+
+    //Edit-button
+    const editBtn = document.createElement("li");
+    //editBtn.classList.add("editButton", "fs-6", "rounded-circle", "bg-light", "border-2", "h-50", "mt-3", "me-2");
+    editBtn.innerHTML = `<button class="dropdown-item" type="button"><i class="bi bi-pencil"></i> Edit post</button>`;
+    editBtn.dataset.postId = postData.id;
+    editBtn.addEventListener("click", async function() {
+        const postId = this.dataset.postId;
+        if (postId) {
+            window.location.href = `/feed/post/edit/?id=${postId}`
+        } else {
+        //console.error("Missing post ID:", error);
+        alert("Failed to delete post! Missing post ID")
+        }
+    });    
+    dropdownMenu.append(editBtn);
+
+    //Delete-button
+    const deleteBtn = document.createElement("li");
+    // deleteBtn.classList.add("deleteButton", "fs-6", "rounded-circle", "bg-light", "border-2", "h-50", "mt-3", "me-2");
+    deleteBtn.innerHTML = `<button class="dropdown-item" type="button"><i class="bi bi-archive"></i> Delete</button>`;
     deleteBtn.dataset.postId = postData.id;
     deleteBtn.addEventListener("click", async function() {
         const postId = this.dataset.postId;
@@ -191,7 +228,9 @@ export function profilePostCard(postData) {
         alert("Failed to delete post! Missing post ID")
         }
     });    
-    buttonContainer.append(deleteBtn);
+    dropdownMenu.append(deleteBtn);
+
+
 
     // IMAGE
     if (postData.media) {
@@ -199,10 +238,12 @@ export function profilePostCard(postData) {
         img.classList.add("d-block", "m-auto", "justify-content-center", "p-2");
         img.style.maxWidth = "98%";
         img.style.maxHeight = "300px";
-        img.src = postData.media ? postData.media: "../../../../images/geometrical.jpeg";
+        img.src = postData.media || "../../../../images/404-error.jpeg";
         img.style.backgroundColor = "$black";
         img.alt = `Image title ${postData.title}`;
         postContent.append(img);
+
+        console.log(postData.media)
     } 
 
     // TIME
@@ -239,7 +280,8 @@ export function profilePostCard(postData) {
         postContent.append(tagsContainer);
     }
     
-    postsHead.append(postLogo, postInfo, buttonContainer)
+    dropdown.append(dropdownToggle, dropdownMenu)
+    postsHead.append(postLogo, postInfo, dropdown)
     post.append(postsHead, postContent)
     
     return post;

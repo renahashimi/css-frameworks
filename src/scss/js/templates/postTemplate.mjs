@@ -1,7 +1,7 @@
 export function postCard(postData) {
 
     const post = document.createElement("div");
-    post.classList.add("bg-light", "rounded", "my-3", "mx-3", "pb-3");
+    post.classList.add("bg-light", "rounded", "mx-2", "my-3", "pb-3");
     const postsHead = document.createElement("div");
     postsHead.classList.add("d-flex", "border-bottom", "border-1", "border-primary", "p-1");
     const postContent = document.createElement("div");
@@ -53,7 +53,7 @@ export function postCard(postData) {
     userNameId.classList.add("fs-6", "mt-n1", "text-secondary");
     postInfo.append(userNameId)
 
-    // //DELETE BUTTON
+    // //DELETE BUTTON 
     // const deleteBtn = document.createElement("button");
     // deleteBtn.classList.add("deleteButton", "fs-6", "rounded-circle", "bg-light", "border");
     // deleteBtn.innerHTML = `<i class="bi bi-archive"></i>`;
@@ -125,9 +125,23 @@ export function postCard(postData) {
         });
         postContent.append(tagsContainer);
     }
+
+
+    //REACTIONS
+    
+
+
+    //COMMENTS
+
+    //POST ID LINK
+    const postlink = document.createElement("a");
+    postlink.href = `/feed/post/?id=${postData.id}`;
+    console.log(postlink)
+    postContent.append(postlink)
     
     postsHead.append(postLogo, postInfo)
-    post.append(postsHead, postContent)
+    
+    post.append(postsHead, postContent, postlink)
     
     return post;
 }
