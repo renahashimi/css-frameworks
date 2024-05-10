@@ -21,6 +21,7 @@ export async function renderProfile() {
         const postCardElement = profilePostCard(postData);
         postsContainer.append(postCardElement);
         });     
+        
        // } else {
        //     console.log("Profile is not found.")
        // }
