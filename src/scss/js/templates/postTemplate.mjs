@@ -148,14 +148,14 @@ export function postCard(postData) {
         likeBtn.classList.add("liked");
     }
     
-    let previousState = {};
+   // let previousState = {};
     const likedBtn = document.createElement("button");
     likedBtn.classList.add("reactionbtn", "liked-button", "border-0", "fs-2", "bg-white", "ms-2", "me-1");
 
     likeBtn.addEventListener("click", () => {
         if (!isLiked) {
-            previousState.likes = postData.reactions.likes;
-            previousState.liked = postData.reactions.liked;
+          //  previousState.likes = postData.reactions.likes;
+            // previousState.liked = postData.reactions.liked;
 
             postData.reactions = postData.reactions || {};
             postData.reactions.likes = (postData.reactions.likes || 0) + 1;
@@ -167,34 +167,42 @@ export function postCard(postData) {
             save(`liked_${postId}`, true);
             isLiked = true;
 
+            likedBtn.classList.toggle("clicked");
+
          } 
-         //else {
-        //     previousState.reactions.likes = postData.likes;
-        //     previousState.reactions.liked = postData.liked;
+        //  else {
+        //     postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
+        //    // previousState.reactions.likes = postData.likes;
+        //     //previousState.reactions.liked = postData.liked;
         //     likeCount.textContent = `${postData.reactions.likes} stars`;
-        //     reactionContainer.replaceChild(likeBtn, likedBtn);
-        //     postData.reactions.likes = previousState.likes;
-        //     postData.reactions.liked = previousState.liked;
-        //     likeBtn.classList.remove("liked")
+        //     //reactionContainer.replaceChild(likeBtn, likedBtn);
+        //  //   postData.reactions.likes = previousState.likes;
+        //    // postData.reactions.liked = previousState.liked;
+        //     likedBtn.classList.remove("liked")
         //     remove(`liked_${postId}`);
         //     isLiked = false;
         // }
-    });
+     });
     likedBtn.addEventListener("click", () => {
         if (isLiked) {
-            previousState.reactions.likes = postData.likes;
-            previousState.reactions.liked = postData.liked;
+            postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
+
+          //  previousState.reactions.likes = postData.likes;
+            //previousState.reactions.liked = postData.liked;
             likeCount.textContent = `${postData.reactions.likes} stars`;
-            reactionContainer.replaceChild(likeBtn, likedBtn);
-            postData.reactions.likes = previousState.likes;
-            postData.reactions.liked = previousState.liked;
-            likeBtn.classList.remove("liked")
+          //  reactionContainer.replaceChild(likeBtn, likedBtn);
+          //  postData.reactions.likes = previousState.likes;
+           // postData.reactions.liked = previousState.liked;
+            likedBtn.classList.remove("clicked");
+            likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
+
             remove(`liked_${postId}`);
             isLiked = false;
+
         }
     });
 
-    likedBtn.classList.toggle("clicked");
+
     reactionContainer.append(likeBtn, likeCount)
 
     //COMMENTS
