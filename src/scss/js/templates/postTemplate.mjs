@@ -1,3 +1,6 @@
+import { remove } from "../storage/index.mjs";
+import { save } from "../storage/index.mjs";
+
 export function postCard(postData) {
 
     const post = document.createElement("div");
@@ -139,13 +142,16 @@ export function postCard(postData) {
     likeCount.classList.add("reactioncount");
     likeCount.textContent = postData.reactions && postData.reactions.likes ? postData.reactions.likes : 0;
     
-    const isLiked = postData.reactions && postData.reactions.liked;
-    // if (isLiked) {
-    //     likeBtn.classList.add("liked")
-    // }
+    const postId = postData.id;
+
+    const isLiked = localStorage.getItem("liked_${postId}") === true;
+    if (isLiked) {
+        likeBtn.classList.add("liked");
+    }
     
     let previousState = {};
     const likedBtn = document.createElement("reactionbtn", "liked-button", "border-0", "fs-2", "bg-white", "ms-2");
+    likedBtn.classList.add("reactionbtn", "liked-button", "border-0", "fs-2", "bg-white", "ms-2", "me-1");
 
     likeBtn.addEventListener("click", () => {
         if (!isLiked) {
@@ -155,18 +161,36 @@ export function postCard(postData) {
             postData.reactions = postData.reactions || {};
             postData.reactions.likes = (postData.reactions.likes || 0) + 1;
             likeCount.textContent = `${postData.reactions.likes} stars`;
-            //likeBtn.classList.add("liked");
-            // likeBtn.disabled = true;
-            likedBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
-            reactionContainer.replaceChild(likedBtn, likeBtn)
+            reactionContainer.replaceChild(likedBtn, likeBtn);
             postData.reactions.liked = true;
+            likeBtn.classList.add("liked");
+            likedBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
+            save(`liked_${postId}`) === true;
+            isLiked === true;
+
         } else {
             previousState.reactions.likes = postData.likes;
             previousState.reactions.liked = postData.liked;
             likeCount.textContent = `${postData.reactions.likes} stars`;
-            reactionContainer.replaceChild(likeBtn, likedBtn)
+            reactionContainer.replaceChild(likeBtn, likedBtn);
+            postData.reactions.likes = previousState.likes;
+            postData.reactions.liked = previousState.liked;
+            likeBtn.classList.remove("liked")
+            remove(`liked_${postId}`);
+            isLiked = false;
         }
     });
+    //     likedBtn.addEventListener("click", () => {
+    //         previousState.reactions.likes = postData.likes;
+    //         previousState.reactions.liked = postData.liked;
+    //         likeCount.textContent = `${postData.reactions.likes} stars`;
+    //         reactionContainer.replaceChild(likeBtn, likedBtn);
+    //         postData.reactions.likes = previousState.likes;
+    //         postData.reactions.liked = previousState.liked;
+    //         likeBtn.classList.remove("liked")
+    //         remove(`liked_${postId}`);
+    //         isLiked = false;
+    // });
 
     likedBtn.classList.toggle("clicked");
     reactionContainer.append(likeBtn, likeCount)
