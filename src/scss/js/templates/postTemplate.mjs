@@ -86,7 +86,7 @@ export function postCard(postData) {
         img.classList.add("d-block", "m-auto", "justify-content-center", "p-2");
         img.style.maxWidth = "98%";
         img.style.maxHeight = "300px";
-        img.src = postData.media ? postData.media: "../../../../images/geometrical.jpeg";
+        img.src = postData.media ? postData.media: "../../../../images/404-error.jpeg";
         img.style.backgroundColor = "$black";
         img.alt = `Image title ${postData.title}`;
         postContent.append(img);
@@ -128,21 +128,64 @@ export function postCard(postData) {
 
 
     //REACTIONS
-    
+    const reactionContainer = document.createElement("div");
+    reactionContainer.classList.add("reactioncontainer");
+ 
+    const likeBtn = document.createElement("button");
+    likeBtn.classList.add("reactionbtn", "like-button", "border-0", "fs-2", "bg-white", "ms-2");
+    likeBtn.innerHTML = `<i class="bi bi-star"></i>`;
 
+    const likeCount = document.createElement("span");
+    likeCount.classList.add("reactioncount");
+    likeCount.textContent = postData.reactions && postData.reactions.likes ? postData.reactions.likes : 0;
+    
+    const isLiked = postData.reactions && postData.reactions.liked;
+    // if (isLiked) {
+    //     likeBtn.classList.add("liked")
+    // }
+    
+    let previousState = {};
+    const likedBtn = document.createElement("reactionbtn", "liked-button", "border-0", "fs-2", "bg-white", "ms-2");
+
+    likeBtn.addEventListener("click", () => {
+        if (!isLiked) {
+            previousState.likes = postData.reactions.likes;
+            previousState.liked = postData.reactions.liked;
+
+            postData.reactions = postData.reactions || {};
+            postData.reactions.likes = (postData.reactions.likes || 0) + 1;
+            likeCount.textContent = `${postData.reactions.likes} stars`;
+            //likeBtn.classList.add("liked");
+            // likeBtn.disabled = true;
+            likedBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
+            reactionContainer.replaceChild(likedBtn, likeBtn)
+            postData.reactions.liked = true;
+        } else {
+            previousState.reactions.likes = postData.likes;
+            previousState.reactions.liked = postData.liked;
+            likeCount.textContent = `${postData.reactions.likes} stars`;
+            reactionContainer.replaceChild(likeBtn, likedBtn)
+        }
+    });
+
+    likedBtn.classList.toggle("clicked");
+    reactionContainer.append(likeBtn, likeCount)
 
     //COMMENTS
 
     //POST ID LINK
     const postlink = document.createElement("a");
     postlink.href = `/feed/post/?id=${postData.id}`;
+    postlink.classList.add("text-decoration-none", "bg-light", "mx-2", "my-2");
     console.log(postlink)
-    postContent.append(postlink)
-    
+
     postsHead.append(postLogo, postInfo)
     
-    post.append(postsHead, postContent, postlink)
-    
+    postlink.append(postsHead, postContent)
+
+    post.append(postlink, reactionContainer)
+
+
     return post;
 }
 
