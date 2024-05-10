@@ -143,7 +143,7 @@ export function postCard(postData) {
     
     const postId = postData.id;
 
-    const isLiked = localStorage.getItem(`liked_${postId}`) === true;
+    let isLiked = localStorage.getItem(`liked_${postId}`) === "true";
     if (isLiked) {
         likeBtn.classList.add("liked");
     }
