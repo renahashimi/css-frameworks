@@ -21,7 +21,7 @@
                <a class="navbar-brand m-auto text-primary" href="#"><i class="bi bi-chat-heart-fill" style="font-size: 30px;"></i></a>
                <div class="bg-secondary rounded-circle mt-n5 px-3 py-1 m-auto"><a class="navbar-brand m-auto text-primary" href="/feed/post/create/"><i class="bi bi-plus-circle-fill" style="font-size: 2.6em;"></i></a></div>
                <a class="navbar-brand m-auto text-primary" href="/profile"><i class="bi bi-person-hearts" style="font-size: 30px;"></i></a>
-               <a class="navbar-brand m-auto text-primary" href="#"><i class="bi bi-heart-fill" style="font-size: 30px;"></i></a>
+               <a id="logout" class="navbar-brand m-auto text-primary" href="#"><i class="bi bi-door-closed-fill" style="font-size: 30px;"></i></a>
             </div>
         </nav> 
     </header>
@@ -46,16 +46,23 @@
                         </div>
                         <div class="form-group my-2">
                             <label for="">Tags</label>
-                            <input class="form-control" name="tags" type="text">
+                            <input class="form-control" type="text" name="tags" >
                         </div> 
                         <button type="submit" class="btn btn-primary text-uppercase border my-2 px-3 fs-5">Update Post</button>
                     </form>
                 </div>
             </div>
         </div>
-
-        
+        <button class="btn btn-primary d-flex fs-3 mt-3 mb-5 text-uppercase m-auto text-center border-light" onclick="history.back()">Cancel</button>
     </main>
-    <footer></footer>
+    <footer>
+        <div class="container-fluid mb-5 pb-4 d-block border-top border-4 border-primary">
+            <div class="row mt-3" style="margin-bottom: 90px;">
+                <div class="col">
+                    <p class="fs-7 font-righteous text-center text-dark">Copyright &copy; 2024 - Moonlight</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

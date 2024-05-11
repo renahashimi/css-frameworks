@@ -35,7 +35,7 @@
                                 <p class="mt-n1 fs-7">PROFILE</p></a>
                             </div>
                             <div class="d-block text-light mx-3">     
-                                <a id="logOut" class="navbar-brand m-auto text-light" href="#"><i class="bi bi-door-closed-fill" style="font-size: 30px;"></i>
+                                <a id="logout2" class="navbar-brand m-auto text-light" href="#"><i class="bi bi-door-closed-fill" style="font-size: 30px;"></i>
                                 <p class="mt-n1 fs-7">SIGN OUT</p></a>
                             </div>
                         </div>
@@ -55,27 +55,27 @@
         </nav>  
     </header>
     <main class="flex-grow-1 text-primary">
-
         <h1 class="fs-2 m-2 pt-3 text-light fw-bolder font-righteous">POSTS</h1>
         <!--SEARCH & FILTER-->
-        <div class="container-md d-flex justify-content-between">
-            <div class="row">
-                <div class="col-4">
-                    
-                </div> 
-                <div class="col-8 d-flex float-end justify-content-end m-auto">
-                    <div class="input-group">
-                        <div class="form-outline d-flex" data-mdb-input-init>
-                            <label class="form-label d-none" for="searchForm">Search</label>
-                            <input type="search" id="searchForm" class="form-control" placeholder="Search"/>
-                            <button type="button" class="btn btn-secondary searchButton"><i class="bi bi-search"></i></button>
-                        </div>                        
-                    </div>
-                </div> 
+        <div class="container-fluid d-flex ps-4 my-4 py-3 border-2 border-light border-top">
+            <div class="input-group">
+                <select class="filterSelect rounded fs-3 bg-secondary" id="inputGroup">
+                    <option selected>Filter Posts</option>
+                    <option value="1">OLD TO NEW</option>
+                    <option value="2">COMMENTS</option>
+                    <option value="3">REACTIONS</option>
+                </select>
+            </div>
+            <div class="input-group justify-content-end m-auto float-end">
+                <div class="form-group d-flex pe-3">
+                    <label class="form-label d-none" for="searchForm">Search</label>
+                    <input type="search" id="searchForm" class="form-control" placeholder="Search">
+                    <button type="button" class="btn btn-secondary searchButton"><i class="bi bi-search"></i></button>
+                </div>                        
             </div>
         </div>
         <!--LIST OF POSTS-->
-        <div class="container-fluid" id="posts"></div>
+        <div class="container-fluid mt-2 border-2 border-light border-top" id="posts"></div>
     </main>
     <footer>
         <div class="container-fluid mb-5 pb-4 d-block border-top border-4 border-primary">
