@@ -1,3 +1,4 @@
+import { postReacts } from "../api/posts/react.mjs";
 import * as storage from "../storage/index.mjs";
 //import { save, remove } from "../storage/index.mjs";
 
@@ -54,34 +55,7 @@ export function postCard(postData) {
     const userNameId = document.createElement("h3");
     userNameId.innerHTML = `@${postData.id}`;
     userNameId.classList.add("fs-6", "mt-n1", "text-secondary");
-    postInfo.append(userNameId)
-
-    // //DELETE BUTTON 
-    // const deleteBtn = document.createElement("button");
-    // deleteBtn.classList.add("deleteButton", "fs-6", "rounded-circle", "bg-light", "border");
-    // deleteBtn.innerHTML = `<i class="bi bi-archive"></i>`;
-    // deleteBtn.dataset.postId = postData.id;
-    // deleteBtn.addEventListener("click", async function() {
-    //     const postId = this.dataset.postId;
-    //     if (postId) {
-    //         if (confirm("Are you sure you want to delete this post?")) {
-    //             try {
-    //                 await removePost(postId)
-    //                 alert("Your post is now deleted successfully. N.B.: Updating the page is recommended!");
-    //                 const postElement = this.closest(".post");
-    //                 if (postElement) {
-    //                     postElement.remove();
-    //                 }
-    //             } catch (error) {
-    //                 console.error("Error deleting post:", error);
-    //             }
-    //         }
-    //     } else {
-    //     //console.error("Missing post ID:", error);
-    //     alert("Failed to delete post! Missing post ID")
-    //     }
-    // });    
-    // postInfo.appendChild(deleteBtn)
+    postInfo.append(userNameId);
 
     // IMAGE
     if (postData.media) {
@@ -129,10 +103,9 @@ export function postCard(postData) {
         postContent.append(tagsContainer);
     }
 
-
     //REACTIONS
     const reactionContainer = document.createElement("div");
-    reactionContainer.classList.add("reactioncontainer");
+    reactionContainer.classList.add("reactioncontainer", "mt-n2");
  
     const likeBtn = document.createElement("button");
     likeBtn.classList.add("reactionbtn", "like-button", "border-0", "fs-2", "bg-white", "ms-2");
@@ -141,55 +114,101 @@ export function postCard(postData) {
     const likeCount = document.createElement("span");
     likeCount.classList.add("reactioncount");
     likeCount.textContent = `${postData.reactions && postData.reactions.likes ? postData.reactions.likes : 0} Stars`;
-    
-    const postId = postData.id;
 
-    let isLiked = storage.load(`liked_${postId}`) === true;
-    if (isLiked) {
-        likeBtn.classList.add("liked");
+    likeBtn.addEventListener("click", async () => {
+    try {
+        const reactionData = await postReacts(postData, "like");
+        console.log("Reaction Successfully:", reactionData);
+
+    } catch (error) {
+        console.error("Failed to react to post", error)
+
     }
-    if (isLiked === null) {
-        isLiked = false;
-    }
+});
+
     
-    const likedBtn = document.createElement("button");
-    likedBtn.classList.add("reactionbtn", "liked-button", "border-0", "fs-2", "bg-white", "ms-2", "me-1");
 
-    likeBtn.addEventListener("click", () => {
-        if (!isLiked) {
-            postData.reactions = postData.reactions || {};
-            postData.reactions.likes = (postData.reactions.likes || 0) + 1;
-            likeCount.textContent = `${postData.reactions.likes} stars`;
-            reactionContainer.replaceChild(likedBtn, likeBtn);
-            postData.reactions.liked = "true";
-            likeBtn.classList.add("liked");
-            likedBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
-            storage.save(`liked_${postId}`, true);
-            isLiked = true;
-        } //  else {
-        //     postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
-        //     likeCount.textContent = `${postData.reactions.likes} stars`;
-        //     //reactionContainer.replaceChild(likeBtn, likedBtn);
-        //     likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
-        //     storage.remove(`liked_${postId}`);
-        //     isLiked = false;
-        // }
-     });
-    likedBtn.addEventListener("click", () => {
-        if (isLiked) {
-            postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
-            likeCount.textContent = `${postData.reactions.likes} stars`;
-            reactionContainer.replaceChild(likeBtn, likedBtn);
-            likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
-            storage.remove(`liked_${postId}`);
-            isLiked = false;
-        }
-    });
+    // const postId = postData.id;
 
-    likedBtn.classList.toggle("clicked");
+    // let isLiked = storage.load(`liked_${postId}`) === true;
+    // if (isLiked) {
+    //     likeBtn.classList.add("liked");
+    // }
+    // if (isLiked === null) {
+    //     isLiked = false;
+    // }
+    
+    // const likedBtn = document.createElement("button");
+    // likedBtn.classList.add("reactionbtn", "liked-button", "border-0", "fs-2", "bg-white", "ms-2", "me-1");
+
+    // likeBtn.addEventListener("click", () => {
+    //     if (!isLiked) {
+    //         postData.reactions = postData.reactions || {};
+    //         postData.reactions.likes = (postData.reactions.likes || 0) + 1;
+    //         likeCount.textContent = `${postData.reactions.likes} stars`;
+    //         reactionContainer.replaceChild(likedBtn, likeBtn);
+    //         postData.reactions.liked = true;
+    //         likeBtn.classList.add("liked");
+    //         likedBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
+    //         storage.save(`liked_${postId}`, true);
+    //         isLiked = true;
+    //     } else {
+    //         postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
+    //         likeCount.textContent = `${postData.reactions.likes} stars`;
+    //         reactionContainer.replaceChild(likeBtn, likedBtn);
+    //         likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
+    //         likeBtn.innerHTML = `<i class="bi bi-star"></i>`;
+    //         storage.remove(`liked_${postId}`);
+    //         isLiked = false;
+    //     }
+    //  });
+    // // likedBtn.addEventListener("click", () => {
+    // //     if (isLiked) {
+    // //         postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
+    // //         likeCount.textContent = `${postData.reactions.likes} stars`;
+    // //         reactionContainer.replaceChild(likeBtn, likedBtn);
+    // //         likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
+    // //         storage.remove(`liked_${postId}`);
+    // //         isLiked = false;
+    // //     }
+    // // });
+
+    // likedBtn.classList.toggle("clicked");
     reactionContainer.append(likeBtn, likeCount)
 
     //COMMENTS
+    const commentsContainer = document.createElement("div");
+    commentsContainer.classList.add("commentContainer", "hidden");
+    const commentsContent = document.createElement("div");
+    commentsContent.classList.add("d-block", "hidden")
+    if (postData.comments && postData.comments.length > 0) {
+        postData.comments.forEach(commentData => {
+            const comment = document.createElement("div");
+            comment.classList.add("comment");
+
+            const commentAuthor = document.createElement("li");
+            commentAuthor.textContent = commentData.author;
+            commentsContent.appendChild(commentAuthor)
+
+            const commentBody = document.createElement("p");
+            commentBody.textContent = commentData.body;
+            commentsContent.appendChild(commentBody)
+        })
+    } else {
+        const noComments = document.createElement("p");
+        noComments.classList.add("m-2", "fw-bolder", "text-uppercase") 
+        noComments.textContent = "No comments yet.";
+        commentsContent.appendChild(noComments);
+    }
+    
+    const openCommentsBtn = document.createElement("button");
+    openCommentsBtn.classList.add("border-0", "text-underline", "m-2", "fs-4")
+    openCommentsBtn.innerHTML = `Comments ${postData._count.comments} <i class="bi bi-arrow-down-short"></i>`;
+    openCommentsBtn.addEventListener("click", () => {
+        commentsContent.classList.toggle("hidden")
+    })
+
+
 
     //POST ID LINK
     const postlink = document.createElement("a");
@@ -198,7 +217,7 @@ export function postCard(postData) {
 
     postsHead.append(postLogo, postInfo)
     postlink.append(postsHead, postContent)
-    post.append(postlink, reactionContainer)
+    post.append(postlink, reactionContainer, openCommentsBtn)
 
 
     return post;
