@@ -1,4 +1,5 @@
 import * as storage from "../storage/index.mjs";
+//import { save, remove } from "../storage/index.mjs";
 
 export function postCard(postData) {
 
@@ -144,7 +145,6 @@ export function postCard(postData) {
     const postId = postData.id;
 
     let isLiked = storage.load(`liked_${postId}`) === true;
-    console.log(isLiked)
     if (isLiked) {
         likeBtn.classList.add("liked");
     }
@@ -160,31 +160,31 @@ export function postCard(postData) {
             postData.reactions = postData.reactions || {};
             postData.reactions.likes = (postData.reactions.likes || 0) + 1;
             likeCount.textContent = `${postData.reactions.likes} stars`;
-            reactionContainer.replaceChild(likedBtn);
+            reactionContainer.replaceChild(likedBtn, likeBtn);
             postData.reactions.liked = "true";
             likeBtn.classList.add("liked");
             likedBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
             storage.save(`liked_${postId}`, true);
             isLiked = true;
-        } else {
+        } //  else {
+        //     postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
+        //     likeCount.textContent = `${postData.reactions.likes} stars`;
+        //     //reactionContainer.replaceChild(likeBtn, likedBtn);
+        //     likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
+        //     storage.remove(`liked_${postId}`);
+        //     isLiked = false;
+        // }
+     });
+    likedBtn.addEventListener("click", () => {
+        if (isLiked) {
             postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
             likeCount.textContent = `${postData.reactions.likes} stars`;
-            reactionContainer.replaceChild(likeBtn);
-            likeBtn.innerHTML = `<i class="bi bi-star"></i>`;
+            reactionContainer.replaceChild(likeBtn, likedBtn);
+            likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
             storage.remove(`liked_${postId}`);
             isLiked = false;
         }
-     });
-    // likedBtn.addEventListener("click", () => {
-    //     if (isLiked) {
-    //         postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
-    //         likeCount.textContent = `${postData.reactions.likes} stars`;
-    //         reactionContainer.replaceChild(likeBtn, likedBtn);
-    //         likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
-    //         storage.remove(`liked_${postId}`);
-    //         isLiked = false;
-    //     }
-    // });
+    });
 
     likedBtn.classList.toggle("clicked");
     reactionContainer.append(likeBtn, likeCount)

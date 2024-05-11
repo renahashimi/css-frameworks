@@ -280,7 +280,6 @@ export function profilePostCard(postData) {
         postContent.append(tagsContainer);
     }
     
-
     //REACTIONS
     const reactionContainer = document.createElement("div");
     reactionContainer.classList.add("reactioncontainer");
@@ -299,7 +298,10 @@ export function profilePostCard(postData) {
     if (isLiked) {
         likeBtn.classList.add("liked");
     }
- 
+    if (isLiked === null) {
+        isLiked = false;
+    }
+    
     const likedBtn = document.createElement("button");
     likedBtn.classList.add("reactionbtn", "liked-button", "border-0", "fs-2", "bg-white", "ms-2", "me-1");
 
@@ -312,20 +314,27 @@ export function profilePostCard(postData) {
             postData.reactions.liked = "true";
             likeBtn.classList.add("liked");
             likedBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
-            likeBtn.innerHTML = `<i class="bi bi-star"></i>`;
-
             storage.save(`liked_${postId}`, true);
             isLiked = true;
         } else {
+           postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
+            likeCount.textContent = `${postData.reactions.likes} stars`;
+        //     //reactionContainer.replaceChild(likeBtn, likedBtn);
+            likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
+            storage.remove(`liked_${postId}`);
+            isLiked = false;
+        }
+     });
+    likedBtn.addEventListener("click", () => {
+        if (isLiked) {
             postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
             likeCount.textContent = `${postData.reactions.likes} stars`;
-            likeBtn.innerHTML = `<i class="bi bi-star"></i>`;
+            reactionContainer.replaceChild(likeBtn, likedBtn);
             likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
             storage.remove(`liked_${postId}`);
             isLiked = false;
         }
     });
-    console.log(`${isLiked}${postId}`)
 
     likedBtn.classList.toggle("clicked");
     reactionContainer.append(likeBtn, likeCount)
