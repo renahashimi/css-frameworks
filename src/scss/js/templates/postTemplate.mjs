@@ -179,8 +179,8 @@ export function postCard(postData) {
     //COMMENTS
     const commentsContainer = document.createElement("div");
     commentsContainer.classList.add("commentContainer", "hidden");
-    const commentsContent = document.createElement("div");
-    commentsContent.classList.add("d-block", "hidden")
+    // const commentsContent = document.createElement("div");
+    // commentsContent.classList.add("d-block", "hidden")
     if (postData.comments && postData.comments.length > 0) {
         postData.comments.forEach(commentData => {
             const comment = document.createElement("div");
@@ -188,24 +188,24 @@ export function postCard(postData) {
 
             const commentAuthor = document.createElement("li");
             commentAuthor.textContent = commentData.author;
-            commentsContent.appendChild(commentAuthor)
+            commentsContainer.appendChild(commentAuthor)
 
             const commentBody = document.createElement("p");
             commentBody.textContent = commentData.body;
-            commentsContent.appendChild(commentBody)
+            commentsContainer.appendChild(commentBody)
         })
     } else {
         const noComments = document.createElement("p");
         noComments.classList.add("m-2", "fw-bolder", "text-uppercase") 
         noComments.textContent = "No comments yet.";
-        commentsContent.appendChild(noComments);
+        commentsContainer.appendChild(noComments);
     }
     
     const openCommentsBtn = document.createElement("button");
     openCommentsBtn.classList.add("border-0", "text-underline", "m-2", "fs-4")
     openCommentsBtn.innerHTML = `Comments ${postData._count.comments} <i class="bi bi-arrow-down-short"></i>`;
     openCommentsBtn.addEventListener("click", () => {
-        commentsContent.classList.toggle("hidden")
+        commentsContainer.classList.remove("hidden")
     })
 
 
@@ -217,7 +217,7 @@ export function postCard(postData) {
 
     postsHead.append(postLogo, postInfo)
     postlink.append(postsHead, postContent)
-    post.append(postlink, reactionContainer, openCommentsBtn)
+    post.append(postlink, reactionContainer, openCommentsBtn, commentsContainer)
 
 
     return post;
