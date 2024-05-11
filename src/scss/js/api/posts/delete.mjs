@@ -14,3 +14,17 @@ export async function removePost(id) {
     });
     return await response.json();
 }   
+
+
+// window.addEventListener("click", clearSearch);
+
+// function clearSearch(){
+//     searchResult.innerHTML = "";
+// }
+
+// const cleatBtn = document.querySelector(".clearbtn");
+// cleatBtn.addEventListener("click", clearSearchTxt);
+
+// function clearSearchTxt() {
+//     document.getElementById("search").value = "";
+// }
