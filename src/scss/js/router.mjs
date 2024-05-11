@@ -23,6 +23,7 @@ export default function router() {
           template.renderAllPosts();
           listeners.setLogOutListener();
           listeners.searchPost();
+          listeners.filterPosts();
           break;
         case "/feed/post/":
           template.renderSinglePostCard();
