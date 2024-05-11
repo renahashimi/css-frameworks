@@ -1,5 +1,7 @@
+import { authFetch } from "../api/authFetch.mjs";
 import { postReacts } from "../api/posts/react.mjs";
 import * as storage from "../storage/index.mjs";
+import { profilePostCard } from "./profileTemplate.mjs";
 //import { save, remove } from "../storage/index.mjs";
 
 export function postCard(postData) {
@@ -179,8 +181,6 @@ export function postCard(postData) {
     //COMMENTS
     const commentsContainer = document.createElement("div");
     commentsContainer.classList.add("commentContainer", "hidden");
-    // const commentsContent = document.createElement("div");
-    // commentsContent.classList.add("d-block", "hidden")
     if (postData.comments && postData.comments.length > 0) {
         postData.comments.forEach(commentData => {
             const comment = document.createElement("div");
@@ -197,16 +197,49 @@ export function postCard(postData) {
     } else {
         const noComments = document.createElement("p");
         noComments.classList.add("m-2", "fw-bolder", "text-uppercase") 
-        noComments.textContent = "No comments yet.";
+        noComments.textContent = `-No comments yet.`;
         commentsContainer.appendChild(noComments);
     }
-    
+
+    //Comment-form
+    function getProfileName() {
+        const profile = storage.load("profile");
+        if (profile) {
+            return profile.name;
+        } else {
+            return null;
+        }
+    }
+    const commentsContent = document.createElement("div");
+    commentsContent.classList.add("d-block", "hidden")
+
+    const commentForm = document.createElement("form", "hidden");
+    commentForm.id = "commentForm";
+    const authorInput = document.createElement("input")
+    authorInput.text = "text";
+    authorInput.id = "author"
+    authorInput.placeholder = "Your name";
+    authorInput.readOnly = true;
+    authorInput.disabled = true;
+    authorInput.value = getProfileName();
+    commentForm.appendChild(authorInput);
+
+    const openFormBtn = document.createElement("button");
+    openFormBtn.classList.add("border-0", "text-underline", "m-2", "fs-7")
+    openFormBtn.innerHTML = `Add a comment <i class="bi bi-chat-right-quote"></i>`;
+    openFormBtn.addEventListener("click", () => {
+        commentsContent.classList.toggle("hidden");
+    })
+    commentsContainer.appendChild(openFormBtn)
+
     const openCommentsBtn = document.createElement("button");
-    openCommentsBtn.classList.add("border-0", "text-underline", "m-2", "fs-4")
+    openCommentsBtn.classList.add("border-0", "text-underline", "m-2", "fs-6")
     openCommentsBtn.innerHTML = `Comments ${postData._count.comments} <i class="bi bi-arrow-down-short"></i>`;
     openCommentsBtn.addEventListener("click", () => {
-        commentsContainer.classList.remove("hidden")
-    })
+        commentsContainer.classList.toggle("hidden");
+    })    
+    commentsContainer.appendChild(commentsContent)
+
 
 
 
