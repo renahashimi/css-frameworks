@@ -311,7 +311,7 @@ export function profilePostCard(postData) {
             postData.reactions.likes = (postData.reactions.likes || 0) + 1;
             likeCount.textContent = `${postData.reactions.likes} stars`;
             reactionContainer.replaceChild(likedBtn, likeBtn);
-            postData.reactions.liked = "true";
+            postData.reactions.liked = true;
             likeBtn.classList.add("liked");
             likedBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
             storage.save(`liked_${postId}`, true);

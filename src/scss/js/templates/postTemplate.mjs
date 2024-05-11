@@ -8,7 +8,7 @@ import { profilePostCard } from "./profileTemplate.mjs";
 export function postCard(postData) {
     //POSTCARD CONTAINER
     const post = document.createElement("div");
-    post.classList.add("bg-light", "rounded", "m-auto", "my-3", "pb-3", "w-75", "justify-content-center");
+    post.classList.add("post-content", "bg-light", "rounded", "m-auto", "my-3", "pb-3", "w-75", "justify-content-center");
     
     //POSTCARD IMAGE-LOGO/PROFILE-NAME
     const postLogo = document.createElement("div");
@@ -23,8 +23,6 @@ export function postCard(postData) {
     
     const postContent = document.createElement("div");
     postContent.classList.add("d-block", "border-bottom", "w-100");
-
-    
 
     const postInfo = document.createElement("div");
     postInfo.classList.add("d-block", "ms-3");
@@ -49,7 +47,7 @@ export function postCard(postData) {
         const userName = document.createElement("h2");
         //userName.href = `/profile/?name=${postData.author.name}`;
         userName.innerHTML = `${postData.name}`;
-        userName.classList.add("fs-4", "fw-bolder", "mt-2");
+        userName.classList.add("author-name", "fs-4", "fw-bolder", "mt-2");
         postInfo.append(userName)
 
     } else if (postData.author) {
@@ -261,7 +259,7 @@ export function postCard(postData) {
     const submitBtn = document.createElement("button");
     submitBtn.classList.add("btn", "btn-secondary", "text-dark", "w-50", "my-1")
     submitBtn.id = "submit";
-    submitBtn.innerHTML = "Submit";
+    submitBtn.innerHTML = "Submit comment";
     commentForm.appendChild(submitBtn);
 
     commentForm.addEventListener("submit", async (event) => {
@@ -273,12 +271,17 @@ export function postCard(postData) {
  
         if (authorName.trim() === "" || commentText.trim() === "") {
             alert("Please fill all the fields");
-            return
+            return;
         }
+        const commentData = {
+            author: authorName,
+            body: commentText,
+        }
+
         try {
             const response = await postComments(commentData, postId);
             console.log("Comment posted", response)
-            commentImput.value = "";
+            commentTextarea.value = "";
         } catch (error) {
             console.error("Erro posting comment", error)
         }
