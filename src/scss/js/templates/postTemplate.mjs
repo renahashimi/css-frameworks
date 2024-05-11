@@ -1,24 +1,40 @@
 import { authFetch } from "../api/authFetch.mjs";
+import { postComments } from "../api/posts/comment.mjs";
 import { postReacts } from "../api/posts/react.mjs";
 import * as storage from "../storage/index.mjs";
 import { profilePostCard } from "./profileTemplate.mjs";
 //import { save, remove } from "../storage/index.mjs";
 
 export function postCard(postData) {
-
+    //POSTCARD CONTAINER
     const post = document.createElement("div");
-    post.classList.add("bg-light", "rounded", "mx-2", "my-3", "pb-3");
-    const postsHead = document.createElement("div");
-    postsHead.classList.add("d-flex", "border-bottom", "border-1", "border-primary", "p-1");
-    const postContent = document.createElement("div");
-    postContent.classList.add("border-bottom");
+    post.classList.add("bg-light", "rounded", "m-auto", "my-3", "pb-3", "w-75", "justify-content-center");
+    
+    //POSTCARD IMAGE-LOGO/PROFILE-NAME
     const postLogo = document.createElement("div");
     postLogo.classList.add("postLogo");
+    const postsHead = document.createElement("div");
+    postsHead.classList.add("d-flex", "p-1", "border-bottom", "border-1", "border-primary");
+    
+    //POST ID LINK 
+    const postlink = document.createElement("a");
+    postlink.href = `/feed/post/?id=${postData.id}`;
+    postlink.classList.add("d-block", "d-md-flex", "text-decoration-none", "bg-light", "mx-2", "my-2", "border-bottom", "border-1", "border-primary");
+    
+    const postContent = document.createElement("div");
+    postContent.classList.add("d-block", "border-bottom", "w-100");
+
+    
+
     const postInfo = document.createElement("div");
     postInfo.classList.add("d-block", "ms-3");
+   
+   
     const postReCo = document.createElement("div");
     postReCo.classList.add("d-block", "ms-3");
     
+
+    //SECTION 1/3
     //USERIMAGE
     if (postData.name && postData.avatar) {
         const userImage = document.createElement("img");
@@ -59,28 +75,12 @@ export function postCard(postData) {
     userNameId.classList.add("fs-6", "mt-n1", "text-secondary");
     postInfo.append(userNameId);
 
-    // IMAGE
-    if (postData.media) {
-        const img = document.createElement("img");
-        img.classList.add("d-block", "m-auto", "justify-content-center", "p-2");
-        img.style.maxWidth = "98%";
-        img.style.maxHeight = "300px";
-        img.src = postData.media ? postData.media: "../../../../images/404-error.jpeg";
-        img.style.backgroundColor = "$black";
-        img.alt = `Image title ${postData.title}`;
-        postContent.append(img);
-    } 
 
-    // TIME
-    const time = document.createElement("time");
-    time.setAttribute("date", postData.created);
-    time.classList.add("ms-2", "fs-7", "fst-italic");
-    time.innerHTML =  `${postData.created.match(/^\d{4}-\d{2}-\d{2}/)}`;
-    postContent.append(time);
+    //SECTION 2/3
 
-    // Title
+    // TITLE
     const title = document.createElement("h3");
-    title.classList.add("fw-bolder", "fs-4", "m-2");
+    title.classList.add("fw-bolder", "fs-4", "m-1", "bg-secondary", "p-2");
     title.innerHTML = postData.title;
     postContent.append(title);
 
@@ -89,6 +89,14 @@ export function postCard(postData) {
     contentText.classList.add("m-2", "fs-5");
     contentText.innerHTML = postData.body;
     postContent.append(contentText);
+
+    // TIME
+    const time = document.createElement("time");
+    time.setAttribute("date", postData.created);
+    time.classList.add("ms-2", "fs-7", "fst-italic");
+    time.innerHTML =  `${postData.created.match(/^\d{4}-\d{2}-\d{2}/)}`;
+    postContent.append(time);
+    
 
     // TAGS 
     if (Array.isArray(postData.tags) && postData.tags.length > 0) {
@@ -104,13 +112,30 @@ export function postCard(postData) {
         });
         postContent.append(tagsContainer);
     }
+    postlink.append(postContent)
+
+
+    // IMAGE
+    if (postData.media) {
+        const postImg = document.createElement("img");
+        postImg.classList.add("postImg", "d-block", "m-auto", "justify-content-center", "p-2", "w-100");
+        postImg.style.maxWidth = "100%";
+        postImg.style.maxHeight = "250px";
+        postImg.src = postData.media ? postData.media: "../../../../images/404-error.jpeg";
+        postImg.style.backgroundColor = "$black";
+        postImg.alt = `Image title ${postData.title}`;
+        postlink.append(postImg);
+    } 
+
+
+    //SECTION 3/3
 
     //REACTIONS
     const reactionContainer = document.createElement("div");
-    reactionContainer.classList.add("reactioncontainer", "mt-n2");
+    reactionContainer.classList.add("reactioncontainer");
  
     const likeBtn = document.createElement("button");
-    likeBtn.classList.add("reactionbtn", "like-button", "border-0", "fs-2", "bg-white", "ms-2");
+    likeBtn.classList.add("reactionbtn", "like-button", "border-0", "fs-2", "bg-transparent", "ms-2");
     likeBtn.innerHTML = `<i class="bi bi-star"></i>`;
 
     const likeCount = document.createElement("span");
@@ -211,12 +236,15 @@ export function postCard(postData) {
         }
     }
     const commentsContent = document.createElement("div");
-    commentsContent.classList.add("d-block", "hidden")
+    commentsContent.classList.add("commentContent", "hidden")
 
-    const commentForm = document.createElement("form", "hidden");
+    const commentForm = document.createElement("form");
+    commentForm.classList.add("d-grid", "w-75", "ms-2")
     commentForm.id = "commentForm";
+
     const authorInput = document.createElement("input")
-    authorInput.text = "text";
+    authorInput.classList.add("my-1")
+    authorInput.type = "text";
     authorInput.id = "author"
     authorInput.placeholder = "Your name";
     authorInput.readOnly = true;
@@ -224,6 +252,38 @@ export function postCard(postData) {
     authorInput.value = getProfileName();
     commentForm.appendChild(authorInput);
 
+    const commentTextarea = document.createElement("textarea");
+    commentTextarea.classList.add("my-1")
+    commentTextarea.id = "commentText";
+    commentTextarea.placeholder = "Write your comment..";
+    commentForm.appendChild(commentTextarea);
+    
+    const submitBtn = document.createElement("button");
+    submitBtn.classList.add("btn", "btn-secondary", "text-dark", "w-50", "my-1")
+    submitBtn.id = "submit";
+    submitBtn.innerHTML = "Submit";
+    commentForm.appendChild(submitBtn);
+
+    commentForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const authorName = authorInput.value;
+        const commentText = commentTextarea.value;
+        const postId = postData.id;
+ 
+        if (authorName.trim() === "" || commentText.trim() === "") {
+            alert("Please fill all the fields");
+            return
+        }
+        try {
+            const response = await postComments(commentData, postId);
+            console.log("Comment posted", response)
+            commentImput.value = "";
+        } catch (error) {
+            console.error("Erro posting comment", error)
+        }
+  
+    })
     const openFormBtn = document.createElement("button");
     openFormBtn.classList.add("border-0", "text-underline", "m-2", "fs-7")
     openFormBtn.innerHTML = `Add a comment <i class="bi bi-chat-right-quote"></i>`;
@@ -231,6 +291,7 @@ export function postCard(postData) {
         commentsContent.classList.toggle("hidden");
     })
     commentsContainer.appendChild(openFormBtn)
+    commentsContent.appendChild(commentForm)
 
     const openCommentsBtn = document.createElement("button");
     openCommentsBtn.classList.add("border-0", "text-underline", "m-2", "fs-6")
@@ -238,19 +299,11 @@ export function postCard(postData) {
     openCommentsBtn.addEventListener("click", () => {
         commentsContainer.classList.toggle("hidden");
     })    
-    commentsContainer.appendChild(commentsContent)
+    commentsContainer.appendChild(commentsContent);
 
-
-
-
-    //POST ID LINK
-    const postlink = document.createElement("a");
-    postlink.href = `/feed/post/?id=${postData.id}`;
-    postlink.classList.add("text-decoration-none", "bg-light", "mx-2", "my-2");
-
+  
     postsHead.append(postLogo, postInfo)
-    postlink.append(postsHead, postContent)
-    post.append(postlink, reactionContainer, openCommentsBtn, commentsContainer)
+    post.append(postsHead, postlink, reactionContainer, openCommentsBtn, commentsContainer)
 
 
     return post;
