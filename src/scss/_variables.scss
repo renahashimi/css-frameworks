@@ -1,5 +1,6 @@
 $primary: #2d3134;
 $secondary: #c6a226;
+$yellow1: #dcc367;
 $white: #fff;
 $black: #000;
 $black2: #0F0F0F;
@@ -40,6 +41,15 @@ button:hover {
   transform: scale(1.2);
 }
 
+//"LIKE"-BUTTON
+.liked-button.clicked {
+  color: $secondary !important;
+  color: black;
+}
+
+.hidden {
+  display: none;
+}
 
 // BACKGROUND COLOR, BOX-SHADOW AND IMAGE
 
@@ -128,6 +138,7 @@ button:hover {
 //END FOR BACK...
 
 
+
 // MARGIN 
   .margin {
     &top50 {
@@ -165,26 +176,33 @@ button:hover {
       margin-top: 100px !important;
     }
   }
+
+  .postImg {
+    justify-content: end;
+    float: right;
+    width: 40% !important;
+    max-width: 300px !important;
+  }
 }
 
 //END FOR MARGIN
 
-//MEDIA FOR POSTCARD
-@media (min-width: 576px) {
-  #posts, #profilePosts {
-      display: grid;
-      grid-template-columns: 50% 50%;
-      justify-content: space-evenly;
-  } 
-}
+// //MEDIA FOR POSTCARD
+// @media (min-width: 576px) {
+//    .postlink, .postContent {
+//       display: grid !important;
+//       grid-template-columns: 50% 50%;
+//       justify-content: space-evenly;
+//   } 
+// }
 
-@media (min-width: 992px) {
-  #posts, #profilePosts {
-      display: grid;
-      grid-template-columns: repeat(3, 33%);
-      justify-content: space-evenly;
-  } 
-}
+// @media (min-width: 992px) {
+//   #posts, #profilePosts {
+//       display: grid;
+//       grid-template-columns: repeat(3, 33%);
+//       justify-content: space-evenly;
+//   } 
+// }
 
 //PROFILE 
 
@@ -193,6 +211,16 @@ button:hover {
   padding: 0;
 }
 
+
+//OTHER UI 
+
+.filterSelect {
+  width: 200px !important;
+}
+
+#inputGroup, #searchForm {
+  height: 40px;
+}
 
 
 
