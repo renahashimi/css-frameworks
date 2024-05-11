@@ -5,7 +5,7 @@ import { API_POSTS, API_SOCIAL_URL } from "../constants.mjs";
 const method = "put";
 const react = "/react"
 
-export async function postComments(postData, reaction) {
+export async function postReacts(postData, reaction) {
     const reactUrl = `${API_SOCIAL_URL}${API_POSTS}${postData.id}${react}${reaction}`;
     try {
         const response = await authFetch(reactUrl, {
