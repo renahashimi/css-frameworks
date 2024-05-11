@@ -1,5 +1,5 @@
 import { removePost } from "../api/posts/delete.mjs";
-import { load, remove, save } from "../storage/index.mjs";
+import * as storage from "../storage/index.mjs";
 
 export function profileTemplate(profileData) {
     
@@ -126,7 +126,7 @@ export function profileTemplate(profileData) {
 
 //POSTCARD FOR PROFILE POSTS
 export function profilePostCard(postData) {
-    const profile = load("profile");
+    const profile = storage.load("profile");
     const post = document.createElement("div");
     post.classList.add("bg-light", "rounded", "my-3", "mx-3", "pb-3", "border", "border-3", "border-secondary");
     const postsHead = document.createElement("div");
@@ -295,9 +295,12 @@ export function profilePostCard(postData) {
     
     const postId = postData.id;
 
-    let isLiked = localStorage.getItem(`liked_${postId}`) === "true";
+    let isLiked = storage.load(`liked_${postId}`) === "true";
     if (isLiked) {
         likeBtn.classList.add("liked");
+    }
+    if (isLiked === null) {
+        isLiked = false;
     }
     
     const likedBtn = document.createElement("button");
@@ -310,30 +313,22 @@ export function profilePostCard(postData) {
             likeCount.textContent = `${postData.reactions.likes} stars`;
             reactionContainer.replaceChild(likedBtn, likeBtn);
             postData.reactions.liked = "true";
+            likeBtn.classList.add("liked");
             likedBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
-            save(`liked_${postId}`, true);
+            storage.save(`liked_${postId}`, true);
             isLiked = true;
         } else {
             postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
             likeCount.textContent = `${postData.reactions.likes} stars`;
             likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
-            remove(`liked_${postId}`);
+            storage.remove(`liked_${postId}`);
             isLiked = false;
         }
     });
-    likedBtn.addEventListener("click", () => {
-        if (isLiked) {
-            postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
-            likeCount.textContent = `${postData.reactions.likes} stars`;
-            reactionContainer.replaceChild(likeBtn, likedBtn);
-            likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
-            remove(`liked_${postId}`);
-            isLiked = false;
-        }
-    });
+    console.log(`${isLiked}${postId}`)
 
     likedBtn.classList.toggle("clicked");
-    reactionContainer.append(likeBtn, likeCount)
+    reactionContainer.append(isLiked ? likedBtn : likeBtn, likeCount)
 
     dropdown.append(dropdownToggle, dropdownMenu)
     postsHead.append(postLogo, postInfo, dropdown)
