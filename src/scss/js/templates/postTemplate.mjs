@@ -1,4 +1,4 @@
-import { save, remove } from "../storage/index.mjs";
+import * as storage from "../storage/index.mjs";
 
 export function postCard(postData) {
 
@@ -143,9 +143,13 @@ export function postCard(postData) {
     
     const postId = postData.id;
 
-    let isLiked = localStorage.getItem(`liked_${postId}`) === "true";
+    let isLiked = storage.load(`liked_${postId}`) === true;
+    console.log(isLiked)
     if (isLiked) {
         likeBtn.classList.add("liked");
+    }
+    if (isLiked === null) {
+        isLiked = false;
     }
     
     const likedBtn = document.createElement("button");
@@ -156,31 +160,31 @@ export function postCard(postData) {
             postData.reactions = postData.reactions || {};
             postData.reactions.likes = (postData.reactions.likes || 0) + 1;
             likeCount.textContent = `${postData.reactions.likes} stars`;
-            reactionContainer.replaceChild(likedBtn, likeBtn);
+            reactionContainer.replaceChild(likedBtn);
             postData.reactions.liked = "true";
             likeBtn.classList.add("liked");
             likedBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
-            save(`liked_${postId}`, true);
+            storage.save(`liked_${postId}`, true);
             isLiked = true;
-         } 
-         else {
+        } else {
             postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
             likeCount.textContent = `${postData.reactions.likes} stars`;
-            likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
-            remove(`liked_${postId}`);
+            reactionContainer.replaceChild(likeBtn);
+            likeBtn.innerHTML = `<i class="bi bi-star"></i>`;
+            storage.remove(`liked_${postId}`);
             isLiked = false;
         }
      });
-    likedBtn.addEventListener("click", () => {
-        if (isLiked) {
-            postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
-            likeCount.textContent = `${postData.reactions.likes} stars`;
-            reactionContainer.replaceChild(likeBtn, likedBtn);
-            likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
-            remove(`liked_${postId}`);
-            isLiked = false;
-        }
-    });
+    // likedBtn.addEventListener("click", () => {
+    //     if (isLiked) {
+    //         postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
+    //         likeCount.textContent = `${postData.reactions.likes} stars`;
+    //         reactionContainer.replaceChild(likeBtn, likedBtn);
+    //         likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
+    //         storage.remove(`liked_${postId}`);
+    //         isLiked = false;
+    //     }
+    // });
 
     likedBtn.classList.toggle("clicked");
     reactionContainer.append(likeBtn, likeCount)
@@ -191,12 +195,9 @@ export function postCard(postData) {
     const postlink = document.createElement("a");
     postlink.href = `/feed/post/?id=${postData.id}`;
     postlink.classList.add("text-decoration-none", "bg-light", "mx-2", "my-2");
-    console.log(postlink)
 
     postsHead.append(postLogo, postInfo)
-    
     postlink.append(postsHead, postContent)
-
     post.append(postlink, reactionContainer)
 
 
