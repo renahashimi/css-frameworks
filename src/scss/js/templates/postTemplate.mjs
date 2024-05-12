@@ -177,30 +177,64 @@ export function postCard(postData) {
 
 
     const commentsContainer = document.createElement("div");
-    commentsContainer.classList.add("commentContainer", "hidden");
+    commentsContainer.classList.add("commentsContainer", "hidden");
     const comment = document.createElement("div");
-    comment.classList.add("comment");
+    comment.classList.add("comment", "d-block", "m-2", "border", "border-2", "border-secondary");
     const commentHeader = document.createElement("div");
-    commentHeader.classList.add("commentHeader", "d-flex");
-
-    const commentImg = document.createElement("img");
-    commentImg.src = postData.author.avatar;
-    commentImg.alt = `Profile image of ${postData.author.name}`;
-    commentImg.classList.add("h-12", "w-12", "rounded-circle");
-    
+    commentHeader.classList.add("commentHeader", "d-flex", "p-1", "border-bottom", "border-1", "border-secondary");
     const commentHead = document.createElement("div");
-    commentHead.classList.add("d-block");
+    commentHead.classList.add("d-block", "ms-1", "fs-7");
+    const commentText = document.createElement("p");
+    commentText.classList.add("d-block", "ms-1", "fs-7", "p-1");
+    const commentContainer = document.createElement("div");
+    commentContainer.classList.add("commentContainer", "d-block");
+  
 
-    const commentAuthorUrl = document.createElement("a");
-    const commentAuthor = document.createElement("h3");
-    commentAuthor.textContent = postData.author.name;
-    commentAuthorUrl.href = `/profile/?name=${postData.author.name}`;
-    commentAuthorUrl.append(commentAuthor);
+    if (postData.comments && postData.comments.length > 0) {
+        postData.comments.forEach(commentData => { 
+            
+            const commentImg = document.createElement("img");
+            commentImg.src = postData.author.avatar;
+            commentImg.alt = `Profile image of ${postData.author.name}`;
+            commentImg.style.maxWidth = "40px";
+            commentImg.style.maxHeight = "40px";
+            commentImg.classList.add("rounded-circle");
+                    
+            const commentAuthorUrl = document.createElement("a");
+            const commentAuthor = document.createElement("h3");
+            commentAuthor.classList.add("fs-6", "mt-1")
+            commentAuthor.textContent = postData.author.name;
+            commentAuthorUrl.href = `/profile/?name=${postData.author.name}`;
+            commentAuthorUrl.append(commentAuthor);
+            commentHead.append(commentAuthorUrl);
 
-    const commentDate = document.createElement("time");
-    commentDate.innerHTML = `${postData.created.match(/^\d{4}-\d{2}-\d{2}/)}`;
+            const commentDate = document.createElement("time");
+            commentDate.classList.add("d-block", "mt-n2", "fs-7")
+            commentDate.innerHTML = `${commentData.created.match(/^\d{4}-\d{2}-\d{2}/)}`;
+            commentHead.append(commentDate)
 
-    commentHead.append(commentAuthorUrl, commentDate);
+
+            const commentBody = document.createElement("p");
+            commentBody.classList.add("fs-4")
+            commentBody.textContent = commentData.body;
+            commentText.append(commentBody)
+        
+            commentHeader.append(commentImg, commentHead);
+            comment.append(commentHeader, commentText)
+            commentContainer.append(comment)
+
+        }) 
+    } else {
+
+        const noComments = document.createElement("p");
+        noComments.classList.add("d-flex", "m-2", "fw-bolder", "border", "py-3", "px-2") 
+        noComments.textContent = `-No comments.`;
+        comment.append(noComments);
+    }
+
+    
+
+
     
     
     //Comments - delete button
@@ -218,34 +252,20 @@ export function postCard(postData) {
 
     deleteButton.append(deleteBtn);
 
-    commentHeader.append(commentImg, commentHead, deleteButton);
-    comment.append(commentHeader)
 
-
-
-    const commentBody = document.createElement("p");
-    commentBody.textContent = postData.body;
-    comment.append(commentBody);
-    
-
-
-    const noComments = document.createElement("p");
-    noComments.classList.add("d-flex", "m-2", "fw-bolder", "border", "py-3", "px-2") 
-    noComments.textContent = `-No comments.`;
-    commentsContainer.append(noComments);
 
 
 
     //Comment-form
-    // function getProfileName() {
-    //     const profile = storage.load("profile").name;
-    //     console.log(profile)
-    //     if (profile) {
-    //         return profile.name;
-    //     } else {
-    //         return null;
-    //     }
-    // }
+    function getProfileName() {
+        const profile = storage.load("profile");
+        console.log(profile)
+        if (profile) {
+            return profile.name;
+        } else {
+            return null;
+        }
+    }
     const commentsContent = document.createElement("div");
     commentsContent.classList.add("commentContent", "hidden")
 
@@ -260,7 +280,7 @@ export function postCard(postData) {
     authorInput.placeholder = "Your name";
     authorInput.readOnly = true;
     authorInput.disabled = true;
-    authorInput.textContent = postData.author.name;
+    authorInput.value = getProfileName();
     commentForm.append(authorInput);
 
     const commentTextarea = document.createElement("textarea");
@@ -268,7 +288,7 @@ export function postCard(postData) {
     commentTextarea.id = "commentText";
     commentTextarea.placeholder = "Write your comment..";
     commentForm.append(commentTextarea);
-    
+
     const submitBtn = document.createElement("button");
     submitBtn.classList.add("btn", "btn-secondary", "text-dark", "w-50", "my-1")
     submitBtn.id = "submit";
@@ -277,7 +297,7 @@ export function postCard(postData) {
 
     commentForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-        const authorName = authorInput.textContent;
+        const authorName = authorInput.value;
         const commentText = commentTextarea.value;
         const postId = postData.id;
  
@@ -298,6 +318,9 @@ export function postCard(postData) {
         }
   
     }) 
+
+    
+
     
     //Button / Toggle to open comments section
     const openCommentsBtn = document.createElement("button");
@@ -313,9 +336,10 @@ export function postCard(postData) {
     openFormBtn.addEventListener("click", () => {
         commentsContent.classList.toggle("hidden");
     })
-    commentsContainer.append(openFormBtn)
+
     commentsContent.append(commentForm)
-    commentsContainer.append(commentsContent);
+    commentsContainer.append(openFormBtn, commentContainer, commentsContent);
+    
 
   
     postsHead.append(postLogo, postInfo)
