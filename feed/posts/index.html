@@ -57,9 +57,20 @@
     <main class="flex-grow-1 text-primary">
         <h1 class="fs-2 m-2 pt-3 text-light fw-bolder font-righteous">POSTS</h1>
         <!--SEARCH & FILTER-->
-        <div class="container-fluid d-flex ps-4 my-4 py-3 border-2 border-light border-top">
+        <div class="container-fluid d-flex ps-4 my-4 py-3 border-2 border-light border-top justify-content-center">
+
+            <!-- <div class="dropdown filterSelect fs-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  Filter Posts
+                </button>
+                <ul class="dropdown-menu rounded fs-3 bg-secondary" id="filterSelect" aria-labelledby="filterDropdown">
+                  <li><a class="dropdown-item" href="#" onclick="filterPosts('date')">Date</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="filterPosts('comments')">Comments</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="filterPosts('reactions')">Reactions</a></li>
+                </ul>
+              </div> -->
             <div class="input-group">
-                <select class="filterSelect rounded fs-3 bg-secondary" id="inputGroup">
+                <select id="filterSelect" class="filterSelect rounded fs-3 bg-secondary" id="inputGroup">
                     <option selected>Filter Posts</option>
                     <option value="date">Old to new</option>
                     <option value="comments">Comments</option>
@@ -70,7 +81,7 @@
                 <div class="form-group d-flex pe-3">
                     <label class="form-label d-none" for="searchForm">Search</label>
                     <input type="search" id="searchForm" class="form-control" placeholder="Search">
-                    <button type="button" class="btn btn-secondary searchButton"><i class="bi bi-search"></i></button>
+                    <!-- <button type="button" class="btn btn-secondary searchButton"><i class="bi bi-search"></i></button> -->
                 </div>                        
             </div>
         </div>
