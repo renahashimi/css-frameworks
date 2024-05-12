@@ -177,13 +177,11 @@ export function postCard(postData) {
     commentHead.classList.add("d-block", "ms-1", "fs-7");
     const commentText = document.createElement("p");
     commentText.classList.add("d-block", "ms-1", "fs-7", "p-1");
-    const commentContainer = document.createElement("div");
-    commentContainer.classList.add("commentContainer", "d-block");
   
     if (postData.comments && postData.comments.length > 0) {
         postData.comments.forEach(commentData => { 
-            const comment = document.createElement("div");
-            comment.classList.add("comment", "d-block", "m-2", "border", "border-2", "border-secondary");
+            const commentContainer = document.createElement("div");
+            commentContainer.classList.add("comment", "d-block", "m-2", "border", "border-2", "border-secondary");
 
             const commentImg = document.createElement("img");
             commentImg.src = commentData.author.avatar;
@@ -212,9 +210,8 @@ export function postCard(postData) {
             commentText.append(commentBody)
         
             commentHeader.append(commentImg, commentHead);
-            comment.append(commentHeader, commentText)
-         //   commentContainer.append(comment)
-            commentsContainer.append(comment)
+            commentContainer.append(commentHeader, commentText)
+            commentsContainer.append(commentContainer);
         });
     } else {
         const noComments = document.createElement("p");
@@ -330,9 +327,7 @@ export function postCard(postData) {
 
     commentsContent.append(commentForm)
     commentsContainer.append(openFormBtn, commentsContent);
-    
 
-  
     postsHead.append(postLogo, postInfo)
     post.append(postsHead, postlink, reactionContainer, openCommentsBtn, commentsContainer)
 
