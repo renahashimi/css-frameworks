@@ -170,8 +170,8 @@ export function postCard(postData) {
 
     //COMMENTS
  
-  const commentsContainer = document.createElement("div");
-            commentsContainer.classList.add("commentsContainer", "hidden");
+    const commentsContainer = document.createElement("div");
+    commentsContainer.classList.add("commentsContainer", "hidden");
           
 
     if (postData.comments && postData.comments.length > 0) {
@@ -193,7 +193,7 @@ export function postCard(postData) {
             commentImg.classList.add("rounded-circle");
                   
             const commentHead = document.createElement("div");
-            commentHead.classList.add("d-block", "ms-1", "fs-7");
+            commentHead.classList.add("d-block", "ms-1", "fs-7", "flex-grow-1");
 
             const commentAuthorUrl = document.createElement("a");
             const commentAuthor = document.createElement("h3");
@@ -209,20 +209,23 @@ export function postCard(postData) {
             commentHead.append(commentDate);
 
             const deleteButton = document.createElement("li");
-            deleteButton.classList.add("btn", "d-flex", "float-end", "ml-auto",  "justify-content-end");
+            deleteButton.classList.add("d-flex", "justify-content-end", "m-auto", "float-end");
             const deleteBtn = document.createElement("button");
-            deleteBtn.classList.add("btn", "d-block", "fs-6", "border-secondary", "float-end", "ml-auto", "justify-self-end");
+            deleteBtn.classList.add("btn", "btn-outline-danger", "d-flex", "fs-6", "p-1");
             deleteBtn.textContent = "Delete comment";
-            comment.append(deleteBtn);
-
-            deleteBtn.addEventListener("click", () => {
-                if (confirm("Are you sure you want to delete this post?")) {
-                   postActions.removeComments(postData.id, postData.comments.id);
-                   comment.remove();
-                }  
-            });
             deleteButton.append(deleteBtn);
-                
+            deleteBtn.addEventListener("click", async () => {
+                if (confirm("Are you sure you want to delete this post?")) {
+                    try {
+                        postActions.removeComments(commentData.id, postData.id);
+                        comment.remove();
+                        alert("Your comment is now deleted.")
+                    } catch (error) {
+                        console.error("Failed to delete comment!", error)
+                    } 
+                } 
+            });
+
             const commentText = document.createElement("p");
             commentText.classList.add("d-block", "ms-1", "fs-7", "p-1");
         
@@ -243,34 +246,9 @@ export function postCard(postData) {
         commentsContainer.append(noComments);
     }
 
-    
-
-
-    
-    
-    // //Comments - delete button
-    // const deleteButton = document.createElement("li");
-
-    // const deleteBtn = document.createElement("button");
-    // deleteBtn.classList.add("btn", "border-0");
-    // deleteBtn.textContent = "Delete comment";
-    // comment.append(deleteBtn);
-
-    // deleteBtn.addEventListener("click", () => {
-    //     postActions.removeComments(postData.id, postData.comments.id);
-    //     comment.remove();
-    // });
-
-    // deleteButton.append(deleteBtn);
-
-
-
-
-
     //Comment-form
     function getProfileName() {
         const profile = storage.load("profile");
-        console.log(profile)
         if (profile) {
             return profile.name;
         } else {
@@ -321,18 +299,15 @@ export function postCard(postData) {
             body: commentText,
         }
         try {
-            const response = await postActions.postComments(commentData, postId);
-            console.log("Comment posted", response)
+            const response = await postActions.postComments(commentData, postData.id);
+            console.log("Comment posted", response);
+            alert("Your comment is submitted - It is recommended to refresh the page")
             commentTextarea.value = "";
         } catch (error) {
             console.error("Error posting comment", error)
         }
-  
     }) 
 
-    
-
-    
     //Button / Toggle to open comments section
     const openCommentsBtn = document.createElement("button");
     openCommentsBtn.classList.add("border-0", "text-underline", "m-2", "fs-5")
