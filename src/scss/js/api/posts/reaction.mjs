@@ -3,10 +3,10 @@ import { API_POSTS, API_SOCIAL_URL } from "../constants.mjs";
 
 
 const method = "PUT";
-const reaction = "👍";
+//const reaction = "👍";
 
-export async function postReacts(postData) {
-    const reactUrl = `${API_SOCIAL_URL}${API_POSTS}${postData.id}/react/${reaction}`;
+export async function postReacts(reaction, postId) {
+    const reactUrl = `${API_SOCIAL_URL}${API_POSTS}/${postId}/react/${reaction}`;
     try {
         const response = await authFetch(reactUrl, {
             method,
