@@ -8,6 +8,6 @@ export async function renderAllPosts() {
     renderPostList(posts, container);
     console.log(posts);
     handler.searchPost("posts");
-    handler.filterPosts(posts)
+   // handler.filterPosts(posts);
 };
   

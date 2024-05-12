@@ -1,5 +1,3 @@
-import { postCard, renderPostList } from "../templates/postTemplate.mjs";
-
 export function searchPost(containerId) {
     const searchInput = document.querySelector("#searchForm");
     const container = document.getElementById(containerId)
