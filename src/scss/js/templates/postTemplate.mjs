@@ -171,17 +171,21 @@ export function postCard(postData) {
     //COMMENTS
     const commentsContainer = document.createElement("div");
     commentsContainer.classList.add("commentsContainer", "hidden");
+  
     const commentHeader = document.createElement("div");
     commentHeader.classList.add("commentHeader", "d-flex", "p-1", "border-bottom", "border-1", "border-secondary");
     const commentHead = document.createElement("div");
     commentHead.classList.add("d-block", "ms-1", "fs-7");
+   
     const commentText = document.createElement("p");
     commentText.classList.add("d-block", "ms-1", "fs-7", "p-1");
+    const commentContainer = document.createElement("div");
+    commentContainer.classList.add("commentContainer", "d-block");
   
     if (postData.comments && postData.comments.length > 0) {
         postData.comments.forEach(commentData => { 
-            const commentContainer = document.createElement("div");
-            commentContainer.classList.add("comment", "d-block", "m-2", "border", "border-2", "border-secondary");
+            const comment = document.createElement("div");
+            comment.classList.add("comment", "d-block", "m-2", "border", "border-2", "border-secondary");
 
             const commentImg = document.createElement("img");
             commentImg.src = commentData.author.avatar;
@@ -201,17 +205,17 @@ export function postCard(postData) {
             const commentDate = document.createElement("time");
             commentDate.classList.add("d-block", "mt-n2", "fs-7")
             commentDate.innerHTML = `${commentData.created.match(/^\d{4}-\d{2}-\d{2}/)}`;
-            commentHead.append(commentDate)
+            commentHead.append(commentDate);
 
 
             const commentBody = document.createElement("p");
             commentBody.classList.add("fs-4")
             commentBody.textContent = commentData.body;
-            commentText.append(commentBody)
+            commentText.append(commentBody);
         
             commentHeader.append(commentImg, commentHead);
-            commentContainer.append(commentHeader, commentText)
-            commentsContainer.append(commentContainer);
+            comment.append(commentHeader, commentText);
+            commentContainer.append(comment);
         });
     } else {
         const noComments = document.createElement("p");
@@ -325,9 +329,10 @@ export function postCard(postData) {
         commentsContent.classList.toggle("hidden");
     })
 
-    commentsContent.append(commentForm)
-    commentsContainer.append(openFormBtn, commentsContent);
+    commentsContent.append(commentForm)  
+    commentsContainer.append(commentContainer)
 
+    commentsContainer.append(openFormBtn, commentContainer, commentsContent);
     postsHead.append(postLogo, postInfo)
     post.append(postsHead, postlink, reactionContainer, openCommentsBtn, commentsContainer)
 
