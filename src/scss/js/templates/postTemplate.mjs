@@ -23,11 +23,6 @@ export function postCard(postData) {
 
     const postInfo = document.createElement("div");
     postInfo.classList.add("d-block", "ms-3");
-   
-   
-    const postReCo = document.createElement("div");
-    postReCo.classList.add("d-block", "ms-3");
-    
 
     //SECTION 1/3
 
@@ -174,12 +169,8 @@ export function postCard(postData) {
 
 
     //COMMENTS
-
-
     const commentsContainer = document.createElement("div");
     commentsContainer.classList.add("commentsContainer", "hidden");
-    const comment = document.createElement("div");
-    comment.classList.add("comment", "d-block", "m-2", "border", "border-2", "border-secondary");
     const commentHeader = document.createElement("div");
     commentHeader.classList.add("commentHeader", "d-flex", "p-1", "border-bottom", "border-1", "border-secondary");
     const commentHead = document.createElement("div");
@@ -189,13 +180,14 @@ export function postCard(postData) {
     const commentContainer = document.createElement("div");
     commentContainer.classList.add("commentContainer", "d-block");
   
-
     if (postData.comments && postData.comments.length > 0) {
         postData.comments.forEach(commentData => { 
-            
+            const comment = document.createElement("div");
+            comment.classList.add("comment", "d-block", "m-2", "border", "border-2", "border-secondary");
+
             const commentImg = document.createElement("img");
-            commentImg.src = postData.author.avatar;
-            commentImg.alt = `Profile image of ${postData.author.name}`;
+            commentImg.src = commentData.author.avatar;
+            commentImg.alt = `Profile image of ${commentData.author.name}`;
             commentImg.style.maxWidth = "40px";
             commentImg.style.maxHeight = "40px";
             commentImg.classList.add("rounded-circle");
@@ -203,8 +195,8 @@ export function postCard(postData) {
             const commentAuthorUrl = document.createElement("a");
             const commentAuthor = document.createElement("h3");
             commentAuthor.classList.add("fs-6", "mt-1")
-            commentAuthor.textContent = postData.author.name;
-            commentAuthorUrl.href = `/profile/?name=${postData.author.name}`;
+            commentAuthor.textContent = commentData.author.name;
+            commentAuthorUrl.href = `/profile/?name=${commentData.author.name}`;
             commentAuthorUrl.append(commentAuthor);
             commentHead.append(commentAuthorUrl);
 
@@ -221,15 +213,14 @@ export function postCard(postData) {
         
             commentHeader.append(commentImg, commentHead);
             comment.append(commentHeader, commentText)
-            commentContainer.append(comment)
-
-        }) 
+         //   commentContainer.append(comment)
+            commentsContainer.append(comment)
+        });
     } else {
-
         const noComments = document.createElement("p");
         noComments.classList.add("d-flex", "m-2", "fw-bolder", "border", "py-3", "px-2") 
         noComments.textContent = `-No comments.`;
-        comment.append(noComments);
+        commentsContainer.append(noComments);
     }
 
     
@@ -237,20 +228,20 @@ export function postCard(postData) {
 
     
     
-    //Comments - delete button
-    const deleteButton = document.createElement("li");
+    // //Comments - delete button
+    // const deleteButton = document.createElement("li");
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.classList.add("btn", "border-0");
-    deleteBtn.textContent = "Delete comment";
-    comment.append(deleteBtn);
+    // const deleteBtn = document.createElement("button");
+    // deleteBtn.classList.add("btn", "border-0");
+    // deleteBtn.textContent = "Delete comment";
+    // comment.append(deleteBtn);
 
-    deleteBtn.addEventListener("click", () => {
-        postActions.removeComments(postData.id, postData.comments.id);
-        comment.remove();
-    });
+    // deleteBtn.addEventListener("click", () => {
+    //     postActions.removeComments(postData.id, postData.comments.id);
+    //     comment.remove();
+    // });
 
-    deleteButton.append(deleteBtn);
+    // deleteButton.append(deleteBtn);
 
 
 
@@ -338,7 +329,7 @@ export function postCard(postData) {
     })
 
     commentsContent.append(commentForm)
-    commentsContainer.append(openFormBtn, commentContainer, commentsContent);
+    commentsContainer.append(openFormBtn, commentsContent);
     
 
   
