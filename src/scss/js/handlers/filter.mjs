@@ -2,10 +2,11 @@ import { getPosts } from "../api/posts/get.mjs";
 import { renderPostList } from "../templates/postTemplate.mjs";
 import { renderAllPosts } from "../templates/renderPosts.mjs";
 
-export async function filterPosts(seletedValue) {
+export async function filterPosts() {
     const filterSelect = document.querySelector("#filterSelect");
     const postsContainer = document.querySelector("#posts");
     const posts = await getPosts();
+    console.log(typeof posts)
 
     filterSelect.addEventListener("change", () => {
         const seletedValue = filterSelect.value;
@@ -18,19 +19,27 @@ export async function filterPosts(seletedValue) {
                 new Date(b.created));
                 break;
             case "comments":
-                filteredPosts = posts.sort((a, b) => 
-                (a.comments.length || 0) - 
-                (b.comments.length || 0));
+                filteredPosts = posts.filter(post => post.comments.length > 0);
                 break;
             case "reactions":
-                filteredPosts = posts.sort((a, b) => 
-                (a._count.reactions.likes || 0) - 
-                (b._count.reactions.length || 0));
+                filteredPosts = posts.filter(post => post.reactions && post.reactions.length > 0);
                 break;
             default:
                 filteredPosts = posts;
-                console.log(typeof posts)
         }
-    renderAllPosts(filteredPosts, postsContainer)
+    renderPostList(filteredPosts, postsContainer)
     });
+// } let filteredPosts;
+// if (seletedValue === "date") {
+//     filteredPosts = posts.slice().sort((a, b) => 
+//     new Date(a.id) - 
+//     new Date(b.id));
+// } else if (seletedValue === "comments") {
+//     filteredPosts = posts.filter(post => post.comments.length > 0);
+// } else if (seletedValue === "reactions"){
+//     filteredPosts = posts.filter(post => post.reactions && post.reactions.length > 0);
+//     return filteredPosts;
+// } else {
+//     filteredPosts = posts;
+
 }

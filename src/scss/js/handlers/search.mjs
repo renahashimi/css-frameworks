@@ -6,12 +6,16 @@ export function searchPost(containerId) {
 
     searchInput.addEventListener("input", function() {
         const searchTerm = this.value.toLowerCase().trim();
-        container.childNodes.forEach(postElement => {
-            const postText = postElement.textContent.toLowerCase();
-            if (postText.includes(searchTerm)) {
-                postElement.style.display = "";
-            } else {
-                postElement.style.display = "none";
+        const postElements = container.querySelectorAll(".post-content")
+
+        postElements.forEach(postElement => {
+            if (postElement.nodeType === 1) {
+                const postText = postElement.textContent.toLowerCase();
+                if (postText.includes(searchTerm)) {
+                    postElement.style.display = "";
+                } else {
+                    postElement.style.display = "none";
+                }
             }
         });
     });
