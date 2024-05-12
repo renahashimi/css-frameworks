@@ -2,15 +2,15 @@ import { authFetch } from "../authFetch.mjs";
 import { API_POSTS, API_SOCIAL_URL } from "../constants.mjs";
 
 
-const method = "put";
-const react = "/react"
+const method = "PUT";
+const reaction = "👍";
 
-export async function postReacts(postData, reaction) {
-    const reactUrl = `${API_SOCIAL_URL}${API_POSTS}${postData.id}${react}${reaction}`;
+export async function postReacts(postData) {
+    const reactUrl = `${API_SOCIAL_URL}${API_POSTS}${postData.id}/react/${reaction}`;
     try {
         const response = await authFetch(reactUrl, {
             method,
-            //body: JSON.stringify(postData),
+            body: JSON.stringify(reaction),
         });
         console.log("Reacted to a post")
 
@@ -19,7 +19,6 @@ export async function postReacts(postData, reaction) {
         }
 
         return await response.json();
-        
     } catch (error) {
         console.error("An error accured, failed at reacting to post", error)
     }
