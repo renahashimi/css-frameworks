@@ -42,9 +42,8 @@ button:hover {
 }
 
 //"LIKE"-BUTTON
-.liked-button.clicked {
-  color: $secondary !important;
-  color: black;
+.reactionbtn.clicked {
+  background-color: $secondary !important;
 }
 
 .hidden {
@@ -176,7 +175,9 @@ button:hover {
       margin-top: 100px !important;
     }
   }
+}
 
+@media (min-width: 1024px) {
   .postImg {
     justify-content: end;
     float: right;
@@ -214,11 +215,7 @@ button:hover {
 
 //OTHER UI 
 
-.filterSelect {
-  width: 200px !important;
-}
-
-#inputGroup, #searchForm {
+#filterSelect, #searchForm {
   height: 40px;
 }
 
