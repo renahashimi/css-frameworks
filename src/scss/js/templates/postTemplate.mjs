@@ -138,33 +138,51 @@ export function postCard(postData) {
 
     const likeCount = document.createElement("span");
     likeCount.classList.add("reactioncount");
-    likeCount.textContent = `${postData.reactions && postData.reactions.likes ? postData.reactions.likes : 0} Stars`;
+    likeCount.textContent = `${postData._count.reactions} Stars`;
+    
+    const likedBtn = document.createElement("button");
+    likedBtn.classList.add("reactionbtn", "liked-button", "border-0", "fs-2", "bg-white", "ms-2", "me-1");
 
-    likeBtn.addEventListener("click", async () => {
-    try {
-        const reactionData = await postReacts(postData, "like");
-        console.log("Reaction Successfully:", reactionData);
-
-    } catch (error) {
-        console.error("Failed to react to post", error)
-
+    const postId = postData.id;
+    let isLiked = storage.load(`liked_${postId}`) === true;
+    if (isLiked) {
+        likeBtn.classList.add("liked");
     }
+    if (isLiked === null) {
+        isLiked = false;
+    }
+    likeBtn.addEventListener("click", async () => {
+
+        likeBtn.addEventListener("click", () => {
+              if (!isLiked) {
+                  postData.reactions = postData.reactions || {};
+                postData.reactions.likes = (postData.reactions.likes || 0) + 1;
+                     likeCount.textContent = `${postData.reactions.likes} stars`;
+                  reactionContainer.replaceChild(likedBtn, likeBtn);
+               postData.reactions.liked = true;
+                 likeBtn.classList.add("liked");
+             likedBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
+            storage.save(`liked_${postId}`, true);
+                  isLiked = true;
+        //      } else {
+        //            postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
+        //     likeCount.textContent = `${postData.reactions.likes} stars`;
+        //              reactionContainer.replaceChild(likeBtn, likedBtn);
+        //             likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
+        // likeBtn.innerHTML = `<i class="bi bi-star"></i>`;
+        //      storage.remove(`liked_${postId}`);
+        //     isLiked = false;
+             }
+          });
+    // try {
+    //     const reactionData = await postReacts(postData, "like");
+    //     console.log("Reaction Successfully:", reactionData);
+
+    // } catch (error) {
+    //     console.error("Failed to react to post", error)
+
+    // }
 });
-
-    
-
-    // const postId = postData.id;
-
-    // let isLiked = storage.load(`liked_${postId}`) === true;
-    // if (isLiked) {
-    //     likeBtn.classList.add("liked");
-    // }
-    // if (isLiked === null) {
-    //     isLiked = false;
-    // }
-    
-    // const likedBtn = document.createElement("button");
-    // likedBtn.classList.add("reactionbtn", "liked-button", "border-0", "fs-2", "bg-white", "ms-2", "me-1");
 
     // likeBtn.addEventListener("click", () => {
     //     if (!isLiked) {
@@ -187,18 +205,18 @@ export function postCard(postData) {
     //         isLiked = false;
     //     }
     //  });
-    // // likedBtn.addEventListener("click", () => {
-    // //     if (isLiked) {
-    // //         postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
-    // //         likeCount.textContent = `${postData.reactions.likes} stars`;
-    // //         reactionContainer.replaceChild(likeBtn, likedBtn);
-    // //         likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
-    // //         storage.remove(`liked_${postId}`);
-    // //         isLiked = false;
-    // //     }
-    // // });
+    likedBtn.addEventListener("click", () => {
+        if (isLiked) {
+            postData.reactions.likes = Math.max(0, (postData.reactions.likes || 0) -1);
+            likeCount.textContent = `${postData.reactions.likes} stars`;
+            reactionContainer.replaceChild(likeBtn, likedBtn);
+            likedBtn.innerHTML = `<i class="bi bi-star"></i>`;
+            storage.remove(`liked_${postId}`);
+            isLiked = false;
+        }
+    });
 
-    // likedBtn.classList.toggle("clicked");
+    likedBtn.classList.toggle("clicked");
     reactionContainer.append(likeBtn, likeCount)
 
     //COMMENTS
