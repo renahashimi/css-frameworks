@@ -1,9 +1,6 @@
-import { authFetch } from "../api/authFetch.mjs";
-import { postComments } from "../api/posts/comment.mjs";
-import { postReacts } from "../api/posts/react.mjs";
+//import { authFetch } from "../api/authFetch.mjs";
+import * as postActions from "../api/posts/index.mjs";
 import * as storage from "../storage/index.mjs";
-import { profilePostCard } from "./profileTemplate.mjs";
-//import { save, remove } from "../storage/index.mjs";
 
 export function postCard(postData) {
     //POSTCARD CONTAINER
@@ -19,7 +16,7 @@ export function postCard(postData) {
     //POST ID LINK 
     const postlink = document.createElement("a");
     postlink.href = `/feed/post/?id=${postData.id}`;
-    postlink.classList.add("d-block", "d-md-flex", "text-decoration-none", "bg-light", "mx-2", "my-2", "border-bottom", "border-1", "border-primary");
+    postlink.classList.add("d-block", "d-lg-flex", "text-decoration-none", "bg-light", "mx-2", "my-2", "border-bottom", "border-1", "border-primary");
     
     const postContent = document.createElement("div");
     postContent.classList.add("d-block", "border-bottom", "w-100");
@@ -33,6 +30,7 @@ export function postCard(postData) {
     
 
     //SECTION 1/3
+
     //USERIMAGE
     if (postData.name && postData.avatar) {
         const userImage = document.createElement("img");
@@ -41,7 +39,7 @@ export function postCard(postData) {
         userImage.alt = `Avatar Name ${postData.title}`;
         userImage.style.width = "60px";
         userImage.style.height = "60px";
-        postLogo.appendChild(userImage);
+        postLogo.append(userImage);
 
         // USERNAME
         const userName = document.createElement("h2");
@@ -57,7 +55,7 @@ export function postCard(postData) {
         userImage.alt = `Avatar Name ${postData.title}`;
         userImage.style.width = "60px";
         userImage.style.height = "60px";
-        postLogo.appendChild(userImage);
+        postLogo.append(userImage);
     
         // USERNAME
         const userName = document.createElement("h2");
@@ -88,14 +86,6 @@ export function postCard(postData) {
     contentText.innerHTML = postData.body;
     postContent.append(contentText);
 
-    // TIME
-    const time = document.createElement("time");
-    time.setAttribute("date", postData.created);
-    time.classList.add("ms-2", "fs-7", "fst-italic");
-    time.innerHTML =  `${postData.created.match(/^\d{4}-\d{2}-\d{2}/)}`;
-    postContent.append(time);
-    
-
     // TAGS 
     if (Array.isArray(postData.tags) && postData.tags.length > 0) {
         const tagsContainer = document.createElement("div");
@@ -110,8 +100,15 @@ export function postCard(postData) {
         });
         postContent.append(tagsContainer);
     }
+    
+    // TIME
+    const time = document.createElement("time");
+    time.setAttribute("date", postData.created);
+    time.classList.add("ms-2", "fs-7", "fst-italic");
+    time.innerHTML =  `${postData.created.match(/^\d{4}-\d{2}-\d{2}/)}`;
+    postContent.append(time);
+    
     postlink.append(postContent)
-
 
     // IMAGE
     if (postData.media) {
@@ -146,58 +143,109 @@ export function postCard(postData) {
     likeCount.classList.add("reactioncount");
     let likeCountValue = isLiked ? postData._count.reactions + 1 : postData._count.reactions;
     likeCount.textContent = `${postData._count.reactions} Stars`;
-    
-    likeBtn.addEventListener("click", () => {
-        if (!isLiked) {
-            likeCountValue++;
-            likeCount.textContent = `${likeCountValue} Stars`;
-            likeBtn.classList.add("liked");
-            likeBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
-            storage.save(`liked_${postId}`, true);
-            isLiked = true;
-        } else if (isLiked) {
-            likeCountValue--;
-            likeCount.textContent = `${likeCountValue} Stars`;
-            likeBtn.classList.remove("liked")
-            storage.load(`liked_${postId}`)
-            storage.remove(`liked_${postId}`);
-            isLiked = false;
+
+    likeBtn.addEventListener("click", async () => {
+        try {
+            const reactionData = await postActions.postReacts("⭐", postId);
+            console.log("Reaction added:", reactionData);
+            if (!isLiked) {
+                likeCountValue++;
+                likeCount.textContent = `${likeCountValue + storage.load(`liked_${postId}`)} Stars`;
+                likeBtn.classList.add("liked");
+                likeBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
+                postActions.postReacts("⭐", postData.id)
+                storage.save(`liked_${postId}`, true);
+                isLiked = true;
+            } else if (isLiked) {
+                likeCountValue--;
+                likeCount.textContent = `${likeCountValue} Stars`;
+                likeBtn.innerHTML = `<i class="bi bi-star"></i>`;
+                likeBtn.classList.remove("liked")
+                storage.remove(`liked_${postId}`);
+                isLiked = false;
+            }
+        } catch (error) {
+            console.error("Failed to react to post.", error);
         }
+
     });
     reactionContainer.append(likeBtn, likeCount)
 
+
+
     //COMMENTS
+
+
     const commentsContainer = document.createElement("div");
     commentsContainer.classList.add("commentContainer", "hidden");
-    if (postData.comments && postData.comments.length > 0) {
-        postData.comments.forEach(commentData => {
-            const comment = document.createElement("div");
-            comment.classList.add("comment");
+    const comment = document.createElement("div");
+    comment.classList.add("comment");
+    const commentHeader = document.createElement("div");
+    commentHeader.classList.add("commentHeader", "d-flex");
 
-            const commentAuthor = document.createElement("li");
-            commentAuthor.textContent = commentData.author;
-            commentsContainer.appendChild(commentAuthor)
+    const commentImg = document.createElement("img");
+    commentImg.src = postData.author.avatar;
+    commentImg.alt = `Profile image of ${postData.author.name}`;
+    commentImg.classList.add("h-12", "w-12", "rounded-circle");
+    
+    const commentHead = document.createElement("div");
+    commentHead.classList.add("d-block");
 
-            const commentBody = document.createElement("p");
-            commentBody.textContent = commentData.body;
-            commentsContainer.appendChild(commentBody)
-        })
-    } else {
-        const noComments = document.createElement("p");
-        noComments.classList.add("m-2", "fw-bolder", "text-uppercase") 
-        noComments.textContent = `-No comments yet.`;
-        commentsContainer.appendChild(noComments);
-    }
+    const commentAuthorUrl = document.createElement("a");
+    const commentAuthor = document.createElement("h3");
+    commentAuthor.textContent = postData.author.name;
+    commentAuthorUrl.href = `/profile/?name=${postData.author.name}`;
+    commentAuthorUrl.append(commentAuthor);
+
+    const commentDate = document.createElement("time");
+    commentDate.innerHTML = `${postData.created.match(/^\d{4}-\d{2}-\d{2}/)}`;
+
+    commentHead.append(commentAuthorUrl, commentDate);
+    
+    
+    //Comments - delete button
+    const deleteButton = document.createElement("li");
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("btn", "border-0");
+    deleteBtn.textContent = "Delete comment";
+    comment.append(deleteBtn);
+
+    deleteBtn.addEventListener("click", () => {
+        postActions.removeComments(postData.id, postData.comments.id);
+        comment.remove();
+    });
+
+    deleteButton.append(deleteBtn);
+
+    commentHeader.append(commentImg, commentHead, deleteButton);
+    comment.append(commentHeader)
+
+
+
+    const commentBody = document.createElement("p");
+    commentBody.textContent = postData.body;
+    comment.append(commentBody);
+    
+
+
+    const noComments = document.createElement("p");
+    noComments.classList.add("d-flex", "m-2", "fw-bolder", "border", "py-3", "px-2") 
+    noComments.textContent = `-No comments.`;
+    commentsContainer.append(noComments);
+
+
 
     //Comment-form
-    function getProfileName() {
-        const profile = storage.load("profile");
-        if (profile) {
-            return profile.name;
-        } else {
-            return null;
-        }
-    }
+    // function getProfileName() {
+    //     const profile = storage.load("profile").name;
+    //     console.log(profile)
+    //     if (profile) {
+    //         return profile.name;
+    //     } else {
+    //         return null;
+    //     }
+    // }
     const commentsContent = document.createElement("div");
     commentsContent.classList.add("commentContent", "hidden")
 
@@ -212,25 +260,24 @@ export function postCard(postData) {
     authorInput.placeholder = "Your name";
     authorInput.readOnly = true;
     authorInput.disabled = true;
-    authorInput.value = getProfileName();
-    commentForm.appendChild(authorInput);
+    authorInput.textContent = postData.author.name;
+    commentForm.append(authorInput);
 
     const commentTextarea = document.createElement("textarea");
     commentTextarea.classList.add("my-1")
     commentTextarea.id = "commentText";
     commentTextarea.placeholder = "Write your comment..";
-    commentForm.appendChild(commentTextarea);
+    commentForm.append(commentTextarea);
     
     const submitBtn = document.createElement("button");
     submitBtn.classList.add("btn", "btn-secondary", "text-dark", "w-50", "my-1")
     submitBtn.id = "submit";
-    submitBtn.innerHTML = "Submit comment";
-    commentForm.appendChild(submitBtn);
+    submitBtn.innerHTML = "Submit";
+    commentForm.append(submitBtn);
 
     commentForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-
-        const authorName = authorInput.value;
+        const authorName = authorInput.textContent;
         const commentText = commentTextarea.value;
         const postId = postData.id;
  
@@ -242,32 +289,33 @@ export function postCard(postData) {
             author: authorName,
             body: commentText,
         }
-
         try {
-            const response = await postComments(commentData, postId);
+            const response = await postActions.postComments(commentData, postId);
             console.log("Comment posted", response)
             commentTextarea.value = "";
         } catch (error) {
-            console.error("Erro posting comment", error)
+            console.error("Error posting comment", error)
         }
   
-    })
+    }) 
+    
+    //Button / Toggle to open comments section
+    const openCommentsBtn = document.createElement("button");
+    openCommentsBtn.classList.add("border-0", "text-underline", "m-2", "fs-5")
+    openCommentsBtn.innerHTML = `Comments ${postData._count.comments} <i class="bi bi-arrow-down-short"></i>`;
+    openCommentsBtn.addEventListener("click", () => {
+        commentsContainer.classList.toggle("hidden");
+    }) 
+
     const openFormBtn = document.createElement("button");
-    openFormBtn.classList.add("border-0", "text-underline", "m-2", "fs-7")
+    openFormBtn.classList.add("border-0", "fw-bold", "m-2", "fs-5", "bg-secondary")
     openFormBtn.innerHTML = `Add a comment <i class="bi bi-chat-right-quote"></i>`;
     openFormBtn.addEventListener("click", () => {
         commentsContent.classList.toggle("hidden");
     })
-    commentsContainer.appendChild(openFormBtn)
-    commentsContent.appendChild(commentForm)
-
-    const openCommentsBtn = document.createElement("button");
-    openCommentsBtn.classList.add("border-0", "text-underline", "m-2", "fs-6")
-    openCommentsBtn.innerHTML = `Comments ${postData._count.comments} <i class="bi bi-arrow-down-short"></i>`;
-    openCommentsBtn.addEventListener("click", () => {
-        commentsContainer.classList.toggle("hidden");
-    })    
-    commentsContainer.appendChild(commentsContent);
+    commentsContainer.append(openFormBtn)
+    commentsContent.append(commentForm)
+    commentsContainer.append(commentsContent);
 
   
     postsHead.append(postLogo, postInfo)

@@ -5,7 +5,7 @@ import { API_POSTS, API_SOCIAL_URL } from "../constants.mjs";
 const method = "post";
 
 export async function postComments(postData, postId) {
-    const commentUrl = `${API_SOCIAL_URL}${API_POSTS}${postId}/comment`;
+    const commentUrl = `${API_SOCIAL_URL}${API_POSTS}/${postId}/comment`;
     try {
         const response = await authFetch(commentUrl, {
             method,
