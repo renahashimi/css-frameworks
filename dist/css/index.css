@@ -94,7 +94,8 @@ button:hover {
     background-image: url(../../images/abstractw&b.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: left;
+    background-position: center;
+    height: 100vh;
   }
 }
 .margintop50 {
@@ -112,7 +113,7 @@ button:hover {
     margin-top: 0px !important;
   }
   .margin-sm-top100 {
-    margin-top: 100px !important;
+    margin-top: 150px !important;
   }
 }
 @media (min-width: 768px) {
