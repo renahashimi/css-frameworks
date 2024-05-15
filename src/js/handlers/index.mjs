@@ -4,5 +4,8 @@ export * from "./logOut.mjs";
 export * from "./createPost.mjs";
 export * from "./updatePost.mjs";
 export * from "./updateProfile.mjs";
+export * from "./renderPosts.mjs";
+export * from "./renderSinglePost.mjs";
+export * from "./renderProfile.mjs";
 export * from "./search.mjs";
 export * from "./filter.mjs";

@@ -1,5 +1,5 @@
 import { getProfile } from "../api/profile/get.mjs";
-import { profilePostCard, profileTemplate } from "./profileTemplate.mjs";
+import { profilePostCard, profileTemplate } from "../templates/profileTemplate.mjs";
 
 export async function renderProfile() {
     try {

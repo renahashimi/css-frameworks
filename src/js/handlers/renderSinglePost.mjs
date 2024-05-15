@@ -1,5 +1,5 @@
 import { getPost } from "../api/posts/get.mjs";
-import { postCard } from "./postTemplate.mjs";
+import { postCard } from "../templates/postTemplate.mjs";
 
 //Render a single post
 export async function renderSinglePostCard() {
