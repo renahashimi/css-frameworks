@@ -2,23 +2,50 @@ import { getPosts } from "../api/posts/get.mjs";
 import { renderPostList } from "../templates/postTemplate.mjs";
 import { renderAllPosts } from "../templates/renderPosts.mjs";
 
-export async function filterPosts(posts) {
-    const container = document.querySelector("#posts");
+export async function filterPosts() {
+    const postsContainer = document.querySelector("#posts");
 
+    const filterAllFeeds = document.getElementById("allFeeds")
     const filterByDate = document.getElementById("byDate")
+    const filterByMedia = document.getElementById("byMedia")
+    // const filterByDate = document.getElementById("by")
+    let posts = await getPosts();
+    console.log(posts)
 
+
+    const renderFilterPosts = () => {
+        postsContainer.innerHTML = ""; 
+        renderAllPosts(posts, postsContainer)
+    }
+       
+    filterAllFeeds.addEventListener("change", async () => {
+        if (filterAllFeeds.checked) {
+            posts = await getPosts();
+            renderFilterPosts();            
+        }
+    })
     filterByDate.addEventListener("change", () => {
-        container.innerHTML = ''; 
-        
-    if (filterByDate.checked) {
-        const filteredDate =  filterByDate(posts);
-        renderAllPosts(filteredDate, container);
+        if (filterByDate.checked) {
+            console.log(filterByDate)
+            posts.sort((a, b) => new Date(a.created) - new Date(b.created));
+            renderFilterPosts();   
+        }
+    })
+    filterByMedia.addEventListener("change", () => {
+        if (filterByMedia.checked) {
+            postsContainer.innerHTML = ""; 
 
-    } 
-
+            const mediaPosts = posts.filter(post => post.media);
+            renderAllPosts(mediaPosts, postsContainer);   
+        }
+    })
+   
 
 
     
+
+    }
+
 //else if (seletedValue === "comments") {
     //     filteredPosts = posts.filter(post => post.comments.length > 0);
     // } else if (seletedValue === "reactions"){
@@ -27,9 +54,7 @@ export async function filterPosts(posts) {
     // } else {
     //     filteredPosts = posts;
     // }
-    });
 
-}
 
 
     // const filterSelect = document.querySelector("#filterSelect");
