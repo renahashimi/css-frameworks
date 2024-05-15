@@ -4,21 +4,60 @@ import { renderAllPosts } from "../templates/renderPosts.mjs";
 
 export async function filterPosts() {
     const postsContainer = document.querySelector("#posts");
-
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]')
     const filterAllFeeds = document.getElementById("allFeeds")
     const filterByDate = document.getElementById("byDate")
     const filterByMedia = document.getElementById("byMedia")
     // const filterByDate = document.getElementById("by")
     let posts = await getPosts();
-    console.log(posts)
 
-
-    const renderFilterPosts = () => {
+    const renderFilterPosts = (filteredPosts) => {
         postsContainer.innerHTML = ""; 
-        renderAllPosts(posts, postsContainer)
-    }
+        renderAllPosts(filteredPosts, postsContainer)
+    };
+
+    // checkboxes.forEach(checkbox => {
+    //     checkbox.addEventListener("change", async () => {
+    //         if(checkbox.checked) {
+    //             switch (checkbox.id) {
+    //                 case "allFeeds":
+    //                     posts = await getPosts();
+    //                     break;
+    //                 case "byDate":
+
+    //                     posts.sort((a, b) => new Date(a.created) - new Date(b.created));                        
+    //                     console.log("date", posts)  
+
+    //                     renderAllPosts(posts)
+
+    //                     break;
+    //                 case "byMedia":
+    //                 posts.filter((post) => post.media !== "" && post.media !== null);
+    //                 break;
+    //                 default:
+    //                     break;
+                    
+    //             }
+    //             renderFilterPosts(posts)
+    //         }
+
+    //     })
+
+
+    // })
+    // //let filteredPosts;
+    
+        
+        
+    //     case "reactions":
+    //         filteredPosts = posts.filter(post => post.reactions && post.reactions.length > 0);
+    //         break;
+    //     default:
+    //         filteredPosts = posts;
+    // }
+   // renderPostList(filteredPosts, postsContainer)
        
-    filterAllFeeds.addEventListener("change", async () => {
+   filterAllFeeds.addEventListener("change", async () => {
         if (filterAllFeeds.checked) {
             posts = await getPosts();
             renderFilterPosts();            
@@ -27,8 +66,8 @@ export async function filterPosts() {
     filterByDate.addEventListener("change", () => {
         if (filterByDate.checked) {
             console.log(filterByDate)
-            posts.sort((a, b) => new Date(a.created) - new Date(b.created));
-            renderFilterPosts();   
+            posts.sort((a, b) => new Date(b.created) - new Date(a.created));
+            renderFilterPosts(posts);   
         }
     })
     filterByMedia.addEventListener("change", () => {
@@ -82,28 +121,28 @@ export async function filterPosts() {
 
 
 
-function filterByMedia(posts) {
-    const postFilterByMedia = posts.filter(post => post.media);
-    return postFilterByMedia;   
-}
+// function filterByMedia(posts) {
+//     const postFilterByMedia = posts.filter(post => post.media);
+//     return postFilterByMedia;   
+// }
 
-export function filterByDate(posts) {
-    const postFilterByDate = posts.sort((a, b) => 
-    new Date(a.created) - 
-    new Date(b.created));
-    console.log(postFilterByDate)
-    return postFilterByDate;   
-}
+// export function filterByDate(posts) {
+//     const postFilterByDate = posts.sort((a, b) => 
+//     new Date(a.created) - 
+//     new Date(b.created));
+//     console.log(postFilterByDate)
+//     return postFilterByDate;   
+// }
 
-function filterByComments(posts) {
-    const postFilterByComments = posts.filter(post => post.comments && post.comments.length > 0);
-    return postFilterByComments;
-}
+// function filterByComments(posts) {
+//     const postFilterByComments = posts.filter(post => post.comments && post.comments.length > 0);
+//     return postFilterByComments;
+// }
 
-function filterByReaction(posts) {
-    const postFilterByReaction = posts.filter(post => post.reactions && post.reactions.length > 0);
-    return postFilterByReaction;
-}
+// function filterByReaction(posts) {
+//     const postFilterByReaction = posts.filter(post => post.reactions && post.reactions.length > 0);
+//     return postFilterByReaction;
+// }
 
 
 
@@ -130,21 +169,21 @@ Media
 
 
 
-// let filteredPosts;
-// switch (seletedValue) {
-//     case "date":
-//         filteredPosts = posts.slice().sort((a, b) => 
-//         new Date(a.created) - 
-//         new Date(b.created));
-//         renderAllPosts(filteredPosts, container)
-//         break;
-//     case "comments":
-//         filteredPosts = posts.filter(post => post.comments.length > 0);
-//         break;
-//     case "reactions":
-//         filteredPosts = posts.filter(post => post.reactions && post.reactions.length > 0);
-//         break;
-//     default:
-//         filteredPosts = posts;
-// }
-// renderPostList(filteredPosts, postsContainer)*/
+let filteredPosts;
+switch (seletedValue) {
+    case "date":
+        filteredPosts = posts.slice().sort((a, b) => 
+        new Date(a.created) - 
+        new Date(b.created));
+        renderAllPosts(filteredPosts, container)
+        break;
+    case "comments":
+        filteredPosts = posts.filter(post => post.comments.length > 0);
+        break;
+    case "reactions":
+        filteredPosts = posts.filter(post => post.reactions && post.reactions.length > 0);
+        break;
+    default:
+        filteredPosts = posts;
+}
+renderPostList(filteredPosts, postsContainer)*/
