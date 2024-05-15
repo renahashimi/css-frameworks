@@ -8,7 +8,7 @@ export async function renderAllPosts() {
     const container = document.querySelector("#posts");
     renderPostList(posts, container);
     handler.searchPost("posts");
-    handler.filterPosts(posts)
+    //handler.filterPosts();
         //console.log(posts);
 };
   
