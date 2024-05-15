@@ -1,42 +1,69 @@
 import { getPosts } from "../api/posts/get.mjs";
 import { renderAllPosts } from "./index.mjs";
 
-//export async function filterPosts() {
-    const postsContainer = document.querySelector("#posts");
-    const filterAllFeeds = document.getElementById("allFeeds");
+
+const postsContainer = document.querySelector("#posts");
+
+export async function filterPosts() {
     let posts = await getPosts();
+ 
+    const filterAllFeeds = document.getElementById("allFeeds");
+    const filterByDate = document.getElementById("byDate");
+    const filterByMedia = document.getElementById("byMedia");
+    postsContainer.innerHTML = "";
 
+   filterAllFeeds.addEventListener("change", async () => {
+        if (filterAllFeeds.checked) {
+            renderAllPosts(posts, postsContainer);
+        }
+    })
+    filterByDate.addEventListener("change", () => {
+        if (filterByDate.checked) {
+            postsContainer
+           posts.sort((a, b) => new Date(a.created) - new Date(b.created));
+            console.log("DATE", posts)
+            renderAllPosts(posts, postsContainer);   
+        }
+    })
+    filterByMedia.addEventListener("change", () => {
+        if (filterByMedia.checked) {
+            postsContainer.innerHTML = ""; 
+            const mediaPosts = posts.filter(post => post.media);
+            renderAllPosts(mediaPosts, postsContainer);
+            console.log("MEDIA", mediaPosts);
+        }
+    });
 
-// export function filterAllFeeds() {
+}
 //     renderAllPosts(posts);
 // }
+//export async function filterPosts() {
+// export function filterByDate(posts, container) {
+//     const byDate = document.getElementById("byDate");
+//     byDate.addEventListener("change", () => {
+//         postsContainer.innerHTML = "";
+//         if (byDate.checked) {
+//             const postFilterByDate = posts.sort((a, b) => new Date(b.created) - new Date(a.created));
+//             renderAllPosts(postFilterByDate, container);  
+//         } else {
+//             renderAllPosts(posts, container)
+//         }
+//     })
+// }
 
-export function filterByDate(posts, container) {
-    const byDate = document.getElementById("byDate");
-    byDate.addEventListener("change", () => {
-        postsContainer.innerHTML = "";
-        if (byDate.checked) {
-            const postFilterByDate = posts.sort((a, b) => new Date(b.created) - new Date(a.created));
-            renderAllPosts(postFilterByDate, container);  
-        } else {
-            renderAllPosts(posts, container)
-        }
-    })
-}
-
-export function filterByMedia(posts, container) {
-    const byMedia = document.getElementById("byMedia");
-    postsContainer.innerHTML = "";
-    byMedia.addEventListener("change", () => {
-        if (byMedia.checked) {
-            const postFilterByMedia = posts.filter(post => post.media);
-            renderAllPosts(postFilterByMedia, container); 
-            console.log(postFilterByMedia) 
-        } else {
-            renderAllPosts(posts, container)
-        }
-    })
-}
+// export function filterByMedia(posts, container) {
+//     const byMedia = document.getElementById("byMedia");
+//     postsContainer.innerHTML = "";
+//     byMedia.addEventListener("change", () => {
+//         if (byMedia.checked) {
+//             const postFilterByMedia = posts.filter(post => post.media);
+//             renderAllPosts(postFilterByMedia, container); 
+//             console.log(postFilterByMedia) 
+//         } else {
+//             renderAllPosts(posts, container)
+//         }
+//     })
+// }
 
 
 // function filterByComments(posts) {

@@ -12,7 +12,7 @@ export default function router() {
           listeners.loginFormListener();
           break;
         case "/profile/":
-          template.renderProfile();
+          listeners.renderProfile();
           listeners.setLogOutListener();
           break;
           case "/profile/edit/":
@@ -20,13 +20,13 @@ export default function router() {
           listeners.setLogOutListener();
           break;
         case "/feed/posts/":
-          template.renderAllPosts();
+          listeners.renderAllPosts();
           listeners.setLogOutListener();
           listeners.searchPost();
-          listeners.filterPosts();
+          listeners.filterPosts()
           break;
         case "/feed/post/":
-          template.renderSinglePostCard();
+          listeners.renderSinglePostCard();
           break;
         case "/feed/post/create/":
           listeners.setCreatePostListener();
