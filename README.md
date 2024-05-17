@@ -35,7 +35,7 @@ User can delete a post content item
 Clone the repo:
 
 ```bash
-git clone https://github.com/renahashimi/css-frameworks.git
+git clone https://github.com/renahashimi/css-frameworks/tree/js2
 ```
 
 ```bash
