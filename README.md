@@ -44,9 +44,13 @@ npm install
 
 ### Running
 
+<<<<<<< Updated upstream
 ```bash
 npm run dev
 ```
+=======
+- VSCode: index.html :: Live Server
+>>>>>>> Stashed changes
 
 ## Contact
 
