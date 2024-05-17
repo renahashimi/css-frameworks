@@ -43,7 +43,10 @@ npm install
 ```
 
 ### Running
-- VSCode: index.html :: Live Server
+
+```bash
+npm run dev
+```
 
 ## Contact
 
