@@ -13,6 +13,13 @@
   font-size: 1.8em !important;
 }
 
+button, h1, .h1, h2, .h2, h3, .h3, h4, .h4, p {
+  text-decoration: none;
+  list-style: none;
+  list-style-type: none;
+  color: #2d3134;
+}
+
 .deleteButton, .navbar a, button {
   transition: transform 0.5s ease-in-out;
 }
