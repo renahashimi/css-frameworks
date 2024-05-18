@@ -71,7 +71,7 @@ export function postCard(postData) {
 
     // TITLE
     const title = document.createElement("h3");
-    title.classList.add("fw-bolder", "fs-4", "m-1", "bg-secondary", "p-2");
+    title.classList.add("fw-bolder", "fs-4", "m-1", "mt-2", "p-1", "border", "border-2", "border-secondary", "shadow");
     title.innerHTML = postData.title;
     postContent.append(title);
 
@@ -108,12 +108,13 @@ export function postCard(postData) {
     // IMAGE
     if (postData.media) {
         const postImg = document.createElement("img");
-        postImg.classList.add("postImg", "d-block", "m-auto", "justify-content-center", "p-2", "w-100");
-        postImg.style.maxWidth = "100%";
-        postImg.style.maxHeight = "350px";
+        postImg.classList.add("postImg", "d-block", "m-auto", "justify-content-center", "my-2", "w-100", "border", "border-3", "border-secondary", "shadow");
+        postImg.style.width = "100%";
+        postImg.style.width = "300px";
+        postImg.style.maxHeight = "400px";
         postImg.style.objectFit = "cover";
-        postImg.style.objectPosition = "0% 30%";
-        postImg.src = postData.media ? postData.media: "../../../../images/404-error.jpeg";
+        postImg.style.objectPosition = "center";
+        postImg.src = postData.media;
         postImg.alt = `Image title ${postData.title}`;
         postlink.append(postImg);
     } 
@@ -148,7 +149,7 @@ export function postCard(postData) {
                 likeCountValue++;
                 likeCount.textContent = `${likeCountValue + storage.load(`liked_${postId}`)} Stars`;
                 likeBtn.classList.add("liked");
-                likeBtn.innerHTML = `<i class="bi bi-star-fill"></i>`;
+                likeBtn.innerHTML = `<i class="bi bi-star-fill text-secondary"></i>`;
                 postActions.postReacts("⭐", postData.id)
                 storage.save(`liked_${postId}`, true);
                 isLiked = true;
@@ -168,11 +169,9 @@ export function postCard(postData) {
     reactionContainer.append(likeBtn, likeCount)
 
     //COMMENTS
- 
     const commentsContainer = document.createElement("div");
-    commentsContainer.classList.add("commentsContainer", "hidden");
+    commentsContainer.classList.add("commentsContainer", "hidden", "px-3");
           
-
     if (postData.comments && postData.comments.length > 0) {
         postData.comments.forEach(commentData => { 
             const commentContainer = document.createElement("div");
@@ -309,8 +308,8 @@ export function postCard(postData) {
 
     //Button / Toggle to open comments section
     const openCommentsBtn = document.createElement("button");
-    openCommentsBtn.classList.add("border-0", "text-underline", "m-2", "fs-5")
-    openCommentsBtn.innerHTML = `Comments ${postData._count.comments} <i class="bi bi-arrow-down-short"></i>`;
+    openCommentsBtn.classList.add("border-1", "border-secondary", "fw-bold", "text-underline", "m-2", "fs-5", "ms-3")
+    openCommentsBtn.innerHTML = `Comments (${postData._count.comments}) <i class="bi bi-arrow-down-short"></i>`;
     openCommentsBtn.addEventListener("click", () => {
         commentsContainer.classList.toggle("hidden");
     }) 

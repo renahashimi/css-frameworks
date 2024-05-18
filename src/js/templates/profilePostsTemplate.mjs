@@ -115,20 +115,20 @@ export function profilePostCard(postData) {
 
     // Title
     const title = document.createElement("h3");
-    title.classList.add("fw-bolder", "fs-4", "m-2");
+    title.classList.add("fw-bolder", "fs-4", "m-2", "p-1", "border", "border-2", "border-secondary");
     title.innerHTML = postData.title;
     postText.append(title);
 
     // TEXT 
     const contentText = document.createElement("p");
-    contentText.classList.add("m-2", "fs-5");
+    contentText.classList.add("m-2", "ps-1", "fs-5");
     contentText.innerHTML = postData.body;
     postText.append(contentText);
 
     // TAGS 
     if (Array.isArray(postData.tags) && postData.tags.length > 0) {
         const tagsContainer = document.createElement("div");
-        tagsContainer.classList.add("d-flex", "ms-1");
+        tagsContainer.classList.add("d-flex", "ms-1", "ps-1");
         postData.tags.forEach(tag => {
             const individualTags = tag.split(",").map(tag => `#${tag.trim()}`);
             const tagText = individualTags.join(', ');
@@ -145,9 +145,10 @@ export function profilePostCard(postData) {
     if (postData.media) {
         const img = document.createElement("img");
         img.classList.add("d-block", "m-auto", "justify-content-center", "w-100", "p-2");
-        img.style.maxWidth = "100%";
+        img.style.width = "100%";
+        img.style.maxWidth = "350px";
         img.style.maxHeight = "350px";
-        img.style.objectFit = "cover";
+        img.style.objectFit = "contain";
         img.src = postData.media || "../../../../images/404-error.jpeg";
         img.alt = `Image title ${postData.title}`;
         postContent.append(img);

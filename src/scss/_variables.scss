@@ -1,5 +1,6 @@
 $primary: #2d3134;
 $secondary: #c6a226;
+$yellowGold: #716641;
 $white: #fff;
 $black: #000;
 $black2: #0F0F0F;
@@ -26,7 +27,7 @@ $font-dosis: "Dosis", sans-serif;
   } 
 }
 
-button, h1, h2, h3, h4, p {
+button, h1, h2, h3, h4, p, i {
   text-decoration: none;
   list-style: none;
   list-style-type: none;
@@ -46,7 +47,6 @@ button:hover {
   transform: scale(1.2);
 }
 
-
 input[type="checkbox"]:checked + label{
   color: $secondary !important;
   text-decoration: underline;
@@ -55,7 +55,6 @@ input[type="checkbox"]:checked + label{
 input[type="checkbox"] { 
   visibility: hidden;
   display: none;
-  
 }
 
 
@@ -159,8 +158,6 @@ input[type="checkbox"] {
     }
   } 
 }
-
-
 //END FOR BACK...
 
 // MARGIN 

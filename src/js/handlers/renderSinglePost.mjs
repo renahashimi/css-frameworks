@@ -10,8 +10,8 @@ export async function renderSinglePostCard() {
     const singlePost = await getPost(postId);
     if (singlePost) {
       const singlePostContainer = document.querySelector("#singlePost");
-      singlePostContainer.classList.add("border", "mw-75", "my-5")
-      singlePostContainer.style.maxWidth = "700px";
+      singlePostContainer.classList.add("mw-75", "my-5")
+      singlePostContainer.style.maxWidth = "900px";
       const backBtnSection = document.createElement("div")
       const backBtn = document.createElement("li");
       backBtn.innerHTML = `<button class="btn btn-primary d-flex fs-3 mt-3 mb-5 text-uppercase m-auto text-center border-light" onclick="history.back()">Cancel</button>`;
