@@ -15,7 +15,7 @@
 <body class="backImage4">
     <header>
         <!--NAV FOR BOTTOM PAGE  / FIXED-->
-        <div class=" container-fluid bg-dark backImage2">
+        <div class="container-fluid bg-dark back-sm-ImageNav border-bottom border-light border-2">
             <div class="row">
                 <div class="col-12 col-md-3">
                     <h1 class="text-secondary font-righteous py-3 ps-1">MOONLIGHT</h1>
@@ -32,7 +32,7 @@
                                 <p class="mt-n1 fs-7">MESSAGE</p></a>
                             </div>
                             <div class="d-block text-light mx-3">     
-                                <a class="navbar-brand m-auto text-secondary active" href="/profile"><i class="bi bi-person-hearts" style="font-size: 30px;"></i>
+                                <a class="navbar-brand m-auto text-light" href="/profile"><i class="bi bi-person-hearts" style="font-size: 30px;"></i>
                                 <p class="mt-n1 fs-7">PROFILE</p></a>
                             </div>
                             <div class="d-block text-light mx-3">     
@@ -47,7 +47,7 @@
         <!--NAV FOR BOTTOM PAGE  / FIXED-->
         <nav class="navbar d-flex d-lg-none justify-content-between align-items-center m-auto border-top border-2 border-primary fixed-bottom navbar-light bg-white" style="max-width: 1100px;">
             <div class="container d-flex justify-content-center align-items-center text-primary h-25 m-auto" style="max-width: 600px;">
-                <a class="navbar-brand m-auto text-secondary active" href="/feed/posts/"><i class="bi bi-house-fill" style="font-size: 30px;"></i></a>
+                <a class="navbar-brand m-auto text-primary" href="/feed/posts/"><i class="bi bi-house-fill" style="font-size: 30px;"></i></a>
                 <a class="navbar-brand m-auto text-primary" href="#"><i class="bi bi-chat-heart-fill" style="font-size: 30px;"></i></a>
                 <div class="bg-secondary rounded-circle mt-n5 px-3 py-1 m-auto"><a class="navbar-brand m-auto text-primary" href="/feed/post/create/"><i class="bi bi-plus-circle-fill" style="font-size: 2.6em;"></i></a></div>
                 <a class="navbar-brand m-auto text-primary" href="/profile"><i class="bi bi-person-hearts" style="font-size: 30px;"></i></a>
@@ -58,10 +58,10 @@
     <main>
       <!--CREATE A POST-->  
         <h1 class="font-righteous fs-4 my-2 py-3 text-uppercase text-light text-center">Create a post</h1>
-        <div class="container-md">
+        <div class="container" style="max-width: 700px;">
             <div class="row justify-content-center">
-                <div class="col-12">
-                    <form id="createPost" class="bg-light p-3">
+                <div class="col-12 border-1 border-light p-3">
+                    <form id="createPost" class="bg-light p-3 border">
                         <div class="form-group my-2">
                             <label for="title">Title</label>
                             <input class="form-control" id="title" type="text" name="title" required>
@@ -86,10 +86,10 @@
         <button class="btn btn-primary d-flex fs-3 text-uppercase m-auto my-3 text-center border-light" onclick="history.back()">Cancel</button>
     </main>
     <footer>
-        <div class="container-fluid mb-5 pb-4 d-block border-top border-4 border-primary">
+        <div class="container-fluid mb-5 pb-4 d-block border-top border-4 border-white mt-5">
             <div class="row mt-3" style="margin-bottom: 90px;">
                 <div class="col">
-                    <p class="fs-7 font-righteous text-center text-dark">Copyright &copy; 2024 - Moonlight</p>
+                    <p class="fs-7 font-righteous text-center text-light">Copyright &copy; 2024 - Moonlight</p>
                 </div>
             </div>
         </div>

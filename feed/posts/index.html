@@ -14,7 +14,7 @@
 <body>
     <header>
         <!--NAV FOR BOTTOM PAGE  / FIXED-->
-        <div class="container-fluid bg-dark backImage2">
+        <div class="container-fluid bg-dark back-sm-ImageNav border-bottom border-light border-2">
             <div class="row">
                 <div class="col-12 col-md-3">
                     <h1 class="text-secondary font-righteous py-3 ps-1">MOONLIGHT</h1>
@@ -57,36 +57,31 @@
     <main class="flex-grow-1 text-primary">
         <h1 class="fs-2 m-2 p-3 text-secondary text-center fw-bolder font-righteous bg-dark">MOONLIGHT <span class="text-light">FEEDS</span> </h1>
         <!--SEARCH & FILTER CONTAINER-->
-        <div class="container-fluid d-flex bg-dark mt-4 ps-2 py-2 border-2 border-light border-top justify-content-center">
+        <div class="container-fluid d-block justify-content-center bg-dark mt-2 ps-2 py-2 border-5 border-secondary border-top border-bottom justify-content-center">
           <!--FILTER-->                
-            <div class="container d-block d-md-flex text-light border-end border-light border-2">
-                <div><h2 class="d-flex font-righteous fs-3 my-2 me-3">Filter:</h2></div>
-                <div class="my-2 d-block d-md-flex flex-wrap fs-4">
-                    <div class="form-check mx-1">
-                        <input class="form-check-input border-light" type="checkbox" role="switch" id="allFeeds">
-                        <label class="form-check-label" for="allFeeds">
-                        All feeds
-                        </label>
+            <div class="container d-block justify-content-center text-light border-bottom border-light border-2">
+                <div><h2 class="d-flex justify-content-center font-righteous fs-3 my-2  text-uppercase">Filter</h2></div>
+                <div class="mt-2 mb-3 d-flex flex-wrap fs-4 justify-content-center">
+                    <div class="form-check p-0">
+                        <input class="form-check-input" type="checkbox" role="switch" id="allFeeds" hidden checked>
+                        <label class="form-check-label border p-1 text-uppercase" for="allFeeds">All feeds</label>
                     </div>
-                    <div class="form-check mx-1">
-                        <input class="form-check-input border-light" type="checkbox" role="switch" id="byDate">
-                        <label class="form-check-label" for="byDate">
-                        Old to New
-                        </label>
+                    <div class="form-check px-2">
+                        <input class="form-check-input" type="checkbox" role="switch" id="byDate" hidden>
+                        <label class="form-check-label border p-1 text-uppercase" for="byDate">Old-New</label>
                     </div>
-                    <div class="form-check mx-1">
-                        <input class="form-check-input border-light" type="checkbox" role="switch" id="byMedia">
-                        <label class="form-check-label" for="byMedia">
-                        Media
-                        </label>
+                    <div class="form-check p-0">
+                        <input class="form-check-input" type="checkbox" role="switch" id="byMedia" hidden>
+                        <label class="form-check-label border p-1 text-uppercase" for="byMedia">Media</label>
                     </div>
                 </div>
             </div>
             <!--SEARCH-->
-            <div class="input-group justify-content-end m-auto float-end ms-4">
-                <div class="form-group d-flex pe-3">
+            <div class="input-group d-block">
+                <div class="d-flex justify-content-center mt-1"><h2 class="d-flex text-light font-righteous fs-3 my-2 text-uppercase">Search</h2></div>
+                <div class="container form-group d-flex m-auto justify-content-center py-2" style="max-width: 600px;">
                     <label class="form-label d-none" for="searchForm">Search</label>
-                    <input type="search" id="searchForm" class="form-control" placeholder="Search">
+                    <input type="search" id="searchForm" class="form-control m-auto justify-content-center" placeholder="Type a word, any word!">
                     <!-- <button type="button" class="btn btn-secondary searchButton"><i class="bi bi-search"></i></button> -->
                 </div>                        
             </div>
