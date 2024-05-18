@@ -5,8 +5,8 @@ import * as storage from "../storage/index.mjs";
 export function postCard(postData) {
     //POSTCARD CONTAINER
     const post = document.createElement("div");
-    post.classList.add("post-content", "bg-light", "rounded", "m-auto", "my-3", "pb-3", "w-75", "justify-content-center", "border", "border-3", "border-primary", "backShadow");
-    
+    post.classList.add("post-content", "bg-light", "rounded", "m-auto", "my-3", "pb-3", "w-100", "justify-content-center", "border", "border-3", "border-primary", "backShadow");
+
     //POSTCARD IMAGE-LOGO/PROFILE-NAME
     const postLogo = document.createElement("div");
     postLogo.classList.add("postLogo");
@@ -110,9 +110,10 @@ export function postCard(postData) {
         const postImg = document.createElement("img");
         postImg.classList.add("postImg", "d-block", "m-auto", "justify-content-center", "p-2", "w-100");
         postImg.style.maxWidth = "100%";
-        postImg.style.maxHeight = "250px";
+        postImg.style.maxHeight = "350px";
+        postImg.style.objectFit = "cover";
+        postImg.style.objectPosition = "0% 30%";
         postImg.src = postData.media ? postData.media: "../../../../images/404-error.jpeg";
-        postImg.style.backgroundColor = "$black";
         postImg.alt = `Image title ${postData.title}`;
         postlink.append(postImg);
     } 
@@ -327,7 +328,6 @@ export function postCard(postData) {
     commentsContainer.append(openFormBtn, commentsContent);
    
     post.append(postsHead, postlink, reactionContainer, openCommentsBtn, commentsContainer);
-
 
     return post;
 }
