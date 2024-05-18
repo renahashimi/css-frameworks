@@ -1,6 +1,6 @@
-export function searchPost(containerId) {
+export function searchPost() {
     const searchInput = document.querySelector("#searchForm");
-    const container = document.getElementById(containerId)
+    const container = document.getElementById("posts");
 
     searchInput.addEventListener("input", function() {
         const searchTerm = this.value.toLowerCase().trim();
