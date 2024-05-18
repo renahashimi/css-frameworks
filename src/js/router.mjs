@@ -1,10 +1,12 @@
 import * as listeners from "./handlers/index.mjs";
-import * as template from "./templates/index.mjs";
-//import * as postActions from "./api/posts/index.mjs";
 
 export default function router() {
     const path = location.pathname;
     switch (path) {
+        case "/":
+          alert("Share your thoughts and inspire others")
+          console.log("Welcome to Moonlight - Share your thoughts and inspire others");
+          break;
         case "/profile/register/":
           listeners.registerFormListener();
           break;
@@ -23,7 +25,7 @@ export default function router() {
           listeners.renderAllPosts();
           listeners.setLogOutListener();
           listeners.searchPost();
-          listeners.filterPosts()
+          listeners.filterPosts();
           break;
         case "/feed/post/":
           listeners.renderSinglePostCard();
