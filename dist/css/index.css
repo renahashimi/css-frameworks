@@ -25,6 +25,16 @@ button:hover {
   transform: scale(1.2);
 }
 
+input[type=checkbox]:checked + label {
+  color: #c6a226 !important;
+  text-decoration: underline;
+}
+
+input[type=checkbox] {
+  visibility: hidden;
+  display: none;
+}
+
 .reactionbtn.clicked {
   background-color: #c6a226 !important;
 }
@@ -51,10 +61,10 @@ button:hover {
   background-image: url(../../images/abstractw&b.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: left;
 }
 .backImage4 {
-  background-image: url(../../images/wavy-folds.jpeg);
+  background-image: url(../../images/abstract4.jpeg);
   background-repeat: no-repeat;
   height: 100vh;
   background-size: cover;
@@ -94,8 +104,14 @@ button:hover {
     background-image: url(../../images/abstractw&b.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: left;
     height: 100vh;
+  }
+  .back-sm-ImageNav {
+    background-image: url(../../images/abstractw&b.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
   }
 }
 .margintop50 {
@@ -112,8 +128,14 @@ button:hover {
   .margin-sm-top-none {
     margin-top: 0px !important;
   }
-  .margin-sm-top100 {
+  .margin-sm-top50 {
+    margin-top: 50px !important;
+  }
+  .margin-sm-top150 {
     margin-top: 150px !important;
+  }
+  .margin-sm-top300 {
+    margin-top: 300px !important;
   }
 }
 @media (min-width: 768px) {
@@ -130,6 +152,40 @@ button:hover {
     float: right;
     width: 40% !important;
     max-width: 300px !important;
+  }
+}
+.avatarImg {
+  margin-top: -3rem !important;
+}
+
+.profileText {
+  font-size: 1em !important;
+}
+
+.profileTexts {
+  font-size: 0.8em !important;
+}
+
+@media (min-width: 768px) {
+  .post-content, .profile-post-content {
+    max-width: 75% !important;
+  }
+  .bannerImg {
+    height: 200px !important;
+  }
+  .avatarImg {
+    width: 140px !important;
+    height: 140px !important;
+    margin-top: -4rem !important;
+  }
+  .profileText {
+    font-size: x-large !important;
+  }
+  .profileTexts {
+    font-size: larger !important;
+  }
+  button .profileText {
+    font-size: 3rem !important;
   }
 }
 #profile {

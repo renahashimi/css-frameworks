@@ -1,6 +1,5 @@
 $primary: #2d3134;
 $secondary: #c6a226;
-$yellow1: #dcc367;
 $white: #fff;
 $black: #000;
 $black2: #0F0F0F;
@@ -28,7 +27,7 @@ $font-dosis: "Dosis", sans-serif;
   
 }
 
-//HOVER
+//HOVER & ACTIVE
 .deleteButton, .navbar a, button{
   transition: transform 0.5s ease-in-out;
 }
@@ -40,6 +39,19 @@ button:hover {
 .deleteButton:hover, .navbar a:hover {
   transform: scale(1.2);
 }
+
+
+input[type="checkbox"]:checked + label{
+  color: $secondary !important;
+  text-decoration: underline;
+}
+
+input[type="checkbox"] { 
+  visibility: hidden;
+  display: none;
+  
+}
+
 
 //"LIKE"-BUTTON
 .reactionbtn.clicked {
@@ -74,11 +86,11 @@ button:hover {
     background-image: url(../../images/abstractw&b.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center; 
+    background-position: left;
   }
 
   &Image4 {
-    background-image: url(../../images/wavy-folds.jpeg);
+    background-image: url(../../images/abstract4.jpeg);
     background-repeat: no-repeat;
     height: 100vh;
     background-size: cover;
@@ -128,8 +140,16 @@ button:hover {
       background-image: url(../../images/abstractw&b.jpeg);
       background-repeat: no-repeat;
       background-size: cover;
-      background-position: center; 
+      background-position: left; 
       height: 100vh;
+    }
+  } 
+  .back-sm- {
+    &ImageNav {
+      background-image: url(../../images/abstractw&b.jpeg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: left; 
     }
   } 
 }
@@ -138,19 +158,19 @@ button:hover {
 //END FOR BACK...
 
 // MARGIN 
-  .margin {
-    &top50 {
-      margin-top: 50px !important;
-    }
-
-    &top100 {
-      margin-top: 100px !important;
-    }
-
-    &top150 {
-      margin-top: 150px !important;
-    }
+.margin {
+  &top50 {
+    margin-top: 50px !important;
   }
+
+  &top100 {
+    margin-top: 100px !important;
+  }
+
+  &top150 {
+    margin-top: 150px !important;
+  }
+}
 
 @media (min-width: 576px) {
   .margin-sm- {
@@ -158,8 +178,16 @@ button:hover {
       margin-top: 0px !important;
     }
 
-    &top100{
+    &top50{
+      margin-top: 50px !important;
+    }
+
+    &top150{
       margin-top: 150px !important;
+    }
+
+    &top300{
+      margin-top: 300px !important;
     }
 
 
@@ -176,6 +204,8 @@ button:hover {
       margin-top: 100px !important;
     }
   }
+
+  
 }
 
 @media (min-width: 1024px) {
@@ -187,39 +217,62 @@ button:hover {
   }
 }
 
-//END FOR MARGIN
+//FOR POST & PROFILE
+.avatarImg {
+  margin-top: -3rem !important;
+}
 
-// //MEDIA FOR POSTCARD
-// @media (min-width: 576px) {
-//    .postlink, .postContent {
-//       display: grid !important;
-//       grid-template-columns: 50% 50%;
-//       justify-content: space-evenly;
-//   } 
-// }
+.profileText {
+  font-size: 1em !important;
+}
 
-// @media (min-width: 992px) {
-//   #posts, #profilePosts {
-//       display: grid;
-//       grid-template-columns: repeat(3, 33%);
-//       justify-content: space-evenly;
-//   } 
-// }
+.profileTexts {
+  font-size: 0.8em !important;
+}
+
+@media (min-width: 768px) {
+  .post-content, .profile-post-content {
+    max-width: 75% !important;
+  }
+
+  .bannerImg {
+    height: 200px !important;
+  }
+
+  .avatarImg {
+    width: 140px !important;
+    height: 140px !important;
+    margin-top: -4rem !important;
+  }
+
+  .profileText {
+    font-size: x-large !important;
+  }
+
+  .profileTexts {
+    font-size: larger !important;
+  }
+
+  button .profileText {
+    font-size: 3rem !important;
+  }
+
+}
 
 //PROFILE 
-
 #profile {
   margin: 0;
   padding: 0;
 }
 
-
 //OTHER UI 
-
 #filterSelect, #searchForm {
   height: 40px;
 }
 
+
+
+//_______________________________________________________________
 
 
 // Variables
