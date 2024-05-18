@@ -1,12 +1,12 @@
 import { getProfile } from "../api/profile/get.mjs";
-import { profilePostCard, profileTemplate } from "../templates/profileTemplate.mjs";
+import * as templates from "../templates/index.mjs";
 
 export async function renderProfile() {
     try {
         const profileData = await getProfile();
         const container = document.querySelector("#profile");
 
-        const profileContainer = profileTemplate(profileData);
+        const profileContainer = templates.profileTemplate(profileData);
         container.innerHTML = "";
         //console.log(profileInfo);
         container.append(profileContainer);
@@ -17,7 +17,7 @@ export async function renderProfile() {
         postsContainer.innerHTML = "";
 
         myPosts.forEach(postData => {
-        const postCardElement = profilePostCard(postData);
+        const postCardElement = templates.profilePostCard(postData);
         postsContainer.append(postCardElement);
         });   
     } catch (error) {

@@ -16,7 +16,7 @@ export async function setUpdateProfileListener() {
         const profile = await getProfile(name);
 
         form.banner.value = profile.banner;
-        form.avatar.value = profile.avater;
+        form.avatar.value = profile.avatar;
         button.disabled = false;
 
         form.addEventListener("submit", (event) => {

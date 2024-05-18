@@ -9,14 +9,12 @@ export function setCreatePostListener() {
             const formData = new FormData(form);
             const post = Object.fromEntries(formData.entries());
             
-
             if (post.tags) {
                 const arrayOfTags = post.tags = post.tags.split(",").map((tag) => tag.trim()).filter((tag) => tag !== "").map(tag => `#${tag}`); 
                 post.tags = arrayOfTags.length > 0 ? arrayOfTags : [];
             } else {
                 post.tags = [];
             }
-
             createPost(post);
         })
         form.reset();
