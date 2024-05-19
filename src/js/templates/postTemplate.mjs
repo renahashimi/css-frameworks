@@ -261,7 +261,7 @@ export function postCard(postData) {
     commentForm.id = "commentForm";
 
     const authorInput = document.createElement("input")
-    authorInput.classList.add("my-1")
+    authorInput.classList.add("my-1", "fs-5")
     authorInput.type = "text";
     authorInput.id = "author"
     authorInput.placeholder = "Your name";
@@ -277,9 +277,9 @@ export function postCard(postData) {
     commentForm.append(commentTextarea);
 
     const submitBtn = document.createElement("button");
-    submitBtn.classList.add("btn", "btn-secondary", "text-dark", "w-50", "my-1")
+    submitBtn.classList.add("btn", "btn-secondary", "text-dark", "text-uppercase", "fw-bold", "my-1", "border", "border-black", "border-2")
     submitBtn.id = "submit";
-    submitBtn.innerHTML = "Submit";
+    submitBtn.innerHTML = "Post comment";
     commentForm.append(submitBtn);
 
     commentForm.addEventListener("submit", async (event) => {
@@ -315,7 +315,7 @@ export function postCard(postData) {
     }) 
 
     const openFormBtn = document.createElement("button");
-    openFormBtn.classList.add("border-0", "fw-bold", "m-2", "fs-5", "bg-secondary")
+    openFormBtn.classList.add("fw-bold", "m-2", "fs-5", "bg-secondary", "border", "border-black", "border-2")
     openFormBtn.innerHTML = `Add a comment <i class="bi bi-chat-right-quote"></i>`;
     openFormBtn.addEventListener("click", () => {
         commentsContent.classList.toggle("hidden");
