@@ -13,7 +13,7 @@ export default function router() {
           listeners.renderProfile();
           listeners.setLogOutListener();
           break;
-        case "/profile/myProfile":
+        case "/profile/myProfile/":
           listeners.renderMyProfile();
           listeners.setLogOutListener();
          break;

@@ -13,7 +13,7 @@ export async function renderMyProfile() {
         //POSTS BY PROFILE
         const myPostsContainer = document.querySelector("#myProfilePosts");
         const myPosts = profileData.posts;
-        postsContainer.innerHTML = "";
+        myPostsContainer.innerHTML = "";
 
         myPosts.forEach(postData => {
         const postCardElement = templates.profilePostCard(postData);

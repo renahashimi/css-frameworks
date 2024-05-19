@@ -17,8 +17,8 @@ export async function getMyProfile(name = load("profile").name) {
     if (!name) {
         throw new Error("Requires a name");
     } 
-    const getProfileUrl = `${API_SOCIAL_URL}${profile}/${name}${posts}`;
-    const response = await authFetch(getProfileUrl);
+    const getMyProfileUrl = `${API_SOCIAL_URL}${profile}/${name}${posts}`;
+    const response = await authFetch(getMyProfileUrl);
     return await response.json(); 
 }
 
