@@ -1,5 +1,4 @@
 import * as postActions from "../api/posts/index.mjs";
-import * as storage from "../storage/index.mjs";
 
 //POSTCARD FOR PROFILE POSTS
 export function profilePostCard(postData) {
@@ -29,7 +28,7 @@ export function profilePostCard(postData) {
     // USERNAME
     const userName = document.createElement("h2");
     userName.innerHTML = `${postData.owner}`;
-    userName.classList.add("fs-4", "fw-bolder", "mt-2");
+    userName.classList.add("fs-4", "fw-bolder", "mt-2", "text-decoration-none");
     postInfo.append(userName)
     console.log(postData)
 

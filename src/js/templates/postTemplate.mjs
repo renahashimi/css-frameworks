@@ -38,7 +38,7 @@ export function postCard(postData) {
         // USERNAME
         const userNameLink = document.createElement("a");
         userNameLink.href = `/profile/?name=${postData.author.name}`;
-
+        userNameLink.classList.add("text-decoration-none");
         const userName = document.createElement("a");
         userName.href = `/profile/?name=${postData.author.name}`;
         userName.innerHTML = `${postData.name}`;
@@ -58,6 +58,7 @@ export function postCard(postData) {
         // USERNAME
         const userNameLink = document.createElement("a");
         userNameLink.href = `/profile/?name=${postData.author.name}`;
+        userNameLink.classList.add("text-decoration-none");
 
         const userName = document.createElement("h2");
         userName.href = `${postData.author.name}`;

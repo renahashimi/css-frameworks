@@ -1,3 +1,4 @@
+
 export function profileTemplate(profileData) {
     const profileContainer = document.createElement("div");
     profileContainer.classList.add("border-bottom", "border-5", "border-primary", "bg-white")
@@ -12,7 +13,7 @@ export function profileTemplate(profileData) {
     
     //NAME
     const myName = document.createElement("h1");
-    myName.classList.add("d-flex", "fw-bolder", "justify-content-center");
+    myName.classList.add("d-flex", "fw-bolder", "justify-content-center", "text-decoration-none");
     myName.textContent = `${profileData.name}`;
     
     //EMAIL
