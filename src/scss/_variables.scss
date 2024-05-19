@@ -27,11 +27,15 @@ $font-dosis: "Dosis", sans-serif;
   } 
 }
 
-button, h1, h2, h3, h4, p, i {
+button, h1, h2, h3, h4, p {
   text-decoration: none;
   list-style: none;
   list-style-type: none;
   color: $primary;
+}
+
+.navbar, .navbar p {
+  color: white !important;
 }
 
 //HOVER & ACTIVE
@@ -49,14 +53,14 @@ button:hover {
 
 input[type="checkbox"]:checked + label{
   color: $secondary !important;
-  text-decoration: underline;
+  font-weight: bold !important;
+  border: 2px solid $secondary !important;
 }
 
 input[type="checkbox"] { 
   visibility: hidden;
   display: none;
 }
-
 
 //"LIKE"-BUTTON
 .reactionbtn.clicked {
