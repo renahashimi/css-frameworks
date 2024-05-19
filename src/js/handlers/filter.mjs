@@ -24,7 +24,6 @@ export async function filterPosts() {
         feedContainer.innerHTML = "";
         if (filterByDate.checked) {
             posts.sort((a, b) => new Date(a.created) - new Date(b.created));
-            console.log("DATE", posts)
             renderPostList(posts, feedContainer);   
             filterAllFeeds.checked = false;
             filterByMedia.checked = false;
@@ -38,8 +37,6 @@ export async function filterPosts() {
             renderPostList(mediaPosts, feedContainer);
             filterAllFeeds.checked = false;
             filterByDate.checked = false;
-
-            // console.log("MEDIA", mediaPosts);
         }    
     });
     

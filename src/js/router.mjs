@@ -3,10 +3,6 @@ import * as listeners from "./handlers/index.mjs";
 export default function router() {
     const path = location.pathname;
     switch (path) {
-        case "/":
-          alert("Share your thoughts and inspire others")
-          console.log("Welcome to Moonlight - Share your thoughts and inspire others");
-          break;
         case "/profile/register/":
           listeners.registerFormListener();
           break;
@@ -17,7 +13,11 @@ export default function router() {
           listeners.renderProfile();
           listeners.setLogOutListener();
           break;
-          case "/profile/edit/":
+        case "/profile/myProfile":
+          listeners.renderMyProfile();
+          listeners.setLogOutListener();
+         break;
+        case "/profile/edit/":
           listeners.setUpdateProfileListener();
           listeners.setLogOutListener();
           break;
@@ -38,21 +38,9 @@ export default function router() {
           listeners.setUpdatePostListener();
           listeners.setLogOutListener();
           break;
+        // case "/":
+        //   alert("Share your thoughts and inspire others")
+        //   console.log("Welcome to Moonlight - Share your thoughts and inspire others");
+        //   break;
     }
 }
-
-
-
-// // testing function //
-// async function testTemplate() {
-//   const posts = await postActions.getPosts();
-//   const post = posts[11976]; 
-//   const container = document.querySelector("#posts");
-//   template.renderAllPosts(posts, container);
-// }
-
-// testTemplate();
-// console.log(typeof id);
-
-
-

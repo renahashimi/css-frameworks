@@ -3,9 +3,9 @@ import * as storage from "../storage/index.mjs";
 
 //POSTCARD FOR PROFILE POSTS
 export function profilePostCard(postData) {
-    const profile = storage.load("profile");
+   // const postData = storage.load("postData");
     const post = document.createElement("div");
-    post.classList.add("profile-post-content", "bg-light", "rounded", "m-auto", "my-3", "w-100", "justify-content-center", "border", "border-3", "border-secondary", "backShadow");
+    post.classList.add("postData-post-content", "bg-light", "rounded", "m-auto", "my-3", "w-100", "justify-content-center", "border", "border-3", "border-secondary", "backShadow");
     const postsHead = document.createElement("div");
     postsHead.classList.add("container-fluid", "d-flex", "border-bottom", "border-1", "border-primary", "p-1", "justify-content-start");
     const postText = document.createElement("div");
@@ -20,7 +20,7 @@ export function profilePostCard(postData) {
     //USERIMAGE
     const userImage = document.createElement("img");
     userImage.classList.add("rounded-circle", "object-fit-cover", "m-1");        
-    userImage.src = profile.avatar || "../../../images/moon.avif";
+    userImage.src = postData.avatar || "../../../images/moon.avif";
     userImage.alt = `Avatar Name ${postData.title}`;
     userImage.style.width = "60px";
     userImage.style.height = "60px";
@@ -28,10 +28,10 @@ export function profilePostCard(postData) {
 
     // USERNAME
     const userName = document.createElement("h2");
-    userName.innerHTML = `${profile.name}`;
+    userName.innerHTML = `${postData.owner}`;
     userName.classList.add("fs-4", "fw-bolder", "mt-2");
     postInfo.append(userName)
-
+    console.log(postData)
 
     // USERNAME-ID
     const userNameId = document.createElement("h3");
@@ -39,7 +39,7 @@ export function profilePostCard(postData) {
     userNameId.classList.add("fs-6", "mt-n1", "text-secondary");
     postInfo.append(userNameId)
 
-    //DELETE and EDIT BUTTON || DROPDOWN MENU
+    // DELETE and EDIT BUTTON || DROPDOWN MENU
     const dropdown = document.createElement("div");
     dropdown.classList.add("dropdown", "container", "d-flex", "bg-light", "m-auto", "justify-content-end", "float-end");
 
@@ -50,6 +50,7 @@ export function profilePostCard(postData) {
     dropdownToggle.setAttribute("data-bs-toggle", "dropdown");
     dropdownToggle.setAttribute("aria-expended", "false");
     //dropdownToggle.innerHTML = `<i class="bi bi-three-dots"></i>`;
+   
     //Icon
     const icon = document.createElement("i");
     icon.classList.add("bi", "bi-three-dots-vertical");
@@ -59,9 +60,6 @@ export function profilePostCard(postData) {
     const dropdownMenu = document.createElement("li");
     dropdownMenu.classList.add("dropdown-menu", "p-2");
     dropdownMenu.setAttribute("aria-labelledby", "dropdownMenubuttun");
-
-    // const buttonContainer = document.createElement("div");
-    // buttonContainer.classList.add("container", "d-flex", "bg-light", "border-2", "justify-content-end");
 
     //Edit-button
     const editBtn = document.createElement("li");
@@ -79,7 +77,7 @@ export function profilePostCard(postData) {
     });    
     dropdownMenu.append(editBtn);
 
-    //Delete-button
+    // DELETE - BTN
     const deleteBtn = document.createElement("li");
     // deleteBtn.classList.add("deleteButton", "fs-6", "rounded-circle", "bg-light", "border-2", "h-50", "mt-3", "me-2");
     deleteBtn.innerHTML = `<button class="dropdown-item" type="button"><i class="bi bi-archive"></i> Delete</button>`;
@@ -113,7 +111,7 @@ export function profilePostCard(postData) {
     time.innerHTML =  `${postData.created.match(/^\d{4}-\d{2}-\d{2}/)}`;
     postText.append(time);
 
-    // Title
+    // TITLE
     const title = document.createElement("h3");
     title.classList.add("fw-bolder", "fs-4", "m-2", "p-1", "border", "border-2", "border-secondary");
     title.innerHTML = postData.title;
@@ -158,10 +156,8 @@ export function profilePostCard(postData) {
 
     if (postsCount === 0) {
         const postContainer = document.querySelector("#profilePosts")
-
         const noPostsText = document.createElement("p");
         noPostsText.textContent = "No posts yet. Create your first post!"    
-        console.log(noPostsText)
         postContainer.append(noPostsText);
     }       
 

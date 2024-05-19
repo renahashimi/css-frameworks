@@ -11,7 +11,6 @@ export async function createPost(postData) {
     try {
         const profileData = load("profile").name;
         const postDataWithAuthor = { ...postData, author: profileData };
-        console.log(postDataWithAuthor)
         const response = await authFetch(createUrl, {
             method,
             body: JSON.stringify(postDataWithAuthor)
@@ -22,9 +21,7 @@ export async function createPost(postData) {
             posts.push(createdPost)
             localStorage.setItem("posts", JSON.stringify(posts));
             window.location.href = "/profile/";
-console.log(createPost)
-            return await createdPost;  
-               
+            return await createdPost;                 
         } else {
             throw new Error ("Failed to create post");                          
         }

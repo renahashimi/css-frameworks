@@ -8,9 +8,7 @@ const action = "/auth/login";
 export async function loginUser(profile){
     const loginUrl = API_SOCIAL_URL + action;
     const body = JSON.stringify(profile);
-
-    console.log(loginUrl);
-
+    
     const response = await fetch(loginUrl, {
         headers: {
             "Content-Type": "application/json"

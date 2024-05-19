@@ -1,7 +1,3 @@
-import { removePost } from "../api/posts/index.mjs";
-import * as postActions from "../api/posts/index.mjs";
-import * as storage from "../storage/index.mjs";
-
 export function profileTemplate(profileData) {
     const profileContainer = document.createElement("div");
     profileContainer.classList.add("border-bottom", "border-5", "border-primary", "bg-white")

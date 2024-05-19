@@ -1,4 +1,3 @@
-//import { authFetch } from "../api/authFetch.mjs";
 import * as postActions from "../api/posts/index.mjs";
 import * as storage from "../storage/index.mjs";
 
@@ -16,7 +15,7 @@ export function postCard(postData) {
     //POST ID LINK 
     const postlink = document.createElement("a");
     postlink.href = `/feed/post/?id=${postData.id}`;
-    postlink.classList.add("d-block", "d-lg-flex", "text-decoration-none", "bg-light", "mx-2", "my-2", "border-bottom", "border-1", "border-primary");
+    postlink.classList.add("d-block", "d-md-flex", "text-decoration-none", "bg-light", "mx-2", "my-2", "border-bottom", "border-1", "border-primary");
     
     const postContent = document.createElement("div");
     postContent.classList.add("d-block", "border-bottom", "w-100");
@@ -37,11 +36,15 @@ export function postCard(postData) {
         postLogo.append(userImage);
 
         // USERNAME
-        const userName = document.createElement("h2");
-        //userName.href = `/profile/?name=${postData.author.name}`;
+        const userNameLink = document.createElement("a");
+        userNameLink.href = `/profile/?name=${postData.author.name}`;
+
+        const userName = document.createElement("a");
+        userName.href = `/profile/?name=${postData.author.name}`;
         userName.innerHTML = `${postData.name}`;
         userName.classList.add("author-name", "fs-4", "fw-bolder", "mt-2");
-        postInfo.append(userName)
+        userNameLink.append(userName);
+        postInfo.append(userNameLink);
 
     } else if (postData.author) {
         const userImage = document.createElement("img");
@@ -53,11 +56,15 @@ export function postCard(postData) {
         postLogo.append(userImage);
     
         // USERNAME
+        const userNameLink = document.createElement("a");
+        userNameLink.href = `/profile/?name=${postData.author.name}`;
+
         const userName = document.createElement("h2");
-        //userName.href = `/profile/?name=${postData.author.name}`;
+        userName.href = `${postData.author.name}`;
         userName.innerHTML = `${postData.author.name}`;
-        userName.classList.add("fs-4", "fw-bolder", "mt-2");
-        postInfo.append(userName)
+        userName.classList.add("fs-4", "fw-bolder", "mt-2", "text-decoration-none");
+        userNameLink.append(userName);
+        postInfo.append(userNameLink);
     }
 
     // USERNAME-ID
@@ -110,7 +117,6 @@ export function postCard(postData) {
         const postImg = document.createElement("img");
         postImg.classList.add("postImg", "d-block", "m-auto", "justify-content-center", "my-2", "w-100", "border", "border-3", "border-secondary", "shadow");
         postImg.style.width = "100%";
-        postImg.style.width = "300px";
         postImg.style.maxHeight = "400px";
         postImg.style.objectFit = "cover";
         postImg.style.objectPosition = "center";
@@ -144,7 +150,6 @@ export function postCard(postData) {
     likeBtn.addEventListener("click", async () => {
         try {
             const reactionData = await postActions.postReacts("⭐", postId);
-            console.log("Reaction added:", reactionData);
             if (!isLiked) {
                 likeCountValue++;
                 likeCount.textContent = `${likeCountValue + storage.load(`liked_${postId}`)} Stars`;
@@ -298,7 +303,6 @@ export function postCard(postData) {
         }
         try {
             const response = await postActions.postComments(commentData, postData.id);
-            console.log("Comment posted", response);
             alert("Your comment is submitted - It is recommended to refresh the page")
             commentTextarea.value = "";
         } catch (error) {

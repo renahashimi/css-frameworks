@@ -35,7 +35,7 @@ button, h1, h2, h3, h4, p {
 }
 
 .navbar, .navbar p {
-  color: white !important;
+  color: white;
 }
 
 //HOVER & ACTIVE
@@ -196,11 +196,8 @@ input[type="checkbox"] {
     &top300{
       margin-top: 300px !important;
     }
-
-
   }
 }
-
 @media (min-width: 768px) {
   .margin-md- {
     &top-none{
@@ -212,7 +209,9 @@ input[type="checkbox"] {
     }
   }
 
-  
+  .postImg {
+    max-width: 270px !important;
+  }
 }
 
 @media (min-width: 1024px) {

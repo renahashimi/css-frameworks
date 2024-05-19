@@ -21,7 +21,7 @@ button, h1, .h1, h2, .h2, h3, .h3, h4, .h4, p {
 }
 
 .navbar, .navbar p {
-  color: white !important;
+  color: white;
 }
 
 .deleteButton, .navbar a, button {
@@ -156,6 +156,9 @@ input[type=checkbox] {
   }
   .margin-md-top100 {
     margin-top: 100px !important;
+  }
+  .postImg {
+    max-width: 270px !important;
   }
 }
 @media (min-width: 1024px) {

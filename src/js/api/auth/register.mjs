@@ -8,8 +8,6 @@ export async function registerUser(profile){
     const registerUrl = `${API_SOCIAL_URL}${API_AUTH}${API_REGISTER}`;
     const body = JSON.stringify(profile);
 
-    console.log(registerUrl);
-
     const response = await fetch(registerUrl, {
         headers: {
             "Content-Type": "application/json",

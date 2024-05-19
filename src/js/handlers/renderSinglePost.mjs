@@ -3,7 +3,6 @@ import { postCard } from "../templates/postTemplate.mjs";
 
 //Render a single post
 export async function renderSinglePostCard() {
-  console.log("Single post page");
   const url = new URL(location.href);
   const postId = url.searchParams.get("id");
   try {

@@ -19,7 +19,6 @@ export async function updatePost(postData) {
         throw new Error("PostID is required to update posts");
     } 
     const updatePostUrl = `${API_SOCIAL_URL}${API_POSTS}/${postData.id}`;
-    //console.log(updatePostUrl);
     const response = await authFetch(updatePostUrl, {
         method,
         body: JSON.stringify(postData),  

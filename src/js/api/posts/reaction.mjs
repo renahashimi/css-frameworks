@@ -12,8 +12,7 @@ export async function postReacts(reaction, postId) {
             method,
             body: JSON.stringify(reaction),
         });
-        console.log("Reacted to a post")
-
+        
         if (!response.ok) {
             throw new Error("Reaction failed");
         }
