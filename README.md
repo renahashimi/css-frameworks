@@ -44,7 +44,6 @@ npm install
 
 ### Running
 
-<<<<<<< Updated upstream
 ```bash
 npm run dev
 ```
