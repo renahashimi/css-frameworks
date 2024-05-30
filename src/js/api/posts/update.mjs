@@ -10,8 +10,6 @@ import { authFetch } from "../authFetch.mjs";
  * @returns {Promise<Object>} The updated post data
  */
 
-
-
 const method = "put";
 
 export async function updatePost(postData) {
@@ -23,7 +21,7 @@ export async function updatePost(postData) {
         method,
         body: JSON.stringify(postData),  
     });
-
+    window.location.href = "/profile/myProfile/";
     return await response.json();
 }
 

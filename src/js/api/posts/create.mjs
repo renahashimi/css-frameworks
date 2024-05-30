@@ -20,7 +20,7 @@ export async function createPost(postData) {
             let posts = JSON.parse(localStorage.getItem("posts")) || [];
             posts.push(createdPost)
             localStorage.setItem("posts", JSON.stringify(posts));
-            window.location.href = "/profile/";
+            window.location.href = "/profile/myProfile/";
             return await createdPost;                 
         } else {
             throw new Error ("Failed to create post");                          

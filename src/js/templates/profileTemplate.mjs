@@ -1,7 +1,10 @@
-
 export function profileTemplate(profileData) {
     const profileContainer = document.createElement("div");
     profileContainer.classList.add("border-bottom", "border-5", "border-primary", "bg-white")
+    
+    //PROFILENAME IN TITLE
+    const userTitle = document.getElementById("userTitle");
+    userTitle.innerHTML = `Profile of ${profileData.name}` ;
 
     //PAGE NAME
     const pageName = document.createElement("h1");

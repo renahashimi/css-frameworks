@@ -20,6 +20,6 @@ export async function removeComments(commentId, postId) {
     const response = await authFetch(reemoveCommentUrl, {
         method,
     });
-   
+    window.location.href = "/feed/posts/";
     return;
 }

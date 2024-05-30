@@ -29,7 +29,7 @@ export function postCard(postData) {
     if (postData.name && postData.avatar) {
         const userImage = document.createElement("img");
         userImage.classList.add("rounded-circle", "object-fit-cover", "m-1");        
-        userImage.src = postData.avatar ? postData.avatar: "../../../../images/moon.avif";
+        userImage.src = postData.avatar ? postData.avatar: "../../../images/moon.avif";
         userImage.alt = `Avatar Name ${postData.title}`;
         userImage.style.width = "60px";
         userImage.style.height = "60px";
@@ -49,7 +49,7 @@ export function postCard(postData) {
     } else if (postData.author) {
         const userImage = document.createElement("img");
         userImage.classList.add("rounded-circle", "object-fit-cover", "m-1");        
-        userImage.src = postData.author && postData.author.avatar ? postData.author.avatar: "../../../../images/moon.avif";
+        userImage.src = postData.author && postData.author.avatar ? postData.author.avatar: "../../../images/moon.avif";
         userImage.alt = `Avatar Name ${postData.title}`;
         userImage.style.width = "60px";
         userImage.style.height = "60px";
@@ -190,7 +190,7 @@ export function postCard(postData) {
             commentHeader.classList.add("commentHeader", "d-flex", "m-auto", "p-1", "border-bottom", "border-1", "border-secondary"); 
          
             const commentImg = document.createElement("img");
-            commentImg.src = commentData.author.avatar;
+            commentImg.src = commentData.author.avatar && postData.author.avatar;
             commentImg.alt = `Profile image of ${commentData.author.name}`;
             commentImg.style.maxWidth = "40px";
             commentImg.style.maxHeight = "40px";
@@ -304,7 +304,7 @@ export function postCard(postData) {
         }
         try {
             const response = await postActions.postComments(commentData, postData.id);
-            alert("Your comment is submitted - It is recommended to refresh the page")
+            alert("Your comment is submitted.")
             commentTextarea.value = "";
         } catch (error) {
             console.error("Error posting comment", error)

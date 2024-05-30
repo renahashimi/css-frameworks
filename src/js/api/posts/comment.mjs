@@ -13,6 +13,7 @@ export async function postComments(postData, postId) {
         });
 
         if (response.ok) {
+            window.location.href = "/feed/posts/";
             return await response.json();
         }
         if (!response.ok) {

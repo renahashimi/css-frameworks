@@ -19,5 +19,6 @@ export async function removePost(id) {
     const response = await authFetch(removePostUrl, {
         method
     });
+    window.location.href = "/profile/myProfile/";
     return await response.json();
 }   

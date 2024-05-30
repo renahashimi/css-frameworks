@@ -7,18 +7,24 @@ const comments = "&_comments=true";
 const reactions = "&_reactions=true";
 
 export async function getPosts() {
-    const getPostsUrl = `${API_SOCIAL_URL}${API_POSTS}${author}${comments}${reactions}`;
-    const response = await authFetch(getPostsUrl);
-    return await response.json();
+    try {
+        const getPostsUrl = `${API_SOCIAL_URL}${API_POSTS}${author}${comments}${reactions}`;
+        const response = await authFetch(getPostsUrl);
+        return await response.json();     
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export async function getPost(id) {
-    // const url = new URL(location.href);
-    // const id = url.searchParams.get("id");
-    if (!id) {
-        throw new Error("You have to have a postID to get posts");
-    } 
-    const getPostUrl = `${API_SOCIAL_URL}${API_POSTS}/${id}${author}${comments}${reactions}`;
-    const response = await authFetch(getPostUrl);
-    return await response.json(); 
+    try {
+        if (!id) {
+            throw new Error("You have to have a postID to get posts");
+        } 
+        const getPostUrl = `${API_SOCIAL_URL}${API_POSTS}/${id}${author}${comments}${reactions}`;
+        const response = await authFetch(getPostUrl);
+        return await response.json(); 
+    } catch (error){
+        console.error(error)
+    }
 }

@@ -16,7 +16,7 @@ export async function renderMyProfile() {
         myPostsContainer.innerHTML = "";
 
         myPosts.forEach(postData => {
-        const postCardElement = templates.profilePostCard(postData);
+        const postCardElement = templates.profilePostCard(postData, profileData);
         myPostsContainer.append(postCardElement);
         });   
     } catch (error) {
@@ -42,7 +42,7 @@ export async function renderProfile() {
         postsContainer.innerHTML = "";
 
         myPosts.forEach(postData => {
-        const postCardElement = templates.profilePostCard(postData);
+        const postCardElement = templates.profilePostCard(postData, profileData);
         postsContainer.append(postCardElement);
         });   
     } catch (error) {

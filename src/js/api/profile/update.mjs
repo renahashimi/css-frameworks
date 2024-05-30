@@ -14,6 +14,6 @@ export async function updateProfile(profileData) {
         body: JSON.stringify(profileData),
     });
 
-    window.location.href = "/profile/";
+    window.location.href = "/profile/myProfile/";
     return await response.json();
 }  

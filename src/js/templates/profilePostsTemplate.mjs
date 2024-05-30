@@ -1,8 +1,7 @@
 import * as postActions from "../api/posts/index.mjs";
 
 //POSTCARD FOR PROFILE POSTS
-export function profilePostCard(postData) {
-   // const postData = storage.load("postData");
+export function profilePostCard(postData, profileData) {
     const post = document.createElement("div");
     post.classList.add("postData-post-content", "bg-light", "rounded", "m-auto", "my-3", "w-100", "justify-content-center", "border", "border-3", "border-secondary", "backShadow");
     const postsHead = document.createElement("div");
@@ -19,18 +18,18 @@ export function profilePostCard(postData) {
     //USERIMAGE
     const userImage = document.createElement("img");
     userImage.classList.add("rounded-circle", "object-fit-cover", "m-1");        
-    userImage.src = postData.avatar || "../../../images/moon.avif";
+    userImage.src = profileData.avatar || "../../../images/moon.avif";
     userImage.alt = `Avatar Name ${postData.title}`;
     userImage.style.width = "60px";
     userImage.style.height = "60px";
     postLogo.appendChild(userImage);
+   
 
     // USERNAME
     const userName = document.createElement("h2");
     userName.innerHTML = `${postData.owner}`;
     userName.classList.add("fs-4", "fw-bolder", "mt-2", "text-decoration-none");
     postInfo.append(userName)
-    console.log(postData)
 
     // USERNAME-ID
     const userNameId = document.createElement("h3");
@@ -87,7 +86,7 @@ export function profilePostCard(postData) {
             if (confirm("Are you sure you want to delete this post?")) {
                 try {
                     await postActions.removePost(postId)
-                    alert("Your post is now deleted successfully. N.B.: Updating the page is recommended!");
+                    alert("Your post is now deleted successfully.");
                     const postElement = this.closest(".post");
                     if (postElement) {
                         postElement.remove();
@@ -97,8 +96,7 @@ export function profilePostCard(postData) {
                 }
             }
         } else {
-        //console.error("Missing post ID:", error);
-        alert("Failed to delete post! Missing post ID")
+            alert("Failed to delete post! Missing post ID")
         }
     });    
     dropdownMenu.append(deleteBtn);
@@ -146,7 +144,7 @@ export function profilePostCard(postData) {
         img.style.maxWidth = "350px";
         img.style.maxHeight = "350px";
         img.style.objectFit = "contain";
-        img.src = postData.media || "../../../../images/404-error.jpeg";
+        img.src = postData.media;
         img.alt = `Image title ${postData.title}`;
         postContent.append(img);
     } 
